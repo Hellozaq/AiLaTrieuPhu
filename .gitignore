@@ -42,3 +42,6 @@ src/main/java/org/example/conf/google-json-conf.json
 
 # Loại trừ class gg sheets conf
 src/main/java/org/example/conf/GoogleSheetConf.java
+
+# Loại trừ file jar
+out/artifacts/AiLaTrieuPhu_jar/AiLaTrieuPhu.jar
