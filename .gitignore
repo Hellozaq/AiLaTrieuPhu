@@ -36,3 +36,9 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+# Loại trừ tệp cấu hình 
+src/main/java/org/example/conf/google-json-conf.json
+
+# Loại trừ class gg sheets conf
+src/main/java/org/example/conf/GoogleSheetConf.java
