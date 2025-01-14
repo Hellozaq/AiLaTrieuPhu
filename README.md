@@ -52,8 +52,6 @@ Nếu bạn muốn đóng góp cho dự án, hãy làm theo các bước sau:
    ```
 4. Tạo Pull Request để yêu cầu tích hợp vào dự án chính.
 
-## Giấy phép
-Dự án được phát hành theo giấy phép [MIT](LICENSE).
 
 ## Liên hệ
-Nếu bạn có bất kỳ câu hỏi hoặc góp ý nào, vui lòng liên hệ qua email: [ngcvien@example.com](mailto:vienhn.24ic@vku.udn.vn).
+Nếu bạn có bất kỳ câu hỏi hoặc góp ý nào, vui lòng liên hệ qua email: [vienhn.24ic@vku.udn.vn](mailto:vienhn.24ic@vku.udn.vn).
