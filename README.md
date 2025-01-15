@@ -11,7 +11,7 @@
 
 ## Công nghệ sử dụng
 - **Ngôn ngữ lập trình:** Java
-- **Thư viện giao diện:** JavaFX
+- **Thư viện giao diện:** Java Swing
 - **Cơ sở dữ liệu:** MySQL (dùng để lưu trữ câu hỏi và thông tin người chơi)
 
 ## Yêu cầu hệ thống
