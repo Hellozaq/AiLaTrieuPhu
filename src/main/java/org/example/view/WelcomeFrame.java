@@ -204,9 +204,10 @@ public class WelcomeFrame extends javax.swing.JFrame {
 
     private void evenHandler() {
 
+        setLocationRelativeTo(null);
         setDocumentFilter(usernameField,15);
         getRootPane().setDefaultButton(playButon);
-        setLocation(420, 250);
+//        setLocation(420, 250);
         makeButtonTransparent(rankingButon);
 
 //        PlayAudio.playAudio("C:\\Users\\admin\\IdeaProjects\\AiLaTrieuPhu\\" +
@@ -269,7 +270,12 @@ public class WelcomeFrame extends javax.swing.JFrame {
                 if (usernameField.getText().isEmpty()) {
                     PlayAudioURL.wrongSound();
                     JOptionPane.showMessageDialog(null, "Nhập username để chơi!");
-                } else {
+                }
+                else if(usernameField.getText().contains(" ")){
+                    PlayAudioURL.wrongSound();
+                    JOptionPane.showMessageDialog(null, "Username không được chứa dấu cách!");
+                }
+                    else {
                     username = usernameField.getText();
                     try {
                         player = playerService.findByUsername(username);

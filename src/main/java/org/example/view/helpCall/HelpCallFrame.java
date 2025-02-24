@@ -11,6 +11,8 @@ import org.example.view.GameFrame;
 
 import javax.sound.sampled.Clip;
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowListener;
 
 /**
@@ -185,6 +187,7 @@ public class HelpCallFrame extends javax.swing.JFrame {
             }
         });
 
+
         jackButon.addMouseListener(new java.awt.event.MouseAdapter() {
 
             @Override
@@ -231,6 +234,7 @@ public class HelpCallFrame extends javax.swing.JFrame {
                         getClass().getResource("/background/khung chat voi Jack.png"));
             }
         });
+
         thangButon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 GameFrame.disableCall();
