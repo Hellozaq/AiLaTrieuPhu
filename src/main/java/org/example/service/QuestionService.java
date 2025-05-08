@@ -5,6 +5,7 @@ import org.example.model.QuestionModel;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +43,10 @@ public class QuestionService {
         PreparedStatement pstmt = Database.getConnection().prepareStatement(
                 "SELECT * FROM `questions` WHERE difficulty_level=1 ORDER BY rand() LIMIT 5;");
         ResultSet rs = pstmt.executeQuery();
+        ResultSetMetaData rsmd = rs.getMetaData();
+        String name = rsmd.getColumnName(1);
+        System.out.println(name);
+
         while (rs.next()) {
             questions.add(questionMapper(rs));
         }

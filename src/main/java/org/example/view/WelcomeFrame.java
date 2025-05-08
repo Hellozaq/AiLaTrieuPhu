@@ -35,6 +35,8 @@ public class WelcomeFrame extends javax.swing.JFrame {
         initComponents();
 //        clipStart = PlayAudio.playStartAudio("src/main/java/org/example/file/audio/" +
 //                "nhạc-bắt-đầu-chương-trình-ALTP-_2008-2020_.wav", -10);
+        ImageIcon icon = new ImageIcon(getClass().getResource("/elements/AiLaTrieuPhu.png"));
+        setIconImage(icon.getImage());
         clipStart = PlayAudioURL.playStartAudio(getClass().getResource("/audio/nhạc-bắt-đầu-chương-trình-ALTP-_2008-2020_.wav"),-10);
         evenHandler();
         setResizable(false);
