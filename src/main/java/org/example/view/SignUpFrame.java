@@ -4,34 +4,30 @@
  */
 package org.example.view;
 
-import javazoom.jl.player.Player;
-import org.example.model.PlayAudio;
 import org.example.model.PlayAudioURL;
 import org.example.model.PlayerModel;
 import org.example.service.AuthService;
 import org.example.service.PlayerService;
 
-import javax.sound.sampled.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.IOException;
-import java.sql.SQLException;
+import javax.sound.sampled.Clip;
 import javax.swing.*;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
- * @author Ngọc Viên assets
+ *
+ * @author Ngọc Viên
  */
-public class WelcomeFrame extends javax.swing.JFrame {
+public class SignUpFrame extends javax.swing.JFrame {
 
     /**
-     * Creates new form WelcomeFrame
+     * Creates new form SignUpFrame
      */
-    public WelcomeFrame() {
+    public SignUpFrame() {
         playerService = new PlayerService();
         authService = new AuthService();
         initComponents();
@@ -39,7 +35,6 @@ public class WelcomeFrame extends javax.swing.JFrame {
 //                "nhạc-bắt-đầu-chương-trình-ALTP-_2008-2020_.wav", -10);
         ImageIcon icon = new ImageIcon(getClass().getResource("/elements/AiLaTrieuPhu.png"));
         setIconImage(icon.getImage());
-        clipStart = PlayAudioURL.playStartAudio(getClass().getResource("/audio/nhạc-bắt-đầu-chương-trình-ALTP-_2008-2020_.wav"),-10);
         evenHandler();
         setResizable(false);
     }
@@ -53,18 +48,16 @@ public class WelcomeFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        rankingButon = new javax.swing.JButton();
+        loginButon = new javax.swing.JButton();
+        loginRectangle = new javax.swing.JLabel();
+        passwordField = new javax.swing.JTextField();
         usernameField = new javax.swing.JTextField();
         usernameLabel = new javax.swing.JLabel();
-        usernameFieldLabel = new javax.swing.JLabel();
-        rankingLabel = new javax.swing.JLabel();
         passwordLabel = new javax.swing.JLabel();
-        passwordField = new javax.swing.JTextField();
-        passwordFieldLabel = new javax.swing.JLabel();
-        signUpButon = new javax.swing.JButton();
-        playButon = new javax.swing.JButton();
+        submitButon = new javax.swing.JButton();
+        usernameFieldLabel = new javax.swing.JLabel();
         playRectangle = new javax.swing.JLabel();
-        quitRectangle = new javax.swing.JLabel();
+        passwordFieldLabel = new javax.swing.JLabel();
         aiLaTrieuPhuLable = new javax.swing.JLabel();
         welcomeBackground = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -73,7 +66,21 @@ public class WelcomeFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(rankingButon, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 40, 40));
+
+        loginButon.setBackground(new java.awt.Color(0, 42, 93));
+        loginButon.setFont(new java.awt.Font("Eras Bold ITC", 1, 14)); // NOI18N
+        loginButon.setForeground(new java.awt.Color(255, 255, 255));
+        loginButon.setText("Login");
+        loginButon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loginButonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(loginButon, new org.netbeans.lib.awtextra.AbsoluteConstraints(212, 315, 105, 24));
+
+        loginRectangle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/elements/Rectangle 2.png"))); // NOI18N
+        getContentPane().add(loginRectangle, new org.netbeans.lib.awtextra.AbsoluteConstraints(205, 312, -1, -1));
+        getContentPane().add(passwordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(232, 228, 141, 25));
         getContentPane().add(usernameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(232, 188, 141, 25));
 
         usernameLabel.setFont(new java.awt.Font("Dialog", 3, 12)); // NOI18N
@@ -81,46 +88,28 @@ public class WelcomeFrame extends javax.swing.JFrame {
         usernameLabel.setText("Username");
         getContentPane().add(usernameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(164, 192, -1, -1));
 
-        usernameFieldLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/elements/Username field.png"))); // NOI18N
-        getContentPane().add(usernameFieldLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 184, -1, -1));
-
-        rankingLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/RankinggButon.png"))); // NOI18N
-        getContentPane().add(rankingLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
-
         passwordLabel.setFont(new java.awt.Font("Dialog", 3, 12)); // NOI18N
         passwordLabel.setForeground(new java.awt.Color(255, 255, 255));
-        passwordLabel.setText("Username");
+        passwordLabel.setText("Password");
         getContentPane().add(passwordLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(164, 232, -1, -1));
-        getContentPane().add(passwordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(232, 228, 141, 25));
 
-        passwordFieldLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/elements/Username field.png"))); // NOI18N
-        getContentPane().add(passwordFieldLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 224, -1, -1));
+        submitButon.setBackground(new java.awt.Color(0, 42, 93));
+        submitButon.setFont(new java.awt.Font("Eras Bold ITC", 1, 14)); // NOI18N
+        submitButon.setForeground(new java.awt.Color(255, 255, 255));
+        submitButon.setText("Sign Up");
+        getContentPane().add(submitButon, new org.netbeans.lib.awtextra.AbsoluteConstraints(198, 270, 128, -1));
 
-        signUpButon.setBackground(new java.awt.Color(0, 42, 93));
-        signUpButon.setFont(new java.awt.Font("Eras Bold ITC", 1, 14)); // NOI18N
-        signUpButon.setForeground(new java.awt.Color(255, 255, 255));
-        signUpButon.setText("Sign Up");
-        signUpButon.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                signUpButonActionPerformed(evt);
-            }
-        });
-        getContentPane().add(signUpButon, new org.netbeans.lib.awtextra.AbsoluteConstraints(212, 315, 105, 24));
-
-        playButon.setBackground(new java.awt.Color(0, 42, 93));
-        playButon.setFont(new java.awt.Font("Eras Bold ITC", 1, 14)); // NOI18N
-        playButon.setForeground(new java.awt.Color(255, 255, 255));
-        playButon.setText("PLAY NOW");
-        getContentPane().add(playButon, new org.netbeans.lib.awtextra.AbsoluteConstraints(198, 270, 128, -1));
+        usernameFieldLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/elements/Username field.png"))); // NOI18N
+        getContentPane().add(usernameFieldLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 184, -1, -1));
 
         playRectangle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/elements/Rectangle 4.png"))); // NOI18N
         getContentPane().add(playRectangle, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 266, -1, -1));
 
-        quitRectangle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/elements/Rectangle 2.png"))); // NOI18N
-        getContentPane().add(quitRectangle, new org.netbeans.lib.awtextra.AbsoluteConstraints(205, 312, -1, -1));
+        passwordFieldLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/elements/Username field.png"))); // NOI18N
+        getContentPane().add(passwordFieldLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 224, -1, -1));
 
         aiLaTrieuPhuLable.setIcon(new javax.swing.ImageIcon(getClass().getResource("/elements/AiLaTrieuPhu.png"))); // NOI18N
-        getContentPane().add(aiLaTrieuPhuLable, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, -20, -1, -1));
+        getContentPane().add(aiLaTrieuPhuLable, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, -20, -1, 260));
 
         welcomeBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/login-bg.png"))); // NOI18N
         getContentPane().add(welcomeBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -142,9 +131,9 @@ public class WelcomeFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void signUpButonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signUpButonActionPerformed
+    private void loginButonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_signUpButonActionPerformed
+    }//GEN-LAST:event_loginButonActionPerformed
 
     private void qrCodeItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_qrCodeItemActionPerformed
         // TODO add your handling code here:
@@ -157,7 +146,7 @@ public class WelcomeFrame extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -167,82 +156,39 @@ public class WelcomeFrame extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(WelcomeFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SignUpFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(WelcomeFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SignUpFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(WelcomeFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SignUpFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(WelcomeFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SignUpFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new WelcomeFrame().setVisible(true);
+                new SignUpFrame().setVisible(true);
             }
         });
     }
-
-    public static void display() {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(WelcomeFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(WelcomeFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(WelcomeFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(WelcomeFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new WelcomeFrame().setVisible(true);
-            }
-        });
-    }
-
 
     private void evenHandler() {
 
         setLocationRelativeTo(null);
         setDocumentFilter(passwordField,15);
-        getRootPane().setDefaultButton(playButon);
+        getRootPane().setDefaultButton(submitButon);
 //        setLocation(420, 250);
-        makeButtonTransparent(rankingButon);
 
 //        PlayAudio.playAudio("C:\\Users\\admin\\IdeaProjects\\AiLaTrieuPhu\\" +
 //                "src\\main\\java\\org\\example\\file\\audio\\funky-and-jazzy-gang-loop-251858.wav",-10);
         // Sử dụng JButton thông thường và thay đổi con trỏ chuột
-        playButon.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        signUpButon.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        rankingButon.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        submitButon.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        loginButon.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
-        //phát âm thanh khi di chuyển chuột đến
-        rankingButon.addMouseListener(new java.awt.event.MouseAdapter() {
-            @Override
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-//                PlayAudio.playAudio("src/main/java/org/example/file/audio/pop-3-269281.wav");
-                PlayAudioURL.playAudio(getClass().getResource("/audio/pop-3-269281.wav"));
-            }
 
-        });
-        playButon.addMouseListener(new java.awt.event.MouseAdapter() {
+        submitButon.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseEntered(java.awt.event.MouseEvent evt) {
 //                PlayAudio.playAudio("src/main/java/org/example/file/audio/pop-3-269281.wav");
@@ -256,7 +202,7 @@ public class WelcomeFrame extends javax.swing.JFrame {
                 PlayAudioURL.playAudio(getClass().getResource("/audio/pop-off-269284.wav"));
             }
         });
-        signUpButon.addMouseListener(new java.awt.event.MouseAdapter() {
+        loginButon.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseEntered(java.awt.event.MouseEvent evt) {
 //                PlayAudio.playAudio("src/main/java/org/example/file/audio/pop-3-269281.wav");
@@ -270,13 +216,13 @@ public class WelcomeFrame extends javax.swing.JFrame {
             }
         });
 
-        signUpButon.addActionListener(new ActionListener() {
+        loginButon.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                SignUpFrame.main(null);
+                WelcomeFrame.display();
             }
         });
-        playButon.addActionListener(new ActionListener() {
+        submitButon.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (passwordField.getText().isEmpty() || usernameField.getText().isEmpty()) {
                     PlayAudioURL.wrongSound();
@@ -290,47 +236,27 @@ public class WelcomeFrame extends javax.swing.JFrame {
                     PlayAudioURL.wrongSound();
                     JOptionPane.showMessageDialog(null, "Password phải có ít nhất 6 ký tự");
                 }
-                    else {
+                else {
                     username = usernameField.getText();
                     password = passwordField.getText();
                     try {
-                        player = authService.login(username, password);
+                        isSignUp = authService.register(username, password);
                     } catch (Exception ex) {
                         throw new RuntimeException(ex);
                     }
-                    if (player != null) {
-                        player = playerService.findByUsername(username);
-                        System.out.println("ksjfkdj");
-                        System.out.println(player.getAvatarPath());
-                        if (player.getAvatarPath().isEmpty()) {
-                            System.out.println(1);
-                            SelectAvatarFrame.display(player, 1, null);
-                            PlayAudioURL.stopAudio(clipStart);
-//                        PlayAudio.playAudio("src/main/java/org/example/file/audio/level-up-2-199574_1.wav");
-                            PlayAudioURL.playAudio(getClass().getResource("/audio/level-up-2-199574_1.wav"));
-                        } else {
-                            System.out.println(2);
-                            PlayAudioURL.stopAudio(clipStart);
-//                        PlayAudio.playAudio("src/main/java/org/example/file/audio/level-up-2-199574_1.wav");
-                            PlayAudioURL.playAudio(getClass().getResource("/audio/level-up-2-199574_1.wav"));
-                            GameFrame.display(player);
-                        }
+                    if (isSignUp) {
+                        JOptionPane.showMessageDialog(null, "Đăng ký tài khoảng thành công");
+                        PlayAudioURL.playAudio(getClass().getResource("/audio/level-up-2-199574_1.wav"));
+                        WelcomeFrame.display();
                         dispose();
-                    }
-                    else {
-                        PlayAudioURL.wrongSound();
-                        JOptionPane.showMessageDialog(null, "Username hoặc mật password không chính xác");
+                    }else {
+                        JOptionPane.showMessageDialog(null, "Đăng ký tài khoảng thất bại");
                     }
 
                 }
             }
         });
-        rankingButon.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                PlayAudioURL.playPopOnAudio();
-                RankingFrame.display();
-            }
-        });
+
         qrCodeItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(null,"",
@@ -369,27 +295,25 @@ public class WelcomeFrame extends javax.swing.JFrame {
         textField.setDocument(doc);
     }
 
+    private boolean isSignUp;
+    private AuthService authService;
     private String username;
     private String password;
     private PlayerModel player;
     private PlayerService playerService;
-    private AuthService authService;
     private Clip clipStart;
-    private Clip clip;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel aiLaTrieuPhuLable;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JButton loginButon;
+    private javax.swing.JLabel loginRectangle;
     private javax.swing.JTextField passwordField;
     private javax.swing.JLabel passwordFieldLabel;
     private javax.swing.JLabel passwordLabel;
-    private javax.swing.JButton playButon;
     private javax.swing.JLabel playRectangle;
     private javax.swing.JMenuItem qrCodeItem;
-    private javax.swing.JLabel quitRectangle;
-    private javax.swing.JButton rankingButon;
-    private javax.swing.JLabel rankingLabel;
-    private javax.swing.JButton signUpButon;
+    private javax.swing.JButton submitButon;
     private javax.swing.JTextField usernameField;
     private javax.swing.JLabel usernameFieldLabel;
     private javax.swing.JLabel usernameLabel;

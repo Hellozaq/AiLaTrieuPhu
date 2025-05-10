@@ -262,14 +262,24 @@ public class RankingFrame extends javax.swing.JFrame {
         avatarLabel7, avatarLabel8, avatarLabel9, avatarLabel10};
         try {
             top10=playerService.getRankingTop10();
-        } catch (SQLException e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
         int index=0;
         for(PlayerModel player:top10) {
             usernameLabels[index].setText(player.getUsername());
             scoreLabels[index].setText(player.getScore()+"");
-            avatarLabels[index].setIcon(new ImageIcon(getClass().getResource("/avatar/"+player.getAvatarPath()+".png")));
+            String avatarPath = player.getAvatarPath();
+            System.out.println(avatarPath);
+            java.net.URL imgUrl = null;
+            if (avatarPath != null && !avatarPath.isEmpty()) {
+                imgUrl = getClass().getResource("/avatar/" + avatarPath + ".png");
+            }
+            if (imgUrl != null) {
+                avatarLabels[index].setIcon(new ImageIcon(imgUrl));
+            } else {
+                avatarLabels[index].setIcon(new ImageIcon(getClass().getResource("/avatar/default.png")));
+            }
             index++;
         }
 

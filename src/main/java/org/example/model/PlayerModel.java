@@ -1,9 +1,28 @@
 package org.example.model;
 
+import jakarta.persistence.*;;
+
+@Entity
+@Table(name = "players")
 public class PlayerModel {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
+
+    @Column(name = "username", unique = true, nullable = false)
     private String username;
+
+    @Column(name = "password_hash", nullable = false)
+    private String passwordHash;
+
+    @Column(name = "score", nullable = false)
     private int score;
+
+    @Column(name = "rank_score", nullable = false)
+    private int rankScore;
+
+    @Column(name = "avatarpath")
     private String avatarPath="";
 
     public PlayerModel() {}
@@ -16,6 +35,15 @@ public class PlayerModel {
         this.id = id;
         this.username = username;
         this.score = score;
+        this.avatarPath = avatarPath;
+    }
+
+    public PlayerModel(int id, String username, String passwordHash, int score, int rankScore, String avatarPath) {
+        this.id = id;
+        this.username = username;
+        this.passwordHash = passwordHash;
+        this.score = score;
+        this.rankScore = rankScore;
         this.avatarPath = avatarPath;
     }
 
@@ -48,9 +76,29 @@ public class PlayerModel {
         return "PlayerModel{" +
                 "id=" + id +
                 ", username='" + username + '\'' +
+                ", passwordHash='" + passwordHash + '\'' +
                 ", score=" + score +
+                ", rankScore=" + rankScore +
+                ", avatarPath='" + avatarPath + '\'' +
                 '}';
     }
+
+    public String getPasswordHash() {
+        return passwordHash;
+    }
+
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
+    }
+
+    public int getRankScore() {
+        return rankScore;
+    }
+
+    public void setRankScore(int rankScore) {
+        this.rankScore = rankScore;
+    }
+
     public String getAvatarPath() {
         return avatarPath;
     }

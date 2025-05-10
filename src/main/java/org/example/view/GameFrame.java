@@ -18,7 +18,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
 
 /**
  * @author Ngọc Viên
@@ -51,7 +50,7 @@ public class GameFrame extends javax.swing.JFrame {
                 setEableButon();
                 try {
                     evenHandler();
-                } catch (SQLException e) {
+                } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
 
@@ -270,7 +269,7 @@ public class GameFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_stopButonActionPerformed
 
-//    /**
+    //    /**
 //     * @param  the command line arguments
 //     */
 //    public static void main(String args[]) {
@@ -370,7 +369,7 @@ public class GameFrame extends javax.swing.JFrame {
 
     }
 
-    private void evenHandler() throws SQLException {
+    private void evenHandler() throws Exception {
 
         disableCallCalled=false;
         disableKhanGiaCalled=false;
@@ -607,7 +606,7 @@ public class GameFrame extends javax.swing.JFrame {
                         player.setScore(score);
                         try {
                             playerService.updateMaxScore(player, score);
-                        } catch (SQLException ex) {
+                        } catch (Exception ex) {
                             throw new RuntimeException(ex);
                         }
                     }
@@ -662,7 +661,7 @@ public class GameFrame extends javax.swing.JFrame {
             score = scoreLevel[questionCurrentIndex - 1];
             try {
                 playerService.updateMaxScore(player, score);
-            } catch (SQLException e) {
+            } catch (Exception e) {
                 throw new RuntimeException(e);
             }
             disableButtons();
@@ -747,7 +746,7 @@ public class GameFrame extends javax.swing.JFrame {
             //luu diem
             try {
                 playerService.updateMaxScore(player, score);
-            } catch (SQLException e) {
+            } catch (Exception e) {
                 throw new RuntimeException(e);
             }
             if (questionCurrentIndex != 15) {
@@ -882,3 +881,4 @@ public class GameFrame extends javax.swing.JFrame {
     private static javax.swing.JLabel x3;
     // End of variables declaration//GEN-END:variables
 }
+

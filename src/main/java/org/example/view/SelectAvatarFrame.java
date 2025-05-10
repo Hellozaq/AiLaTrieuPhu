@@ -13,7 +13,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
+//import java.sql.Exception;
 
 /**
  * @author Ngọc Viên
@@ -88,7 +88,7 @@ public class SelectAvatarFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-//    /**
+    //    /**
 //     * @param args the command line arguments
 //     */
 //    public static void main(String args[]) {
@@ -208,7 +208,7 @@ public class SelectAvatarFrame extends javax.swing.JFrame {
                     player.setAvatarPath("1");
                     try {
                         playerService.updateAvatar(player);
-                    } catch (SQLException ex) {
+                    } catch (Exception ex) {
                         throw new RuntimeException(ex);
                     }
                     dispose();
@@ -221,7 +221,7 @@ public class SelectAvatarFrame extends javax.swing.JFrame {
                     player.setAvatarPath("2");
                     try {
                         playerService.updateAvatar(player);
-                    } catch (SQLException ex) {
+                    } catch (Exception ex) {
                         throw new RuntimeException(ex);
                     }
                     dispose();
@@ -234,7 +234,7 @@ public class SelectAvatarFrame extends javax.swing.JFrame {
                     player.setAvatarPath("3");
                     try {
                         playerService.updateAvatar(player);
-                    } catch (SQLException ex) {
+                    } catch (Exception ex) {
                         throw new RuntimeException(ex);
                     }
                     dispose();
@@ -247,7 +247,7 @@ public class SelectAvatarFrame extends javax.swing.JFrame {
                     player.setAvatarPath("4");
                     try {
                         playerService.updateAvatar(player);
-                    } catch (SQLException ex) {
+                    } catch (Exception ex) {
                         throw new RuntimeException(ex);
                     }
                     dispose();
@@ -260,7 +260,7 @@ public class SelectAvatarFrame extends javax.swing.JFrame {
                     player.setAvatarPath("5");
                     try {
                         playerService.updateAvatar(player);
-                    } catch (SQLException ex) {
+                    } catch (Exception ex) {
                         throw new RuntimeException(ex);
                     }
                     dispose();
@@ -273,7 +273,7 @@ public class SelectAvatarFrame extends javax.swing.JFrame {
                     player.setAvatarPath("6");
                     try {
                         playerService.updateAvatar(player);
-                    } catch (SQLException ex) {
+                    } catch (Exception ex) {
                         throw new RuntimeException(ex);
                     }
                     dispose();
@@ -286,7 +286,7 @@ public class SelectAvatarFrame extends javax.swing.JFrame {
                     player.setAvatarPath("7");
                     try {
                         playerService.updateAvatar(player);
-                    } catch (SQLException ex) {
+                    } catch (Exception ex) {
                         throw new RuntimeException(ex);
                     }
                     dispose();
@@ -299,7 +299,7 @@ public class SelectAvatarFrame extends javax.swing.JFrame {
                     player.setAvatarPath("8");
                     try {
                         playerService.updateAvatar(player);
-                    } catch (SQLException ex) {
+                    } catch (Exception ex) {
                         throw new RuntimeException(ex);
                     }
                     dispose();
@@ -312,7 +312,7 @@ public class SelectAvatarFrame extends javax.swing.JFrame {
                     player.setAvatarPath("9");
                     try {
                         playerService.updateAvatar(player);
-                    } catch (SQLException ex) {
+                    } catch (Exception ex) {
                         throw new RuntimeException(ex);
                     }
                     dispose();
@@ -325,7 +325,7 @@ public class SelectAvatarFrame extends javax.swing.JFrame {
                     player.setAvatarPath("10");
                     try {
                         playerService.updateAvatar(player);
-                    } catch (SQLException ex) {
+                    } catch (Exception ex) {
                         throw new RuntimeException(ex);
                     }
                     dispose();
@@ -338,7 +338,7 @@ public class SelectAvatarFrame extends javax.swing.JFrame {
                     player.setAvatarPath("11");
                     try {
                         playerService.updateAvatar(player);
-                    } catch (SQLException ex) {
+                    } catch (Exception ex) {
                         throw new RuntimeException(ex);
                     }
                     dispose();
@@ -351,7 +351,7 @@ public class SelectAvatarFrame extends javax.swing.JFrame {
                     player.setAvatarPath("12");
                     try {
                         playerService.updateAvatar(player);
-                    } catch (SQLException ex) {
+                    } catch (Exception ex) {
                         throw new RuntimeException(ex);
                     }
                     dispose();
@@ -364,7 +364,7 @@ public class SelectAvatarFrame extends javax.swing.JFrame {
                     player.setAvatarPath("13");
                     try {
                         playerService.updateAvatar(player);
-                    } catch (SQLException ex) {
+                    } catch (Exception ex) {
                         throw new RuntimeException(ex);
                     }
                     dispose();
@@ -377,7 +377,7 @@ public class SelectAvatarFrame extends javax.swing.JFrame {
                     player.setAvatarPath("14");
                     try {
                         playerService.updateAvatar(player);
-                    } catch (SQLException ex) {
+                    } catch (Exception ex) {
                         throw new RuntimeException(ex);
                     }
                     dispose();
@@ -390,7 +390,7 @@ public class SelectAvatarFrame extends javax.swing.JFrame {
                     player.setAvatarPath("15");
                     try {
                         playerService.updateAvatar(player);
-                    } catch (SQLException ex) {
+                    } catch (Exception ex) {
                         throw new RuntimeException(ex);
                     }
                     dispose();
@@ -405,7 +405,7 @@ public class SelectAvatarFrame extends javax.swing.JFrame {
                     player.setAvatarPath("1");
                     try {
                         playerService.updateAvatar(player);
-                    } catch (SQLException ex) {
+                    } catch (Exception ex) {
                         throw new RuntimeException(ex);
                     }
                     avatarLabel.setIcon(new ImageIcon(getClass().getResource("/avatar/"+player.getAvatarPath()+".png")));
@@ -418,7 +418,7 @@ public class SelectAvatarFrame extends javax.swing.JFrame {
                     player.setAvatarPath("2");
                     try {
                         playerService.updateAvatar(player);
-                    } catch (SQLException ex) {
+                    } catch (Exception ex) {
                         throw new RuntimeException(ex);
                     }
                     avatarLabel.setIcon(new ImageIcon(getClass().getResource("/avatar/"+player.getAvatarPath()+".png")));
@@ -431,7 +431,7 @@ public class SelectAvatarFrame extends javax.swing.JFrame {
                     player.setAvatarPath("3");
                     try {
                         playerService.updateAvatar(player);
-                    } catch (SQLException ex) {
+                    } catch (Exception ex) {
                         throw new RuntimeException(ex);
                     }
                     avatarLabel.setIcon(new ImageIcon(getClass().getResource("/avatar/"+player.getAvatarPath()+".png")));
@@ -444,7 +444,7 @@ public class SelectAvatarFrame extends javax.swing.JFrame {
                     player.setAvatarPath("4");
                     try {
                         playerService.updateAvatar(player);
-                    } catch (SQLException ex) {
+                    } catch (Exception ex) {
                         throw new RuntimeException(ex);
                     }
                     avatarLabel.setIcon(new ImageIcon(getClass().getResource("/avatar/"+player.getAvatarPath()+".png")));
@@ -457,7 +457,7 @@ public class SelectAvatarFrame extends javax.swing.JFrame {
                     player.setAvatarPath("5");
                     try {
                         playerService.updateAvatar(player);
-                    } catch (SQLException ex) {
+                    } catch (Exception ex) {
                         throw new RuntimeException(ex);
                     }
                     avatarLabel.setIcon(new ImageIcon(getClass().getResource("/avatar/"+player.getAvatarPath()+".png")));
@@ -470,7 +470,7 @@ public class SelectAvatarFrame extends javax.swing.JFrame {
                     player.setAvatarPath("6");
                     try {
                         playerService.updateAvatar(player);
-                    } catch (SQLException ex) {
+                    } catch (Exception ex) {
                         throw new RuntimeException(ex);
                     }
                     avatarLabel.setIcon(new ImageIcon(getClass().getResource("/avatar/"+player.getAvatarPath()+".png")));
@@ -483,7 +483,7 @@ public class SelectAvatarFrame extends javax.swing.JFrame {
                     player.setAvatarPath("7");
                     try {
                         playerService.updateAvatar(player);
-                    } catch (SQLException ex) {
+                    } catch (Exception ex) {
                         throw new RuntimeException(ex);
                     }
                     avatarLabel.setIcon(new ImageIcon(getClass().getResource("/avatar/"+player.getAvatarPath()+".png")));
@@ -496,7 +496,7 @@ public class SelectAvatarFrame extends javax.swing.JFrame {
                     player.setAvatarPath("8");
                     try {
                         playerService.updateAvatar(player);
-                    } catch (SQLException ex) {
+                    } catch (Exception ex) {
                         throw new RuntimeException(ex);
                     }
                     avatarLabel.setIcon(new ImageIcon(getClass().getResource("/avatar/"+player.getAvatarPath()+".png")));
@@ -509,7 +509,7 @@ public class SelectAvatarFrame extends javax.swing.JFrame {
                     player.setAvatarPath("9");
                     try {
                         playerService.updateAvatar(player);
-                    } catch (SQLException ex) {
+                    } catch (Exception ex) {
                         throw new RuntimeException(ex);
                     }
                     avatarLabel.setIcon(new ImageIcon(getClass().getResource("/avatar/"+player.getAvatarPath()+".png")));
@@ -522,7 +522,7 @@ public class SelectAvatarFrame extends javax.swing.JFrame {
                     player.setAvatarPath("10");
                     try {
                         playerService.updateAvatar(player);
-                    } catch (SQLException ex) {
+                    } catch (Exception ex) {
                         throw new RuntimeException(ex);
                     }
                     avatarLabel.setIcon(new ImageIcon(getClass().getResource("/avatar/"+player.getAvatarPath()+".png")));
@@ -535,7 +535,7 @@ public class SelectAvatarFrame extends javax.swing.JFrame {
                     player.setAvatarPath("11");
                     try {
                         playerService.updateAvatar(player);
-                    } catch (SQLException ex) {
+                    } catch (Exception ex) {
                         throw new RuntimeException(ex);
                     }
                     avatarLabel.setIcon(new ImageIcon(getClass().getResource("/avatar/"+player.getAvatarPath()+".png")));
@@ -548,7 +548,7 @@ public class SelectAvatarFrame extends javax.swing.JFrame {
                     player.setAvatarPath("12");
                     try {
                         playerService.updateAvatar(player);
-                    } catch (SQLException ex) {
+                    } catch (Exception ex) {
                         throw new RuntimeException(ex);
                     }
                     avatarLabel.setIcon(new ImageIcon(getClass().getResource("/avatar/"+player.getAvatarPath()+".png")));
@@ -561,7 +561,7 @@ public class SelectAvatarFrame extends javax.swing.JFrame {
                     player.setAvatarPath("13");
                     try {
                         playerService.updateAvatar(player);
-                    } catch (SQLException ex) {
+                    } catch (Exception ex) {
                         throw new RuntimeException(ex);
                     }
                     avatarLabel.setIcon(new ImageIcon(getClass().getResource("/avatar/"+player.getAvatarPath()+".png")));
@@ -574,7 +574,7 @@ public class SelectAvatarFrame extends javax.swing.JFrame {
                     player.setAvatarPath("14");
                     try {
                         playerService.updateAvatar(player);
-                    } catch (SQLException ex) {
+                    } catch (Exception ex) {
                         throw new RuntimeException(ex);
                     }
                     avatarLabel.setIcon(new ImageIcon(getClass().getResource("/avatar/"+player.getAvatarPath()+".png")));
@@ -587,7 +587,7 @@ public class SelectAvatarFrame extends javax.swing.JFrame {
                     player.setAvatarPath("15");
                     try {
                         playerService.updateAvatar(player);
-                    } catch (SQLException ex) {
+                    } catch (Exception ex) {
                         throw new RuntimeException(ex);
                     }
                     avatarLabel.setIcon(new ImageIcon(getClass().getResource("/avatar/"+player.getAvatarPath()+".png")));
@@ -628,3 +628,4 @@ public class SelectAvatarFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 }
+
