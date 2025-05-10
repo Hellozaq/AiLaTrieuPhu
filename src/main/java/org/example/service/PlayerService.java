@@ -79,7 +79,7 @@ public class PlayerService {
     public List<PlayerModel> getRankingTop10() {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             return session.createQuery(
-                "FROM PlayerModel ORDER BY score DESC", PlayerModel.class)
+                "FROM PlayerModel ORDER BY rankScore DESC", PlayerModel.class)
                 .setMaxResults(10)
                 .list();
         }

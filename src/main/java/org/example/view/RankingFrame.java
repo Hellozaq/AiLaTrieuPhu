@@ -268,7 +268,7 @@ public class RankingFrame extends javax.swing.JFrame {
         int index=0;
         for(PlayerModel player:top10) {
             usernameLabels[index].setText(player.getUsername());
-            scoreLabels[index].setText(player.getScore()+"");
+            scoreLabels[index].setText(player.getRankScore()+"");
             String avatarPath = player.getAvatarPath();
             System.out.println(avatarPath);
             java.net.URL imgUrl = null;
