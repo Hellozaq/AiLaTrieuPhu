@@ -313,7 +313,8 @@ public class WelcomeFrame extends javax.swing.JFrame {
                             PlayAudioURL.stopAudio(clipStart);
 //                        PlayAudio.playAudio("src/main/java/org/example/file/audio/level-up-2-199574_1.wav");
                             PlayAudioURL.playAudio(getClass().getResource("/audio/level-up-2-199574_1.wav"));
-                            GameFrame.display(player);
+//                            GameFrame.display(player);
+                            ModeSelectionFrame.display(player);
                         }
                         dispose();
                     }

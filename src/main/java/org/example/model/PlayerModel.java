@@ -1,10 +1,13 @@
 package org.example.model;
 
-import jakarta.persistence.*;;
+import jakarta.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "players")
-public class PlayerModel {
+public class PlayerModel implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
