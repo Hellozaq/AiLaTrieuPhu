@@ -4,8 +4,6 @@
  */
 package org.example.view;
 
-import javazoom.jl.player.Player;
-import org.example.model.PlayAudio;
 import org.example.model.PlayAudioURL;
 import org.example.model.PlayerModel;
 import org.example.service.AuthService;
@@ -15,9 +13,6 @@ import javax.sound.sampled.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.IOException;
-import java.sql.SQLException;
 import javax.swing.*;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;

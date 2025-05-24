@@ -4,15 +4,12 @@
  */
 package org.example.view;
 
-import org.example.controllers.QuestionController;
 import org.example.model.PlayAudioURL;
 import org.example.model.PlayerModel;
 import org.example.model.QuestionModel;
 import org.example.network.GameClient;
 import org.example.network.Message;
 import org.example.network.MessageType;
-import org.example.service.PlayerService;
-import org.example.view.helpCall.HelpCallFrame;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -176,7 +173,7 @@ public class OnlineGameFrame extends javax.swing.JFrame {
 
         questionCurrentIndexLabel.setFont(new java.awt.Font("Eras Bold ITC", 1, 15)); // NOI18N
         questionCurrentIndexLabel.setForeground(new java.awt.Color(10, 47, 104));
-        getContentPane().add(questionCurrentIndexLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(69, 252, -1, -1));
+        getContentPane().add(questionCurrentIndexLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(282, 252, -1, -1));
 
         scoreLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/elements/TongThuong3.png"))); // NOI18N
         getContentPane().add(scoreLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 10, -1, -1));
@@ -447,8 +444,7 @@ public class OnlineGameFrame extends javax.swing.JFrame {
 
     private void setupOnlineGameUI() {
         // Hiển thị thông tin người chơi hiện tại
-        // Giả sử avatarLabel, usernameLabel, moneyLabel đã được khai báo và thêm vào UI bởi NetBeans
-        if (avatarLabel != null) { // Kiểm tra null trước khi sử dụng
+        if (avatarLabel != null) {
             if (currentPlayer.getAvatarPath() != null && !currentPlayer.getAvatarPath().isEmpty()) {
                 avatarLabel.setIcon(new ImageIcon(getClass().getResource("/avatar/" + currentPlayer.getAvatarPath() + ".png")));
             } else {
@@ -458,9 +454,9 @@ public class OnlineGameFrame extends javax.swing.JFrame {
         if (usernameLabel != null) usernameLabel.setText(currentPlayer.getUsername());
         if (moneyLabel != null) moneyLabel.setText("Điểm: 0");
         myOnlineScore = 0;
+        questionCurrentIndex = 0; // Reset thứ tự câu hỏi về 0
 
         // Hiển thị thông tin đối thủ ban đầu
-        // Giả sử opponentAvatarLabel, opponentNameLabel, opponentScoreLabel đã được thêm vào UI
         if (opponentPlayer != null) {
             updateOpponentDisplay(opponentPlayer.getUsername(), opponentPlayer.getAvatarPath(), 0);
         } else {
@@ -473,7 +469,7 @@ public class OnlineGameFrame extends javax.swing.JFrame {
         disableButtons();
         if (questionLabel != null) questionLabel.setText("Đang chờ câu hỏi từ server...");
         if (questionCurrentIndexLabel != null)
-            questionCurrentIndexLabel.setText(""); // Hoặc "Câu 1" tùy theo server gửi
+            questionCurrentIndexLabel.setText("0"); // Hiển thị số 0 khi chưa có câu hỏi
 
         // Ẩn nút trợ giúp
         if (help5050Buton != null) help5050Buton.setVisible(false);
@@ -552,6 +548,7 @@ public class OnlineGameFrame extends javax.swing.JFrame {
                         "Xác Nhận Rời Trận", JOptionPane.YES_NO_OPTION);
                 if (confirm == JOptionPane.YES_OPTION) {
                     // Cần định nghĩa MessageType.C2S_LEAVE_GAME trong enum MessageType
+                    PlayAudioURL.stopAudio(question1to5Audio);
                     gameClient.sendMessage(new Message(MessageType.valueOf("C2S_LEAVE_GAME"), roomId));
                 }
             });
@@ -677,16 +674,21 @@ public class OnlineGameFrame extends javax.swing.JFrame {
     public void displayQuestion(QuestionModel question, int totalTimeInSeconds) {
         SwingUtilities.invokeLater(() -> {
             this.currentQuestion = question;
+            questionCurrentIndex++; // Tăng thứ tự câu hỏi
             if (questionLabel != null) questionLabel.setText("<html>" + question.getQuestion() + "</html>");
             if (aButon != null) aButon.setText("A. " + question.getOptionA());
             if (bButon != null) bButon.setText("B. " + question.getOptionB());
             if (cButon != null) cButon.setText("C. " + question.getOptionC());
             if (dButon != null) dButon.setText("D. " + question.getOptionD());
 
-//            resetAnswerButtonColors();
+            // Cập nhật số thứ tự câu hỏi
+            if (questionCurrentIndexLabel != null) {
+                questionCurrentIndexLabel.setText(String.valueOf(questionCurrentIndex));
+            }
+
             setEableButon();
             if (gameStatusLabel != null) gameStatusLabel.setText("Thời gian: " + totalTimeInSeconds + "s");
-            logger.info("Hiển thị câu hỏi ID: " + question.getId());
+            logger.info("Hiển thị câu hỏi thứ " + questionCurrentIndex);
         });
     }
 
