@@ -9,6 +9,8 @@ public enum MessageType {
     C2S_LEAVE_ROOM,
     C2S_LOBBY_CHAT,      // Payload: ChatMessage
     C2S_PLAYER_READY,    // Payload: boolean (sẵn sàng / không sẵn sàng)
+    C2S_SUBMIT_ANSWER,      // Client gửi câu trả lời
+    C2S_LEAVE_GAME,
 
     // Server to Client
     S2C_CONNECTION_ACKNOWLEDGED, // Xác nhận kết nối thành công, có thể gửi lại thông tin Player đã được server cập nhật
@@ -24,8 +26,12 @@ public enum MessageType {
     S2C_UPDATE_PLAYER_INFO,    // Payload: PlayerModel (cập nhật tiền,...)
 
     // Thông điệp trong game (sẽ định nghĩa sau)
-    C2S_SUBMIT_ANSWER,
     S2C_QUESTION,
     S2C_ANSWER_RESULT,
-    S2C_GAME_OVER
-}
+    S2C_GAME_OVER,
+    S2C_UPDATE_GAME_SCORE,
+    S2C_GAME_OVER_SCORE,
+    S2C_GAME_QUESTION, // Server thông báo kết thúc game
+    S2C_OPPONENT_ANSWERED,  // (Tùy chọn) Thông báo đối thủ đã trả lời
+    S2C_TIME_UP
+    }

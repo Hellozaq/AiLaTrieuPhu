@@ -89,7 +89,7 @@ public class WelcomeFrame extends javax.swing.JFrame {
 
         passwordLabel.setFont(new java.awt.Font("Dialog", 3, 12)); // NOI18N
         passwordLabel.setForeground(new java.awt.Color(255, 255, 255));
-        passwordLabel.setText("Username");
+        passwordLabel.setText("Password");
         getContentPane().add(passwordLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(164, 232, -1, -1));
         getContentPane().add(passwordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(232, 228, 141, 25));
 

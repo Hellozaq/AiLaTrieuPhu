@@ -7,11 +7,14 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Collections;
+
+import org.example.model.QuestionModel;     // Thêm import
+import org.example.controllers.QuestionController; // Thêm import (để lấy câu hỏi)
+import org.example.service.PlayerService;
+
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.*;
 import java.util.logging.*;
 
 public class Server {
@@ -20,17 +23,37 @@ public class Server {
     private ExecutorService clientExecutorService; // Dùng thread pool để quản lý client
     private final List<ClientHandler> connectedClients = Collections.synchronizedList(new ArrayList<>());
     private final Map<String, Room> activeRooms = new ConcurrentHashMap<>();
+    private QuestionController questionController; // Để lấy danh sách câu hỏi
+    private PlayerService playerService;           // Để cập nhật tiền người chơi
+    private final ScheduledExecutorService timerScheduler = Executors.newSingleThreadScheduledExecutor(); // Dùng chung cho các timer của phòng
+
 
     private static final Logger logger = Logger.getLogger(Server.class.getName());
 
     public Server() {
         setupLogger();
         clientExecutorService = Executors.newCachedThreadPool();
+
+        try {
+            questionController = new QuestionController();
+            playerService = new PlayerService(); // Đảm bảo dòng này được thực thi
+            logger.info("QuestionController initialized with " + (questionController.getQuestions() != null ? questionController.getQuestions().size() : "null list") + " questions.");
+            if (playerService == null) {
+                logger.severe("PLAYER SERVICE IS NULL AFTER INITIALIZATION!");
+            } else {
+                logger.info("PlayerService initialized successfully.");
+            }
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, "Failed to initialize QuestionController or PlayerService", e);
+            // Critical error, consider stopping server or handling appropriately
+        }
+
     }
 
     private void setupLogger() {
         try {
-            // Tắt logger mặc định của root để tránh in 2 lần nếu console handler của root được cấu hình
+            // Tắt logger mặc định của root để tránh in 2 lần nếu console handler của root
+            // được cấu hình
             Logger rootLogger = Logger.getLogger("");
             Handler[] handlers = rootLogger.getHandlers();
             if (handlers.length > 0 && handlers[0] instanceof ConsoleHandler) {
@@ -44,19 +67,21 @@ public class Server {
             consoleHandler.setLevel(Level.INFO); // Log ra console từ INFO trở lên
             consoleHandler.setFormatter(new SimpleFormatter() {
                 private static final String FORMAT = "[%1$tF %1$tT] [%2$-7s] %3$s %n";
+
                 @Override
                 public synchronized String format(LogRecord lr) {
                     return String.format(FORMAT,
                             new java.util.Date(lr.getMillis()),
                             lr.getLevel().getLocalizedName(),
-                            lr.getMessage()
-                    );
+                            lr.getMessage());
                 }
             });
             logger.addHandler(consoleHandler);
 
             // File Handler
-            FileHandler fileHandler = new FileHandler("server_log.%u.%g.txt", 1024 * 1024, 5, true); // Log xoay vòng, 1MB/file, 5 files
+            FileHandler fileHandler = new FileHandler("server_log.%u.%g.txt", 1024 * 1024, 5, true); // Log xoay vòng,
+            // 1MB/file, 5
+            // files
             fileHandler.setLevel(Level.FINE); // Ghi vào file từ FINE trở lên (chi tiết hơn)
             fileHandler.setFormatter(new SimpleFormatter()); // Có thể tùy chỉnh formatter cho file nếu muốn
             logger.addHandler(fileHandler);
@@ -67,7 +92,6 @@ public class Server {
             logger.log(Level.SEVERE, "Lỗi cấu hình file logger.", e);
         }
     }
-
 
     public void startServer() {
         try {
@@ -121,45 +145,6 @@ public class Server {
         connectedClients.remove(clientHandler);
     }
 
-    // Quản lý Phòng
-    public synchronized Room createRoom(PlayerModel player, ClientHandler handler, int betAmount) {
-        // TODO: Trừ tiền cược của người chơi player.getRankScore() - betAmount
-        // player.setRankScore(player.getRankScore() - betAmount); // Cần cập nhật vào DB sau này
-        // server.getPlayerService().updatePlayer(player); // Ví dụ
-        Room newRoom = new Room(player, handler, betAmount);
-        activeRooms.put(newRoom.getRoomId(), newRoom);
-        logger.info("Phòng " + newRoom.getRoomId() + " được tạo bởi " + player.getUsername() + " với mức cược " + betAmount);
-        return newRoom;
-    }
-
-    public synchronized Room joinRoom(String roomId, PlayerModel player, ClientHandler handler) {
-        Room room = activeRooms.get(roomId);
-        if (room != null && !room.isFull()) {
-            if (player.getRankScore() < room.getBetAmount()) {
-                logger.warning(player.getUsername() + " không đủ tiền ("+ player.getRankScore() +") để vào phòng " + roomId + " cược " + room.getBetAmount());
-                return null; // Không đủ tiền cược
-            }
-            // TODO: Trừ tiền cược của người chơi
-            if (room.addPlayer2(player, handler)) {
-                logger.info(player.getUsername() + " đã tham gia phòng " + roomId);
-                return room;
-            }
-        }
-        logger.warning(player.getUsername() + " không thể tham gia phòng " + roomId + ". Lý do: " + (room == null ? "Không tồn tại" : "Phòng đầy hoặc lỗi khác"));
-        return null;
-    }
-
-    public synchronized void leaveRoom(String roomId, PlayerModel player) {
-        Room room = activeRooms.get(roomId);
-        if (room != null) {
-            logger.info(player.getUsername() + " rời phòng " + roomId);
-            room.removePlayer(player);
-            if (room.isEmpty()) {
-                activeRooms.remove(roomId);
-                logger.info("Phòng " + roomId + " trống và đã bị xóa.");
-            }
-        }
-    }
 
     public synchronized List<RoomInfo> getRoomInfoList() {
         List<RoomInfo> roomInfos = new ArrayList<>();
@@ -173,7 +158,8 @@ public class Server {
         List<RoomInfo> roomInfos = getRoomInfoList();
         Message roomListMessage = new Message(MessageType.S2C_ROOM_LIST_UPDATE, roomInfos);
         for (ClientHandler client : connectedClients) {
-            // Chỉ gửi danh sách phòng cho những client chưa ở trong phòng nào hoặc LobbyFrame đang active
+            // Chỉ gửi danh sách phòng cho những client chưa ở trong phòng nào hoặc
+            // LobbyFrame đang active
             // Hoặc đơn giản là gửi cho tất cả, client tự quyết định có hiển thị hay không
             client.sendMessage(roomListMessage);
         }
@@ -188,33 +174,376 @@ public class Server {
         }
     }
 
-
     public void sendRoomListToClient(ClientHandler clientHandler) {
         clientHandler.sendMessage(new Message(MessageType.S2C_ROOM_LIST_UPDATE, getRoomInfoList()));
     }
 
-    public void startGameForRoom(Room room) {
-        if (room.getStatus().equals("READY_TO_START")) {
-            room.setStatus("PLAYING"); // Chuyển trạng thái phòng
-            // TODO: Logic trừ tiền cược của cả 2 người chơi (nếu chưa trừ lúc tạo/join)
 
-            // Thông báo cho cả 2 client trong phòng là game bắt đầu
-            Message gameStartMsg = new Message(MessageType.S2C_GAME_STARTING, room.getRoomId());
-            if (room.getHandler1() != null) room.getHandler1().sendMessage(gameStartMsg);
-            if (room.getHandler2() != null) room.getHandler2().sendMessage(gameStartMsg);
+    public synchronized Room createRoom(PlayerModel player, ClientHandler handler, int betAmount) {
+        // TODO: Trừ tiền cược ban đầu ở đây hoặc khi game bắt đầu
+        Room newRoom = new Room(player, handler, betAmount);
+        activeRooms.put(newRoom.getRoomId(), newRoom);
+        logger.info("Phòng " + newRoom.getRoomId() + " được tạo bởi " + player.getUsername() + " với mức cược " + betAmount);
+        return newRoom;
+    }
 
-            logger.info("Game bắt đầu cho phòng " + room.getRoomId() + " giữa " + room.getPlayer1().getUsername() + " và " + (room.getPlayer2() != null ? room.getPlayer2().getUsername() : "UNKNOWN"));
-            broadcastRoomList(); // Cập nhật trạng thái phòng cho mọi người
+    public synchronized Room joinRoom(String roomId, PlayerModel player, ClientHandler handler) {
+        Room room = activeRooms.get(roomId);
+        if (room != null && !room.isFull()) {
+            if (player.getRankScore() < room.getBetAmount()) {
+                logger.warning(player.getUsername() + " không đủ tiền (" + player.getRankScore() + ") để vào phòng " + roomId + " cược " + room.getBetAmount());
+                handler.sendMessage(new Message(MessageType.S2C_ERROR, "Không đủ " + room.getBetAmount() + " xu để vào phòng."));
+                return null;
+            }
+            if (room.addPlayer2(player, handler)) {
+                logger.info(player.getUsername() + " đã tham gia phòng " + roomId);
+                // TODO: Trừ tiền cược ban đầu ở đây hoặc khi game bắt đầu
+                return room;
+            }
+        }
+        logger.warning(player.getUsername() + " không thể tham gia phòng " + roomId + ". Lý do: " + (room == null ? "Không tồn tại" : "Phòng đầy hoặc lỗi khác"));
+        handler.sendMessage(new Message(MessageType.S2C_ERROR, "Không thể vào phòng. Phòng không tồn tại hoặc đã đầy."));
+        return null;
+    }
 
-            // TODO: Bắt đầu gửi câu hỏi đầu tiên cho phòng này
-            // sendNextQuestionToRoom(room);
+    public synchronized void leaveRoom(String roomId, ClientHandler handler) { // Sửa tham số thành ClientHandler
+        Room room = activeRooms.get(roomId);
+        if (room != null) {
+            PlayerModel leavingPlayer = handler.getPlayer();
+            logger.info((leavingPlayer != null ? leavingPlayer.getUsername() : "Một người chơi") + " rời phòng " + roomId);
+
+            // Nếu game đang diễn ra, xử thua cho người rời đi
+            if ("PLAYING".equals(room.getStatus())) {
+                endGameForRoom(room, (leavingPlayer != null ? leavingPlayer.getUsername() : "Một người chơi") + " đã rời trận.", handler);
+                return; // endGameForRoom sẽ xử lý việc xóa phòng nếu cần
+            }
+
+            room.removePlayer(handler); // Truyền ClientHandler
+            if (room.isEmpty()) {
+                activeRooms.remove(roomId);
+                logger.info("Phòng " + roomId + " trống và đã bị xóa.");
+            } else {
+                // Nếu còn người ở lại, cập nhật trạng thái phòng (ví dụ về WAITING)
+                room.setStatus("WAITING");
+                // Thông báo cho người còn lại (nếu có) đã được xử lý trong ClientHandler -> S2C_OPPONENT_LEFT_ROOM và S2C_ROOM_JOINED
+            }
         }
     }
 
-    public synchronized Room getRoomById(String roomId) {
+    public synchronized Room getRoomById(String roomId) { // Đã thêm ở lần trước
         return activeRooms.get(roomId);
     }
 
+
+    // --- Các phương thức mới cho Game Logic ---
+    public synchronized void startGameForRoom(Room room) {
+        if (room == null || !"READY_TO_START".equals(room.getStatus())) {
+            logger.warning("Không thể bắt đầu game cho phòng " + (room != null ? room.getRoomId() : "null") + ". Trạng thái không hợp lệ: " + (room != null ? room.getStatus() : "N/A"));
+            return;
+        }
+
+        // 1. Trừ tiền cược (ví dụ) - Cần đảm bảo giao dịch an toàn
+        try {
+            if (room.getPlayer1() != null && room.getPlayer2() != null) {
+                int bet = room.getBetAmount();
+                if (room.getPlayer1().getRankScore() < bet || room.getPlayer2().getRankScore() < bet) {
+                    logger.severe("Lỗi nghiêm trọng: Người chơi không đủ tiền cược khi bắt đầu game trong phòng " + room.getRoomId());
+                    // Gửi lỗi cho cả 2, hủy game, hoàn tiền nếu đã trừ
+                    Message errMsg = new Message(MessageType.S2C_ERROR, "Lỗi: Một người chơi không đủ tiền cược. Game bị hủy.");
+                    if (room.getHandler1() != null) room.getHandler1().sendMessage(errMsg);
+                    if (room.getHandler2() != null) room.getHandler2().sendMessage(errMsg);
+                    room.setStatus("FINISHED_ERROR"); // Trạng thái lỗi
+                    // Không cần xóa phòng ngay, để client nhận lỗi rồi tự rời
+                    return;
+                }
+                // Giả sử đã trừ ở bước join hoặc tạo, hoặc trừ ở đây
+                // playerService.deductBet(room.getPlayer1().getId(), bet);
+                // playerService.deductBet(room.getPlayer2().getId(), bet);
+                // Cập nhật PlayerModel cho client
+                // if(room.getHandler1() != null) room.getHandler1().sendMessage(new Message(MessageType.S2C_UPDATE_PLAYER_INFO, playerService.getPlayerById(room.getPlayer1().getId())));
+                // if(room.getHandler2() != null) room.getHandler2().sendMessage(new Message(MessageType.S2C_UPDATE_PLAYER_INFO, playerService.getPlayerById(room.getPlayer2().getId())));
+                logger.info("Đã xác nhận tiền cược cho phòng " + room.getRoomId());
+            }
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, "Lỗi xử lý tiền cược cho phòng " + room.getRoomId(), e);
+            // Gửi lỗi và dừng game
+            return;
+        }
+
+
+        room.setStatus("PLAYING");
+        room.resetGameStats(); // Đặt lại điểm số và trạng thái game của phòng
+
+        // Lấy danh sách câu hỏi cho ván đấu (ví dụ 5 câu)
+        List<QuestionModel> allQuestions = questionController.getQuestions(); // Lấy tất cả câu hỏi
+        Collections.shuffle(allQuestions); // Xáo trộn
+        List<QuestionModel> gameQuestionsForRoom = new ArrayList<>(allQuestions.subList(0, Math.min(15, allQuestions.size()))); // Chọn 5 câu đầu
+        room.setGameQuestions(gameQuestionsForRoom);
+
+        logger.info("Game bắt đầu cho phòng " + room.getRoomId() + " với " + gameQuestionsForRoom.size() + " câu hỏi.");
+
+        Message gameStartMsg = new Message(MessageType.S2C_GAME_STARTING, new Object[]{room.getRoomId(), room.getPlayer1(), room.getPlayer2()}); // Gửi kèm thông tin 2 player
+        if (room.getHandler1() != null) room.getHandler1().sendMessage(gameStartMsg);
+        if (room.getHandler2() != null) room.getHandler2().sendMessage(gameStartMsg);
+
+        broadcastRoomList(); // Cập nhật trạng thái phòng cho sảnh chờ
+
+        final Room finalRoom = room; // Cần biến final để dùng trong lambda
+        timerScheduler.schedule(() -> {
+            logger.info("Đã trì hoãn, bây giờ gửi câu hỏi đầu tiên cho phòng " + finalRoom.getRoomId());
+            sendNextQuestionToRoom(finalRoom);
+        }, 2000, TimeUnit.MILLISECONDS); // Gửi câu hỏi đầu tiên
+    }
+
+    private synchronized void sendNextQuestionToRoom(Room room) {
+        if (room == null || !"PLAYING".equals(room.getStatus())) return;
+
+        // Hủy timer của câu hỏi trước (nếu có)
+        if (room.getQuestionTimerFuture() != null && !room.getQuestionTimerFuture().isDone()) {
+            room.getQuestionTimerFuture().cancel(false);
+        }
+
+        int nextQuestionIndex = room.getCurrentQuestionIndexInGame();
+        if (nextQuestionIndex < room.getGameQuestions().size() - 1) {
+            nextQuestionIndex++; // Tăng index sau khi kiểm tra
+            room.setCurrentQuestionIndexInGame(nextQuestionIndex);
+            QuestionModel question = room.getGameQuestions().get(nextQuestionIndex);
+            room.setCurrentQuestionInRoom(question);
+            room.setPlayer1AnswerIndex(-1); // Reset trạng thái trả lời
+            room.setPlayer2AnswerIndex(-1);
+
+            int timeLimitSeconds = 60; // Thời gian cho mỗi câu hỏi
+            Message questionMsg = new Message(MessageType.S2C_GAME_QUESTION, new Object[]{question, timeLimitSeconds});
+
+            if (room.getHandler1() != null) room.getHandler1().sendMessage(questionMsg);
+            if (room.getHandler2() != null) room.getHandler2().sendMessage(questionMsg);
+
+            logger.info("Đã gửi câu hỏi " + (nextQuestionIndex + 1) + " (ID: " + question.getId() + ") cho phòng " + room.getRoomId());
+
+            // Đặt hẹn giờ cho câu hỏi
+            ScheduledFuture<?> timerFuture = timerScheduler.schedule(() -> {
+                logger.info("Hết giờ cho câu hỏi " + (room.getCurrentQuestionIndexInGame() + 1) + " phòng " + room.getRoomId());
+                processTimeUpForRoom(room);
+            }, timeLimitSeconds, TimeUnit.SECONDS);
+            room.setQuestionTimerFuture(timerFuture);
+        } else {
+            // Hết câu hỏi
+            logger.info("Hết câu hỏi cho phòng " + room.getRoomId());
+            endGameForRoom(room, "Đã hoàn thành tất cả câu hỏi.", null);
+        }
+    }
+
+    public synchronized void handleSubmitAnswer(ClientHandler handler, Room room, int questionId, int answerIndex) {
+        if (room == null || !"PLAYING".equals(room.getStatus()) || room.getCurrentQuestionInRoom() == null) {
+            logger.warning("Nhận câu trả lời khi phòng không ở trạng thái PLAYING hoặc không có câu hỏi hiện tại. Phòng: " + (room != null ? room.getRoomId() : "null"));
+            return;
+        }
+        if (room.getCurrentQuestionInRoom().getId() != questionId) {
+            logger.warning("Nhận câu trả lời cho câu hỏi ID " + questionId + " nhưng câu hỏi hiện tại của phòng là " + room.getCurrentQuestionInRoom().getId());
+            return; // Trả lời cho câu hỏi cũ, bỏ qua
+        }
+
+        PlayerModel p = handler.getPlayer();
+        boolean alreadyAnswered = false;
+
+        if (handler == room.getHandler1()) {
+            if (room.getPlayer1AnswerIndex() == -1) room.setPlayer1AnswerIndex(answerIndex);
+            else alreadyAnswered = true;
+        } else if (handler == room.getHandler2()) {
+            if (room.getPlayer2AnswerIndex() == -1) room.setPlayer2AnswerIndex(answerIndex);
+            else alreadyAnswered = true;
+        } else {
+            return; // Handler không thuộc phòng
+        }
+
+        if (alreadyAnswered) {
+            logger.info(p.getUsername() + " cố gắng trả lời lại câu hỏi " + questionId + ". Bỏ qua.");
+            return;
+        }
+
+        logger.info(p.getUsername() + " đã trả lời câu " + (room.getCurrentQuestionIndexInGame() + 1) + " với lựa chọn " + answerIndex);
+
+        // Thông báo cho đối thủ là người này đã trả lời (tùy chọn)
+        // ClientHandler opponentHandler = room.getOpponentHandler(handler);
+        // if (opponentHandler != null) {
+        // opponentHandler.sendMessage(new Message(MessageType.S2C_OPPONENT_ANSWERED, p.getUsername()));
+        // }
+
+
+        // Kiểm tra xem cả hai đã trả lời chưa
+        if (room.getPlayer1AnswerIndex() != -1 && room.getPlayer2AnswerIndex() != -1) {
+            if (room.getQuestionTimerFuture() != null && !room.getQuestionTimerFuture().isDone()) {
+                room.getQuestionTimerFuture().cancel(false); // Hủy timer vì cả 2 đã trả lời
+                logger.info("Đã hủy timer cho câu hỏi " + (room.getCurrentQuestionIndexInGame() + 1) + " phòng " + room.getRoomId() + " vì cả 2 đã trả lời.");
+            }
+            processAnswersAndContinue(room);
+        }
+    }
+
+
+    private synchronized void processTimeUpForRoom(Room room) {
+        if (room == null || !"PLAYING".equals(room.getStatus())) return;
+        logger.info("Xử lý hết giờ cho câu hỏi " + (room.getCurrentQuestionIndexInGame() + 1) + " phòng " + room.getRoomId());
+
+        // Đánh dấu những người chưa trả lời là hết giờ (ví dụ, câu trả lời = 0)
+        if (room.getPlayer1AnswerIndex() == -1) room.setPlayer1AnswerIndex(0); // 0 nghĩa là hết giờ
+        if (room.getPlayer2AnswerIndex() == -1) room.setPlayer2AnswerIndex(0);
+
+        processAnswersAndContinue(room);
+    }
+
+    private synchronized void processAnswersAndContinue(Room room) {
+        if (room == null || !"PLAYING".equals(room.getStatus()) || room.getCurrentQuestionInRoom() == null) return;
+
+        QuestionModel question = room.getCurrentQuestionInRoom();
+        int correctAnswer = question.getCorrectAnswer();
+
+        boolean p1Result = (room.getPlayer1AnswerIndex() == correctAnswer);
+        boolean p2Result = (room.getPlayer2AnswerIndex() == correctAnswer);
+
+        int pointsThisRound = 1000;
+
+        if (p1Result) room.incrementPlayer1OnlineScore(pointsThisRound);
+        if (p2Result) room.incrementPlayer2OnlineScore(pointsThisRound);
+
+        Message resultMsg = new Message(MessageType.S2C_ANSWER_RESULT, new Object[]{
+                question.getId(),
+                room.getPlayer1AnswerIndex(), p1Result,
+                room.getPlayer2AnswerIndex(), p2Result,
+                correctAnswer
+        });
+//        Message scoreMsg = new Message(MessageType.S2C_UPDATE_GAME_SCORE, new Object[]{
+//                room.getPlayer1OnlineScore(), room.getPlayer2OnlineScore()
+//        });
+//
+//        if (room.getHandler1() != null) {
+//            room.getHandler1().sendMessage(resultMsg);
+//            room.getHandler1().sendMessage(scoreMsg);
+//        }
+//        if (room.getHandler2() != null) {
+//            room.getHandler2().sendMessage(resultMsg);
+//            room.getHandler2().sendMessage(scoreMsg);
+//        }
+
+        if (room.getHandler1() != null) {
+            room.getHandler1().sendMessage(new Message(MessageType.S2C_UPDATE_GAME_SCORE, new Object[]{
+                    room.getPlayer1OnlineScore(), // myOnlineScore cho P1
+                    room.getPlayer2OnlineScore()  // opponentOnlineScore cho P1
+            }));
+        }
+
+// Gửi cho Client 2 (handler2): Điểm của P2 là "myScore", điểm của P1 là "opponentScore"
+        if (room.getHandler2() != null) {
+            room.getHandler2().sendMessage(new Message(MessageType.S2C_UPDATE_GAME_SCORE, new Object[]{
+                    room.getPlayer2OnlineScore(), // myOnlineScore cho P2
+                    room.getPlayer1OnlineScore()  // opponentOnlineScore cho P2
+            }));
+        }
+        logger.info("Đã xử lý và gửi kết quả câu hỏi " + (room.getCurrentQuestionIndexInGame() + 1) + " cho phòng " + room.getRoomId());
+
+        // Chuyển sang câu hỏi tiếp theo hoặc kết thúc game
+        sendNextQuestionToRoom(room);
+    }
+
+    public synchronized void endGameForRoom(Room room, String reason, ClientHandler leaver) {
+        if (room == null || "FINISHED".equals(room.getStatus()) || "FINISHED_ERROR".equals(room.getStatus())) {
+            logger.warning("endGameForRoom được gọi cho phòng " + (room != null ? room.getRoomId() : "null") + " nhưng phòng đã kết thúc hoặc không hợp lệ.");
+            return; // Game đã kết thúc hoặc phòng không hợp lệ
+        }
+        logger.info("Kết thúc game cho phòng " + room.getRoomId() + ". Lý do: " + reason);
+        room.setStatus("FINISHED");
+
+        // Hủy timer nếu còn chạy
+        if (room.getQuestionTimerFuture() != null && !room.getQuestionTimerFuture().isDone()) {
+            room.getQuestionTimerFuture().cancel(true);
+        }
+
+
+        PlayerModel p1 = room.getPlayer1();
+        PlayerModel p2 = room.getPlayer2();
+        ClientHandler h1 = room.getHandler1();
+        ClientHandler h2 = room.getHandler2();
+
+        if (p1 == null || p2 == null || h1 == null || h2 == null) {
+            logger.warning("Không đủ thông tin người chơi/handler để kết thúc game và trao thưởng cho phòng " + room.getRoomId());
+            // Có thể chỉ xóa phòng nếu 1 người đã thoát hoàn toàn
+            if (room.isEmpty() || room.getPlayerCount() < 2 && leaver != null) { // Nếu leaver làm phòng trống hoặc còn 1
+                activeRooms.remove(room.getRoomId());
+                logger.info("Phòng " + room.getRoomId() + " đã được xóa do không đủ người chơi khi kết thúc game.");
+            }
+            broadcastRoomList();
+            return;
+        }
+
+
+        String winnerUsername = null;
+        PlayerModel winnerModel = null;
+        PlayerModel loserModel = null;
+        int prize = room.getBetAmount() * 2; // Tổng tiền cược
+
+        if (leaver != null) { // Nếu có người rời trận
+            if (leaver == h1) { // p1 rời
+                winnerModel = p2;
+                loserModel = p1;
+            } else { // p2 rời
+                winnerModel = p1;
+                loserModel = p2;
+            }
+            winnerUsername = winnerModel.getUsername();
+            // Người rời trận không nhận được gì, tiền cược của họ thuộc về người thắng
+            prize = room.getBetAmount(); // Chỉ tiền cược của người thua
+        } else { // Kết thúc bình thường
+            if (room.getPlayer1OnlineScore() > room.getPlayer2OnlineScore()) {
+                winnerModel = p1;
+                loserModel = p2;
+            } else if (room.getPlayer2OnlineScore() > room.getPlayer1OnlineScore()) {
+                winnerModel = p2;
+                loserModel = p1;
+            } else { // Hòa
+                prize = room.getBetAmount(); // Mỗi người nhận lại tiền cược của mình
+            }
+            if (winnerModel != null) winnerUsername = winnerModel.getUsername();
+        }
+
+
+        try {
+            if (winnerModel != null && loserModel != null) { // Có thắng có thua
+                winnerModel.setRankScore(winnerModel.getRankScore() + room.getBetAmount()); // Thắng nhận tiền cược của đối thủ
+                // loserModel.setRankScore(loserModel.getRankScore() - room.getBetAmount()); // Thua mất tiền cược (đã trừ khi vào phòng hoặc sẽ trừ)
+                // Hiện tại, logic tiền cược là người thắng nhận tổng (hoặc nhận phần của người thua)
+                // Giả sử tiền cược đã bị "khóa", giờ cộng cho người thắng
+                playerService.updatePlayer(winnerModel); // Cập nhật DB
+                // playerService.updatePlayer(loserModel); // Cập nhật DB nếu rankScore của người thua cũng thay đổi (ví dụ bị trừ)
+                logger.info("Trao thưởng: " + winnerModel.getUsername() + " thắng " + room.getBetAmount() + " xu. " + loserModel.getUsername() + " thua.");
+
+            } else { // Hòa
+                // Hoàn tiền cược nếu có cơ chế "khóa" tiền cược
+                // p1.setRankScore(p1.getRankScore() + room.getBetAmount()); // Giả sử hoàn tiền
+                // p2.setRankScore(p2.getRankScore() + room.getBetAmount());
+                // playerService.updatePlayer(p1);
+                // playerService.updatePlayer(p2);
+                logger.info("Game hòa cho phòng " + room.getRoomId() + ". Tiền cược có thể được hoàn (tùy logic).");
+                prize = 0; // Không ai thắng thêm
+            }
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, "Lỗi cập nhật điểm/tiền cho người chơi sau game " + room.getRoomId(), e);
+        }
+
+        // Gửi thông báo kết thúc game và thông tin người chơi đã cập nhật
+        if (h1 != null) {
+            h1.sendMessage(new Message(MessageType.S2C_GAME_OVER, new Object[]{winnerUsername, (winnerModel == p1 ? prize : (winnerModel == null ? 0 : -room.getBetAmount())), (winnerModel == p1)}));
+            h1.sendMessage(new Message(MessageType.S2C_UPDATE_PLAYER_INFO, playerService.getPlayerById(p1.getId()))); // Gửi PlayerModel mới nhất
+        }
+        if (h2 != null) {
+            h2.sendMessage(new Message(MessageType.S2C_GAME_OVER, new Object[]{winnerUsername, (winnerModel == p2 ? prize : (winnerModel == null ? 0 : -room.getBetAmount())), (winnerModel == p2)}));
+            h2.sendMessage(new Message(MessageType.S2C_UPDATE_PLAYER_INFO, playerService.getPlayerById(p2.getId())));
+        }
+
+        // Xóa phòng sau khi game kết thúc
+        activeRooms.remove(room.getRoomId());
+        logger.info("Phòng " + room.getRoomId() + " đã kết thúc và bị xóa.");
+        broadcastRoomList();
+    }
 
     public static void main(String[] args) {
         Server server = new Server();

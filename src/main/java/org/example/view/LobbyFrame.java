@@ -561,17 +561,7 @@ public class LobbyFrame extends JFrame {
         });
     }
 
-    public void handleGameStarting(Object payload) { // payload có thể là roomID
-        SwingUtilities.invokeLater(() -> {
-            appendChatMessage("Hệ thống: Trò chơi sắp bắt đầu!");
-            JOptionPane.showMessageDialog(this, "Trò chơi sắp bắt đầu!", "Thông Báo", JOptionPane.INFORMATION_MESSAGE);
-//            PlayAudioURL.stopAllAudio(); // Dừng nhạc lobby
-            // TODO: Mở OnlineGameFrame và truyền gameClient, currentPlayer, và thông tin phòng (payload)
-            // OnlineGameFrame.display(currentPlayer, gameClient, payload);
-            dispose();
-            logger.info("Game bắt đầu, đóng LobbyFrame.");
-        });
-    }
+
 
     public void showErrorMessage(String errorMessage) {
         SwingUtilities.invokeLater(() -> {
@@ -715,5 +705,85 @@ public class LobbyFrame extends JFrame {
         mockClient.connect(testPlayer);
 
         LobbyFrame.display(testPlayer, mockClient);
+    }
+    // Trong LobbyFrame.java - handleGameStarting(Object payload)
+    public void handleGameStarting(Object payload) {
+        SwingUtilities.invokeLater(() -> {
+            appendChatMessage("Hệ thống: Trò chơi sắp bắt đầu!");
+
+            String gameRoomId = null;
+            PlayerModel p1FromServer = null;
+            PlayerModel p2FromServer = null;
+            PlayerModel opponentToPass = null;
+
+            if (payload instanceof Object[]) {
+                Object[] data = (Object[]) payload;
+                if (data.length >= 3) {
+                    gameRoomId = (String) data[0];
+                    p1FromServer = (PlayerModel) data[1]; // Thông tin Player 1 từ server
+                    p2FromServer = (PlayerModel) data[2]; // Thông tin Player 2 từ server
+
+                    logger.info("handleGameStarting cho " + currentPlayer.getUsername() + " (ID: " + currentPlayer.getId() + ")");
+                    logger.info("Payload S2C_GAME_STARTING - RoomID: " + gameRoomId);
+
+                    if (p1FromServer != null) {
+                        logger.info("Thông tin Player 1 từ server: " + p1FromServer.getUsername() + " (ID: " + p1FromServer.getId() + ", Avatar: " + p1FromServer.getAvatarPath() + ")");
+                        knownPlayers.put(p1FromServer.getUsername(), p1FromServer); // Cập nhật/thêm vào knownPlayers
+                    } else {
+                        logger.warning("p1FromServer từ server là null!");
+                    }
+                    if (p2FromServer != null) {
+                        logger.info("Thông tin Player 2 từ server: " + p2FromServer.getUsername() + " (ID: " + p2FromServer.getId() + ", Avatar: " + p2FromServer.getAvatarPath() + ")");
+                        knownPlayers.put(p2FromServer.getUsername(), p2FromServer); // Cập nhật/thêm vào knownPlayers
+                    } else {
+                        logger.warning("p2FromServer từ server là null!");
+                    }
+
+                    // QUAN TRỌNG: Kiểm tra p1FromServer và p2FromServer không null trước khi so sánh username
+                    if (p1FromServer != null && currentPlayer.getUsername().equals(p1FromServer.getUsername())) {
+                        opponentToPass = p2FromServer; // Nếu tôi là P1, đối thủ là P2
+                        logger.info("Tôi (" + currentPlayer.getUsername() + ") là Player 1. Đối thủ được xác định là: " + (opponentToPass != null ? opponentToPass.getUsername() : "null (P2 từ server null?)"));
+                    } else if (p2FromServer != null && currentPlayer.getUsername().equals(p2FromServer.getUsername())) {
+                        opponentToPass = p1FromServer; // Nếu tôi là P2, đối thủ là P1
+                        logger.info("Tôi (" + currentPlayer.getUsername() + ") là Player 2. Đối thủ được xác định là: " + (opponentToPass != null ? opponentToPass.getUsername() : "null (P1 từ server null?)"));
+                    } else {
+                        logger.severe("KHÔNG KHỚP USERNAME! Hoặc một trong các PlayerInfo từ server là null. CurrentPlayer: " + currentPlayer.getUsername() +
+                                ", p1FromServer: " + (p1FromServer != null ? p1FromServer.getUsername() : "null") +
+                                ", p2FromServer: " + (p2FromServer != null ? p2FromServer.getUsername() : "null"));
+                        showErrorMessage("Lỗi: Không xác định được vai trò người chơi (thông tin server không khớp).");
+                        // Cân nhắc không return ngay, thử fallback nếu currentJoinedRoomInfo có
+                        if (currentJoinedRoomInfo != null && opponentToPass == null) { // Fallback logic (ít tin cậy hơn)
+                            logger.warning("Thử fallback để tìm đối thủ từ currentJoinedRoomInfo...");
+                            String opponentNameFallback = currentPlayer.getUsername().equals(currentJoinedRoomInfo.getPlayer1Name()) ?
+                                    currentJoinedRoomInfo.getPlayer2Name() : currentJoinedRoomInfo.getPlayer1Name();
+                            if (opponentNameFallback != null) {
+                                opponentToPass = knownPlayers.get(opponentNameFallback);
+                                logger.info("Fallback: Đối thủ được tìm thấy từ knownPlayers: " + (opponentToPass != null ? opponentToPass.getUsername() : "null"));
+                            }
+                        }
+                        if (opponentToPass == null) return; // Nếu fallback cũng thất bại thì mới return
+                    }
+                } else {
+                    logger.severe("Payload S2C_GAME_STARTING Object[] length < 3");
+                    showErrorMessage("Lỗi: Dữ liệu bắt đầu game không đủ.");
+                    return;
+                }
+            } else {
+                logger.severe("Payload S2C_GAME_STARTING không phải là Object[]. Actual type: " + (payload != null ? payload.getClass().getName() : "null"));
+                showErrorMessage("Lỗi: Dữ liệu bắt đầu game không đúng loại.");
+                return;
+            }
+
+            if (opponentToPass == null) {
+                logger.severe("SAU TẤT CẢ, opponentToPass VẪN NULL cho người chơi " + currentPlayer.getUsername() + " phòng " + gameRoomId);
+                knownPlayers.forEach((name, model) -> logger.info("KnownPlayer lúc này: " + name + " (ID: " + model.getId() + ", Avatar: " + model.getAvatarPath() + ")"));
+                showErrorMessage("Lỗi: Không tìm thấy thông tin đối thủ để bắt đầu trận đấu.");
+                return;
+            }
+
+            logger.info("Mở OnlineGameFrame. CurrentPlayer: " + currentPlayer.getUsername() + ", Opponent: " + opponentToPass.getUsername() + ", RoomID: " + gameRoomId);
+            OnlineGameFrame.display(currentPlayer, gameClient, gameRoomId, opponentToPass);
+            dispose(); // Đóng LobbyFrame
+        });
     }
 }

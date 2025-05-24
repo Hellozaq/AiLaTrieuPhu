@@ -69,145 +69,179 @@ public class ClientHandler implements Runnable {
     }
 
     private void handleClientMessage(Message message) {
-        if (this.player == null) { // Chưa xác thực mà gửi tin nhắn khác connect
+        if (this.player == null) {
             logger.warning("Client chưa xác thực gửi tin nhắn: " + message.getType());
             return;
         }
-        switch (message.getType()) {
-            case C2S_GET_ROOM_LIST:
-                server.sendRoomListToClient(this);
-                logger.info(player.getUsername() + " yêu cầu danh sách phòng.");
-                break;
-            case C2S_CREATE_ROOM:
-                if (message.getPayload() instanceof Integer) {
-                    int betAmount = (Integer) message.getPayload();
-                    // Kiểm tra xem người chơi có đủ tiền không (tạm thời bỏ qua, sẽ thêm sau)
-                    if (player.getRankScore() < betAmount) {
-                        sendMessage(new Message(MessageType.S2C_ERROR, "Bạn không đủ tiền để tạo phòng với mức cược này."));
-                        logger.warning(player.getUsername() + " không đủ tiền ("+player.getRankScore()+") để tạo phòng cược " + betAmount);
-                        return;
+        // Ưu tiên xử lý tin nhắn trong game nếu client đang ở trong phòng và phòng đang chơi
+        if (currentRoom != null && "PLAYING".equals(currentRoom.getStatus())) {
+            switch (message.getType()) {
+                case C2S_SUBMIT_ANSWER:
+                    if (message.getPayload() instanceof Object[]) {
+                        Object[] data = (Object[]) message.getPayload();
+                        int questionId = (Integer) data[0];
+                        int answerIndex = (Integer) data[1];
+                        server.handleSubmitAnswer(this, currentRoom, questionId, answerIndex);
                     }
-                    currentRoom = server.createRoom(this.player, this, betAmount);
-                    if (currentRoom != null) {
-                        sendMessage(new Message(MessageType.S2C_ROOM_JOINED, currentRoom.getRoomInfo()));
-                        logger.info(player.getUsername() + " đã tạo phòng " + currentRoom.getRoomId() + " với mức cược " + betAmount);
-                        server.broadcastRoomList(); // Cập nhật cho các client khác
-                    } else {
-                        sendMessage(new Message(MessageType.S2C_ERROR, "Không thể tạo phòng."));
-                        logger.warning(player.getUsername() + " tạo phòng thất bại.");
+                    break;
+                case C2S_LEAVE_GAME: // Client chủ động rời game
+                    logger.info(player.getUsername() + " yêu cầu rời trận đấu trong phòng " + currentRoom.getRoomId());
+                    server.endGameForRoom(currentRoom, player.getUsername() + " đã rời trận.", this);
+                    // ClientHandler này có thể sẽ bị đóng sau đó nếu server quyết định vậy
+                    // Hoặc client tự quay về lobby sau khi nhận S2C_GAME_OVER
+                    break;
+                case C2S_LOBBY_CHAT: // Cho phép chat cả khi đang chơi game
+                    if (message.getPayload() instanceof String) {
+                        String chatMsg = (String) message.getPayload();
+                        logger.info("[CHAT GAME " + currentRoom.getRoomId() + "] " + player.getUsername() + ": " + chatMsg);
+                        Message chatRelayMsg = new Message(MessageType.S2C_LOBBY_CHAT, "[Game] " + player.getUsername() + ": " + chatMsg);
+                        if(currentRoom.getHandler1() != null) currentRoom.getHandler1().sendMessage(chatRelayMsg);
+                        if(currentRoom.getHandler2() != null) currentRoom.getHandler2().sendMessage(chatRelayMsg);
                     }
-                }
-                break;
-            case C2S_JOIN_ROOM:
-                if (message.getPayload() instanceof String) {
-                    String roomIdToJoin = (String) message.getPayload();
-                    Room joinedRoom = server.joinRoom(roomIdToJoin, this.player, this);
-                    if (joinedRoom != null) {
-                        currentRoom = joinedRoom;
-                        // Gửi thông tin phòng cho người vừa join
-                        sendMessage(new Message(MessageType.S2C_ROOM_JOINED, currentRoom.getRoomInfo()));
-                        logger.info(player.getUsername() + " đã tham gia phòng " + roomIdToJoin);
+                    break;
+                // Các tin nhắn khác không liên quan đến game có thể bị bỏ qua hoặc log lại
+                default:
+                    logger.warning("Client " + player.getUsername() + " gửi tin nhắn " + message.getType() + " không hợp lệ khi đang trong game tại phòng " + currentRoom.getRoomId());
+                    // Có thể gửi S2C_ERROR cho client này
+                    // sendMessage(new Message(MessageType.S2C_ERROR, "Hành động không hợp lệ khi đang trong trận đấu."));
+                    break;
+            }
+        }
+        // Nếu không trong game hoặc game chưa bắt đầu, xử lý tin nhắn sảnh chờ
+        else if (currentRoom != null && ("WAITING_READY".equals(currentRoom.getStatus()) || "READY_TO_START".equals(currentRoom.getStatus())) ) {
+            // Xử lý tin nhắn cho phòng chờ sẵn sàng
+            switch (message.getType()) {
+                case C2S_LEAVE_ROOM:
+                    server.leaveRoom(currentRoom.getRoomId(), this);
+                    // ClientHandler sẽ không còn currentRoom nữa sau khi server xử lý
+                    // Thông báo cho đối thủ (nếu có) và cập nhật danh sách phòng đã được xử lý trong server.leaveRoom và ClientHandler.handleDisconnect
+                    sendMessage(new Message(MessageType.S2C_ROOM_LEFT, null));
+                    // Cập nhật currentRoom thành null sau khi server đã xử lý xong
+                    // server.leaveRoom đã gọi currentRoom.removePlayer(this)
+                    // Nếu phòng trống, server sẽ xóa phòng. ClientHandler cần được cập nhật là nó không còn trong phòng nào.
+                    this.currentRoom = null; // Đánh dấu client này không còn ở trong phòng
+                    server.broadcastRoomList();
+                    break;
+                case C2S_LOBBY_CHAT:
+                    if (message.getPayload() instanceof String) {
+                        String chatMsg = (String) message.getPayload();
+                        logger.info("[CHAT PHÒNG " + currentRoom.getRoomId() + "] " + player.getUsername() + ": " + chatMsg);
+                        Message chatRelayMsg = new Message(MessageType.S2C_LOBBY_CHAT, player.getUsername() + ": " + chatMsg);
+                        if(currentRoom.getHandler1()!=null) currentRoom.getHandler1().sendMessage(chatRelayMsg);
+                        if(currentRoom.getHandler2()!=null) currentRoom.getHandler2().sendMessage(chatRelayMsg);
+                    }
+                    break;
+                case C2S_PLAYER_READY:
+                    if (message.getPayload() instanceof Boolean) {
+                        boolean isReady = (Boolean) message.getPayload();
+                        currentRoom.setPlayerReady(this, isReady); // Truyền handler thay vì player model
+                        logger.info(player.getUsername() + (isReady ? " đã sẵn sàng." : " hủy sẵn sàng.") + " trong phòng " + currentRoom.getRoomId());
 
-                        // Thông báo cho người chơi còn lại trong phòng VÀ gửi lại RoomInfo cập nhật cho họ
                         ClientHandler opponentHandler = currentRoom.getOpponentHandler(this);
                         if (opponentHandler != null) {
-                            // Tin nhắn này báo cho client của đối thủ biết CÓ người mới vào, và đó là ai
-                            opponentHandler.sendMessage(new Message(MessageType.S2C_OPPONENT_JOINED_ROOM, this.player));
-                            // GỬI LẠI RoomInfo cập nhật cho đối thủ, giờ đã có đủ 2 người chơi
-                            opponentHandler.sendMessage(new Message(MessageType.S2C_ROOM_JOINED, currentRoom.getRoomInfo()));
+                            opponentHandler.sendMessage(new Message(MessageType.S2C_OPPONENT_READY_STATUS, new Object[]{this.player.getUsername(), isReady}));
                         }
-                        server.broadcastRoomList(); // Cập nhật danh sách phòng cho sảnh chờ chung
-                    } else {
-                        sendMessage(new Message(MessageType.S2C_ERROR, "Không thể tham gia phòng. Phòng không tồn tại, đã đầy hoặc bạn không đủ tiền cược."));
-                        logger.warning(player.getUsername() + " tham gia phòng " + roomIdToJoin + " thất bại.");
+
+                        if ("READY_TO_START".equals(currentRoom.getStatus())) {
+                            logger.info("Cả hai người chơi trong phòng " + currentRoom.getRoomId() + " đã sẵn sàng. Bắt đầu game!");
+                            server.startGameForRoom(currentRoom);
+                        }
+                        server.broadcastRoomList();
                     }
-                }
-                break;
-            case C2S_LEAVE_ROOM:
-                if (currentRoom != null) {
-                    String leftRoomId = currentRoom.getRoomId(); // Lưu lại ID trước khi currentRoom có thể bị set thành null
-                    server.leaveRoom(leftRoomId, this.player);
-                    logger.info(player.getUsername() + " đã rời phòng " + leftRoomId);
-                    sendMessage(new Message(MessageType.S2C_ROOM_LEFT, null)); // Xác nhận rời phòng cho người gửi
-
-                    ClientHandler opponentHandler = currentRoom.getOpponentHandler(this); // Lấy đối thủ TRƯỚC KHI currentRoom bị thay đổi bởi server.leaveRoom
-
-                    // Cần lấy lại đối tượng Room từ server sau khi leaveRoom đã xử lý xong
-                    // để gửi thông tin phòng cập nhật (chỉ còn 1 người) cho đối thủ còn lại.
-                    Room roomAfterLeave = server.getRoomById(leftRoomId); // Cần thêm phương thức này vào Server.java
-
-                    if (opponentHandler != null && roomAfterLeave != null && !roomAfterLeave.isEmpty()) {
-                        opponentHandler.sendMessage(new Message(MessageType.S2C_OPPONENT_LEFT_ROOM, this.player.getUsername()));
-                        // Gửi lại thông tin phòng cập nhật cho đối thủ (giờ phòng chỉ còn 1 người)
-                        opponentHandler.sendMessage(new Message(MessageType.S2C_ROOM_JOINED, roomAfterLeave.getRoomInfo()));
-                    } else if (opponentHandler != null && (roomAfterLeave == null || roomAfterLeave.isEmpty())) {
-                        // Nếu phòng bị xóa (vì không còn ai) thì không cần gửi S2C_ROOM_JOINED nữa
-                        // mà có thể client của đối thủ sẽ tự xử lý khi không nhận được thông tin phòng nữa hoặc server gửi 1 tin nhắn khác
-                        opponentHandler.sendMessage(new Message(MessageType.S2C_OPPONENT_LEFT_ROOM, this.player.getUsername()));
-                        // Có thể client của đối thủ sẽ tự động quay về sảnh khi không còn phòng hoặc nhận được S2C_ROOM_LIST_UPDATE
+                    break;
+                default:
+                    logger.warning("Client " + player.getUsername() + " gửi tin nhắn " + message.getType() + " không hợp lệ khi đang trong phòng chờ " + currentRoom.getRoomId());
+                    break;
+            }
+        }
+        else { // Client ở sảnh chờ chung (currentRoom == null)
+            switch (message.getType()) {
+                case C2S_GET_ROOM_LIST:
+                    server.sendRoomListToClient(this);
+                    logger.info(player.getUsername() + " yêu cầu danh sách phòng.");
+                    break;
+                case C2S_CREATE_ROOM:
+                    if (message.getPayload() instanceof Integer) {
+                        int betAmount = (Integer) message.getPayload();
+                        if (player.getRankScore() < betAmount) {
+                            sendMessage(new Message(MessageType.S2C_ERROR, "Bạn không đủ " + betAmount + " xu để tạo phòng này."));
+                            logger.warning(player.getUsername() + " không đủ tiền ("+player.getRankScore()+") để tạo phòng cược " + betAmount);
+                            return;
+                        }
+                        Room createdRoom = server.createRoom(this.player, this, betAmount); // Gán phòng mới cho client handler này
+                        if (createdRoom != null) {
+                            this.currentRoom = createdRoom; // Cập nhật currentRoom
+                            sendMessage(new Message(MessageType.S2C_ROOM_JOINED, this.currentRoom.getRoomInfo()));
+                            logger.info(player.getUsername() + " đã tạo phòng " + this.currentRoom.getRoomId() + " với mức cược " + betAmount);
+                            server.broadcastRoomList();
+                        } else {
+                            sendMessage(new Message(MessageType.S2C_ERROR, "Không thể tạo phòng."));
+                            logger.warning(player.getUsername() + " tạo phòng thất bại.");
+                        }
                     }
+                    break;
+                case C2S_JOIN_ROOM:
+                    if (message.getPayload() instanceof String) {
+                        String roomIdToJoin = (String) message.getPayload();
+                        Room joinedRoom = server.joinRoom(roomIdToJoin, this.player, this);
+                        if (joinedRoom != null) {
+                            this.currentRoom = joinedRoom; // Cập nhật currentRoom
+                            sendMessage(new Message(MessageType.S2C_ROOM_JOINED, this.currentRoom.getRoomInfo()));
+                            logger.info(player.getUsername() + " đã tham gia phòng " + roomIdToJoin);
 
-                    currentRoom = null; // Client này không còn ở trong phòng nào nữa
-                    server.broadcastRoomList();
-                }
-                break;
-            case C2S_LOBBY_CHAT:
-                if (currentRoom != null && message.getPayload() instanceof String) {
-                    String chatMsg = (String) message.getPayload();
-                    logger.info("[CHAT PHÒNG " + currentRoom.getRoomId() + "] " + player.getUsername() + ": " + chatMsg);
-                    // Gửi tin nhắn cho cả 2 người trong phòng
-                    Message chatRelayMsg = new Message(MessageType.S2C_LOBBY_CHAT, player.getUsername() + ": " + chatMsg);
-                    currentRoom.getHandler1().sendMessage(chatRelayMsg);
-                    if (currentRoom.getHandler2() != null) {
-                        currentRoom.getHandler2().sendMessage(chatRelayMsg);
+                            ClientHandler opponentHandler = this.currentRoom.getOpponentHandler(this);
+                            if (opponentHandler != null) {
+                                opponentHandler.sendMessage(new Message(MessageType.S2C_OPPONENT_JOINED_ROOM, this.player));
+                                opponentHandler.sendMessage(new Message(MessageType.S2C_ROOM_JOINED, this.currentRoom.getRoomInfo()));
+                            }
+                            server.broadcastRoomList();
+                        }
+                        // Không cần else ở đây vì server.joinRoom đã gửi lỗi nếu thất bại
                     }
-                } else if (currentRoom == null && message.getPayload() instanceof String) {
-                    // Chat ở sảnh chờ chung (nếu có logic này) - tạm thời bỏ qua
-                    logger.info("[CHAT SẢNH] " + player.getUsername() + ": " + message.getPayload());
-                    server.broadcastMessageToAll(new Message(MessageType.S2C_LOBBY_CHAT, "[Sảnh] " + player.getUsername() + ": " + message.getPayload()), this);
-
-                }
-                break;
-            case C2S_PLAYER_READY:
-                if (currentRoom != null && message.getPayload() instanceof Boolean) {
-                    boolean isReady = (Boolean) message.getPayload();
-                    currentRoom.setPlayerReady(this.player, isReady);
-                    logger.info(player.getUsername() + (isReady ? " đã sẵn sàng." : " hủy sẵn sàng.") + " trong phòng " + currentRoom.getRoomId());
-
-                    // Thông báo cho đối thủ về trạng thái sẵn sàng
-                    ClientHandler opponentHandler = currentRoom.getOpponentHandler(this);
-                    if (opponentHandler != null) {
-                        opponentHandler.sendMessage(new Message(MessageType.S2C_OPPONENT_READY_STATUS, new Object[]{this.player.getUsername(), isReady}));
+                    break;
+                case C2S_LOBBY_CHAT: // Chat ở sảnh chung (nếu không ở trong phòng nào)
+                    if (message.getPayload() instanceof String) {
+                        logger.info("[CHAT SẢNH] " + player.getUsername() + ": " + message.getPayload());
+                        server.broadcastMessageToAll(new Message(MessageType.S2C_LOBBY_CHAT, "[Sảnh] " + player.getUsername() + ": " + message.getPayload()), this);
                     }
-
-                    // Kiểm tra xem cả hai đã sẵn sàng để bắt đầu game chưa
-                    if (currentRoom.getStatus().equals("READY_TO_START")) {
-                        logger.info("Cả hai người chơi trong phòng " + currentRoom.getRoomId() + " đã sẵn sàng. Bắt đầu game!");
-                        server.startGameForRoom(currentRoom);
-                    }
-                    server.broadcastRoomList(); // Cập nhật trạng thái phòng
-                }
-                break;
-            default:
-                logger.warning("Loại tin nhắn không xác định từ " + player.getUsername() + ": " + message.getType());
-                break;
+                    break;
+                default:
+                    logger.warning("Loại tin nhắn không xác định từ " + player.getUsername() + " ở sảnh: " + message.getType());
+                    break;
+            }
         }
     }
 
-    private void handleDisconnect() {
-        if (currentRoom != null) {
-            server.leaveRoom(currentRoom.getRoomId(), this.player);
-            ClientHandler opponentHandler = currentRoom.getOpponentHandler(this);
-            if (opponentHandler != null) {
-                opponentHandler.sendMessage(new Message(MessageType.S2C_OPPONENT_LEFT_ROOM, this.player.getUsername()));
-                opponentHandler.sendMessage(new Message(MessageType.S2C_ROOM_JOINED, currentRoom.getRoomInfo())); // Cập nhật phòng cho đối thủ
+    private void handleDisconnect() { // Được gọi khi client ngắt kết nối hoặc có lỗi stream
+        if (player != null) { // Chỉ xử lý nếu client đã được xác thực
+            logger.info(player.getUsername() + " (" + clientSocket.getInetAddress() + ") đang ngắt kết nối...");
+            if (currentRoom != null) {
+                // Nếu đang trong game, xử thua
+                if ("PLAYING".equals(currentRoom.getStatus())) {
+                    logger.info(player.getUsername() + " ngắt kết nối khi đang chơi trong phòng " + currentRoom.getRoomId() + ". Xử thua.");
+                    server.endGameForRoom(currentRoom, player.getUsername() + " đã ngắt kết nối.", this);
+                } else { // Nếu đang ở phòng chờ
+                    logger.info(player.getUsername() + " ngắt kết nối khi đang ở phòng chờ " + currentRoom.getRoomId() + ".");
+                    ClientHandler opponentHandler = currentRoom.getOpponentHandler(this); // Lấy đối thủ trước khi rời
+                    server.leaveRoom(currentRoom.getRoomId(), this); // Gọi server để xử lý rời phòng
+                    if (opponentHandler != null && currentRoom != null && !currentRoom.isEmpty()) { // Nếu phòng còn và có đối thủ
+                        Room roomAfterLeave = server.getRoomById(currentRoom.getRoomId()); // Lấy trạng thái phòng mới nhất
+                        if (roomAfterLeave != null) {
+                            opponentHandler.sendMessage(new Message(MessageType.S2C_OPPONENT_LEFT_ROOM, this.player.getUsername()));
+                            opponentHandler.sendMessage(new Message(MessageType.S2C_ROOM_JOINED, roomAfterLeave.getRoomInfo()));
+                        } else { // Phòng đã bị xóa
+                            opponentHandler.sendMessage(new Message(MessageType.S2C_OPPONENT_LEFT_ROOM, this.player.getUsername()));
+                        }
+                    }
+                }
+                currentRoom = null; // Client này không còn ở trong phòng nào nữa
             }
-            currentRoom = null;
-        }
-        server.removeConnectedClient(this);
-        server.broadcastRoomList();
-        if (player != null) {
+            server.removeConnectedClient(this);
+            server.broadcastRoomList(); // Cập nhật sảnh cho các client khác
             logger.info(player.getUsername() + " đã chính thức ngắt kết nối khỏi server.");
+        } else {
+            logger.info("Client (" + clientSocket.getInetAddress() + ") chưa xác thực đã ngắt kết nối.");
+            server.removeConnectedClient(this); // Vẫn xóa khỏi danh sách để tránh rò rỉ
         }
     }
 

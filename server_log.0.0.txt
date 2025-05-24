@@ -8,3 +8,1761 @@ May 22, 2025 6:24:09 PM org.example.network.Server startServer
 INFO: Client mới kết nối từ: /127.0.0.1
 May 22, 2025 6:27:04 PM org.example.network.Server startServer
 INFO: Client mới kết nối từ: /127.0.0.1
+May 22, 2025 6:27:15 PM org.example.network.Server startServer
+INFO: Server Ai Là Triệu Phú Online đã khởi động trên cổng 12345
+May 22, 2025 6:28:16 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 22, 2025 6:30:28 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 22, 2025 6:30:37 PM org.example.network.Server createRoom
+INFO: Phòng 3c2960 được tạo bởi thiennhan với mức cược 1000
+May 22, 2025 6:31:14 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 22, 2025 6:31:57 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 22, 2025 6:32:27 PM org.example.network.Server joinRoom
+INFO: ngocvien đã tham gia phòng 3c2960
+May 22, 2025 6:33:48 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 22, 2025 7:19:21 PM org.example.network.Server createRoom
+INFO: Phòng f7233f được tạo bởi key với mức cược 1000
+May 22, 2025 7:19:28 PM org.example.network.Server leaveRoom
+INFO: key rời phòng f7233f
+May 22, 2025 7:19:28 PM org.example.network.Server leaveRoom
+INFO: Phòng f7233f trống và đã bị xóa.
+May 22, 2025 7:19:34 PM org.example.network.Server leaveRoom
+INFO: thiennhan rời phòng 3c2960
+May 22, 2025 7:19:40 PM org.example.network.Server leaveRoom
+INFO: ngocvien rời phòng 3c2960
+May 22, 2025 7:19:40 PM org.example.network.Server leaveRoom
+INFO: Phòng 3c2960 trống và đã bị xóa.
+May 22, 2025 7:21:45 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 22, 2025 7:22:20 PM org.example.network.Server createRoom
+INFO: Phòng 65fdff được tạo bởi ngocvien với mức cược 1000
+May 22, 2025 7:22:41 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 22, 2025 7:23:37 PM org.example.network.Server joinRoom
+INFO: thiennhan đã tham gia phòng 65fdff
+May 22, 2025 7:23:49 PM org.example.network.Server startGameForRoom
+INFO: Game bắt đầu cho phòng 65fdff giữa ngocvien và thiennhan
+May 22, 2025 7:23:53 PM org.example.network.Server leaveRoom
+INFO: ngocvien rời phòng 65fdff
+May 22, 2025 7:23:55 PM org.example.network.Server leaveRoom
+INFO: thiennhan rời phòng 65fdff
+May 22, 2025 7:23:55 PM org.example.network.Server leaveRoom
+INFO: Phòng 65fdff trống và đã bị xóa.
+May 22, 2025 7:28:43 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 22, 2025 7:28:58 PM org.example.network.Server createRoom
+INFO: Phòng e811e8 được tạo bởi ngocvien với mức cược 1000
+May 22, 2025 7:30:33 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 22, 2025 7:30:41 PM org.example.network.Server joinRoom
+INFO: key đã tham gia phòng e811e8
+May 22, 2025 7:31:20 PM org.example.network.Server startGameForRoom
+INFO: Game bắt đầu cho phòng e811e8 giữa ngocvien và key
+May 22, 2025 7:31:25 PM org.example.network.Server leaveRoom
+INFO: ngocvien rời phòng e811e8
+May 22, 2025 7:31:28 PM org.example.network.Server leaveRoom
+INFO: key rời phòng e811e8
+May 22, 2025 7:31:28 PM org.example.network.Server leaveRoom
+INFO: Phòng e811e8 trống và đã bị xóa.
+May 22, 2025 9:58:47 PM org.example.network.Server startServer
+INFO: Server Ai Là Triệu Phú Online đã khởi động trên cổng 12345
+May 22, 2025 9:59:21 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 22, 2025 9:59:53 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 22, 2025 10:00:08 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 22, 2025 10:00:35 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 22, 2025 10:01:00 PM org.example.network.Server createRoom
+INFO: Phòng fb1bb6 được tạo bởi key với mức cược 1000
+May 22, 2025 10:01:08 PM org.example.network.Server joinRoom
+INFO: ngocvien đã tham gia phòng fb1bb6
+May 22, 2025 10:01:19 PM org.example.network.Server startGameForRoom
+INFO: Game bắt đầu cho phòng fb1bb6 giữa key và ngocvien
+May 22, 2025 10:02:30 PM org.example.network.Server startGameForRoom
+INFO: Game bắt đầu cho phòng fb1bb6 giữa key và ngocvien
+May 22, 2025 10:03:22 PM org.example.network.Server leaveRoom
+INFO: ngocvien rời phòng fb1bb6
+May 22, 2025 10:03:26 PM org.example.network.Server joinRoom
+INFO: ngocvien đã tham gia phòng fb1bb6
+May 22, 2025 10:03:32 PM org.example.network.Server startGameForRoom
+INFO: Game bắt đầu cho phòng fb1bb6 giữa key và ngocvien
+May 22, 2025 10:03:36 PM org.example.network.Server leaveRoom
+INFO: ngocvien rời phòng fb1bb6
+May 22, 2025 10:03:39 PM org.example.network.Server createRoom
+INFO: Phòng fb7099 được tạo bởi ngocvien với mức cược 1000
+May 22, 2025 10:03:43 PM org.example.network.Server leaveRoom
+INFO: key rời phòng fb1bb6
+May 22, 2025 10:03:43 PM org.example.network.Server leaveRoom
+INFO: Phòng fb1bb6 trống và đã bị xóa.
+May 22, 2025 10:04:18 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 22, 2025 10:04:25 PM org.example.network.Server joinRoom
+INFO: key đã tham gia phòng fb7099
+May 22, 2025 10:04:47 PM org.example.network.Server startGameForRoom
+INFO: Game bắt đầu cho phòng fb7099 giữa ngocvien và key
+May 22, 2025 10:09:21 PM org.example.network.Server leaveRoom
+INFO: ngocvien rời phòng fb7099
+May 22, 2025 10:09:34 PM org.example.network.Server leaveRoom
+INFO: key rời phòng fb7099
+May 22, 2025 10:09:34 PM org.example.network.Server leaveRoom
+INFO: Phòng fb7099 trống và đã bị xóa.
+May 22, 2025 10:09:36 PM org.example.network.Server createRoom
+INFO: Phòng 94c2b2 được tạo bởi key với mức cược 1000
+May 22, 2025 10:09:46 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 22, 2025 10:10:00 PM org.example.network.Server joinRoom
+INFO: ngocvien đã tham gia phòng 94c2b2
+May 22, 2025 10:10:54 PM org.example.network.Server startGameForRoom
+INFO: Game bắt đầu cho phòng 94c2b2 giữa key và ngocvien
+May 22, 2025 10:12:24 PM org.example.network.Server leaveRoom
+INFO: ngocvien rời phòng 94c2b2
+May 22, 2025 10:12:51 PM org.example.network.Server leaveRoom
+INFO: key rời phòng 94c2b2
+May 22, 2025 10:12:51 PM org.example.network.Server leaveRoom
+INFO: Phòng 94c2b2 trống và đã bị xóa.
+May 22, 2025 10:18:57 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 22, 2025 10:18:59 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 22, 2025 10:19:06 PM org.example.network.Server createRoom
+INFO: Phòng d3b622 được tạo bởi key với mức cược 1000
+May 22, 2025 10:19:21 PM org.example.network.Server joinRoom
+INFO: ngocvien đã tham gia phòng d3b622
+May 22, 2025 10:19:33 PM org.example.network.Server startGameForRoom
+INFO: Game bắt đầu cho phòng d3b622 giữa key và ngocvien
+May 22, 2025 10:20:27 PM org.example.network.Server leaveRoom
+INFO: key rời phòng d3b622
+May 22, 2025 10:20:32 PM org.example.network.Server leaveRoom
+INFO: ngocvien rời phòng d3b622
+May 22, 2025 10:20:32 PM org.example.network.Server leaveRoom
+INFO: Phòng d3b622 trống và đã bị xóa.
+May 22, 2025 10:20:53 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 22, 2025 10:21:28 PM org.example.network.Server createRoom
+INFO: Phòng 479f4b được tạo bởi key với mức cược 1000
+May 22, 2025 10:21:33 PM org.example.network.Server joinRoom
+INFO: ngocvien đã tham gia phòng 479f4b
+May 22, 2025 10:21:45 PM org.example.network.Server startGameForRoom
+INFO: Game bắt đầu cho phòng 479f4b giữa key và ngocvien
+May 22, 2025 10:22:12 PM org.example.network.Server leaveRoom
+INFO: key rời phòng 479f4b
+May 22, 2025 10:22:52 PM org.example.network.Server leaveRoom
+INFO: ngocvien rời phòng 479f4b
+May 22, 2025 10:22:52 PM org.example.network.Server leaveRoom
+INFO: Phòng 479f4b trống và đã bị xóa.
+May 22, 2025 10:23:08 PM org.example.network.Server startServer
+INFO: Server Ai Là Triệu Phú Online đã khởi động trên cổng 12345
+May 22, 2025 10:23:39 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 22, 2025 10:24:31 PM org.example.network.Server createRoom
+INFO: Phòng 93351a được tạo bởi ngocvien với mức cược 1000
+May 22, 2025 10:24:32 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 22, 2025 10:24:43 PM org.example.network.Server joinRoom
+INFO: key đã tham gia phòng 93351a
+May 22, 2025 10:25:10 PM org.example.network.Server startGameForRoom
+INFO: Game bắt đầu cho phòng 93351a giữa ngocvien và key
+May 22, 2025 10:25:33 PM org.example.network.Server leaveRoom
+INFO: key rời phòng 93351a
+May 22, 2025 10:26:20 PM org.example.network.Server leaveRoom
+INFO: ngocvien rời phòng 93351a
+May 22, 2025 10:26:20 PM org.example.network.Server leaveRoom
+INFO: Phòng 93351a trống và đã bị xóa.
+May 22, 2025 10:27:54 PM org.example.network.Server startServer
+INFO: Server Ai Là Triệu Phú Online đã khởi động trên cổng 12345
+May 22, 2025 10:28:25 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 22, 2025 10:29:03 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 22, 2025 10:29:06 PM org.example.network.Server createRoom
+INFO: Phòng daaef6 được tạo bởi key với mức cược 1000
+May 22, 2025 10:29:13 PM org.example.network.Server joinRoom
+INFO: ngocvien đã tham gia phòng daaef6
+May 22, 2025 10:29:23 PM org.example.network.Server startGameForRoom
+INFO: Game bắt đầu cho phòng daaef6 giữa key và ngocvien
+May 22, 2025 10:29:46 PM org.example.network.Server leaveRoom
+INFO: key rời phòng daaef6
+May 22, 2025 10:29:53 PM org.example.network.Server leaveRoom
+INFO: ngocvien rời phòng daaef6
+May 22, 2025 10:29:53 PM org.example.network.Server leaveRoom
+INFO: Phòng daaef6 trống và đã bị xóa.
+May 22, 2025 10:31:14 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 22, 2025 10:31:40 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 22, 2025 10:31:43 PM org.example.network.Server createRoom
+INFO: Phòng 37af1e được tạo bởi key với mức cược 1000
+May 22, 2025 10:31:50 PM org.example.network.Server joinRoom
+INFO: ngocvien đã tham gia phòng 37af1e
+May 22, 2025 10:32:07 PM org.example.network.Server startGameForRoom
+INFO: Game bắt đầu cho phòng 37af1e giữa key và ngocvien
+May 22, 2025 10:33:37 PM org.example.network.Server leaveRoom
+INFO: ngocvien rời phòng 37af1e
+May 22, 2025 10:36:38 PM org.example.network.Server startServer
+INFO: Server Ai Là Triệu Phú Online đã khởi động trên cổng 12345
+May 22, 2025 10:37:06 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 22, 2025 10:37:08 PM org.example.network.Server createRoom
+INFO: Phòng 39b94c được tạo bởi ngocvien với mức cược 1000
+May 22, 2025 10:37:42 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 22, 2025 10:37:50 PM org.example.network.Server joinRoom
+INFO: key đã tham gia phòng 39b94c
+May 22, 2025 10:38:06 PM org.example.network.Server startGameForRoom
+INFO: Game bắt đầu cho phòng 39b94c giữa ngocvien và key
+May 22, 2025 11:15:51 PM org.example.network.Server startServer
+INFO: Server Ai Là Triệu Phú Online đã khởi động trên cổng 12345
+May 22, 2025 11:16:09 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 22, 2025 11:17:13 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 22, 2025 11:17:19 PM org.example.network.Server createRoom
+INFO: Phòng 3d227c được tạo bởi key với mức cược 1000
+May 22, 2025 11:17:24 PM org.example.network.Server joinRoom
+INFO: ngocvien đã tham gia phòng 3d227c
+May 22, 2025 11:17:33 PM org.example.network.Server startGameForRoom
+INFO: Đã xác nhận tiền cược cho phòng 3d227c
+May 22, 2025 11:17:33 PM org.example.network.Server endGameForRoom
+INFO: Kết thúc game cho phòng 3d227c. Lý do: ngocvien đã ngắt kết nối.
+May 22, 2025 11:17:33 PM org.example.network.Server endGameForRoom
+SEVERE: Lỗi cập nhật điểm/tiền cho người chơi sau game 3d227c
+java.lang.NullPointerException: Cannot invoke "org.example.service.PlayerService.updatePlayer(org.example.model.PlayerModel)" because "this.playerService" is null
+	at org.example.network.Server.endGameForRoom(Server.java:479)
+	at org.example.network.ClientHandler.handleDisconnect(ClientHandler.java:222)
+	at org.example.network.ClientHandler.run(ClientHandler.java:66)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:572)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1575)
+
+May 22, 2025 11:19:00 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 22, 2025 11:19:04 PM org.example.network.Server leaveRoom
+INFO: key rời phòng 3d227c
+May 22, 2025 11:19:05 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 22, 2025 11:19:09 PM org.example.network.Server createRoom
+INFO: Phòng 775113 được tạo bởi key với mức cược 1000
+May 22, 2025 11:19:22 PM org.example.network.Server joinRoom
+INFO: ngocvien đã tham gia phòng 775113
+May 22, 2025 11:19:30 PM org.example.network.Server startGameForRoom
+INFO: Đã xác nhận tiền cược cho phòng 775113
+May 22, 2025 11:19:30 PM org.example.network.Server endGameForRoom
+INFO: Kết thúc game cho phòng 775113. Lý do: ngocvien đã ngắt kết nối.
+May 22, 2025 11:19:30 PM org.example.network.Server endGameForRoom
+SEVERE: Lỗi cập nhật điểm/tiền cho người chơi sau game 775113
+java.lang.NullPointerException: Cannot invoke "org.example.service.PlayerService.updatePlayer(org.example.model.PlayerModel)" because "this.playerService" is null
+	at org.example.network.Server.endGameForRoom(Server.java:479)
+	at org.example.network.ClientHandler.handleDisconnect(ClientHandler.java:222)
+	at org.example.network.ClientHandler.run(ClientHandler.java:66)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:572)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1575)
+
+May 22, 2025 11:29:56 PM org.example.network.Server leaveRoom
+INFO: key rời phòng 775113
+May 22, 2025 11:30:15 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 22, 2025 11:30:38 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 22, 2025 11:30:41 PM org.example.network.Server createRoom
+INFO: Phòng e64271 được tạo bởi key với mức cược 1000
+May 22, 2025 11:31:55 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 22, 2025 11:32:30 PM org.example.network.Server joinRoom
+INFO: ngocvien đã tham gia phòng e64271
+May 22, 2025 11:32:38 PM org.example.network.Server startGameForRoom
+INFO: Đã xác nhận tiền cược cho phòng e64271
+May 22, 2025 11:32:38 PM org.example.network.Server endGameForRoom
+INFO: Kết thúc game cho phòng e64271. Lý do: ngocvien đã ngắt kết nối.
+May 22, 2025 11:32:38 PM org.example.network.Server endGameForRoom
+SEVERE: Lỗi cập nhật điểm/tiền cho người chơi sau game e64271
+java.lang.NullPointerException: Cannot invoke "org.example.service.PlayerService.updatePlayer(org.example.model.PlayerModel)" because "this.playerService" is null
+	at org.example.network.Server.endGameForRoom(Server.java:479)
+	at org.example.network.ClientHandler.handleDisconnect(ClientHandler.java:222)
+	at org.example.network.ClientHandler.run(ClientHandler.java:66)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:572)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1575)
+
+May 22, 2025 11:38:21 PM org.example.network.Server leaveRoom
+INFO: key rời phòng e64271
+May 22, 2025 11:38:45 PM org.example.network.Server startServer
+INFO: Server Ai Là Triệu Phú Online đã khởi động trên cổng 12345
+May 22, 2025 11:39:05 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 22, 2025 11:39:32 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 22, 2025 11:39:34 PM org.example.network.Server createRoom
+INFO: Phòng c794c3 được tạo bởi key với mức cược 1000
+May 22, 2025 11:39:37 PM org.example.network.Server joinRoom
+INFO: ngocvien đã tham gia phòng c794c3
+May 22, 2025 11:39:46 PM org.example.network.Server endGameForRoom
+INFO: Kết thúc game cho phòng c794c3. Lý do: ngocvien đã ngắt kết nối.
+May 22, 2025 11:39:46 PM org.example.network.Server endGameForRoom
+SEVERE: Lỗi cập nhật điểm/tiền cho người chơi sau game c794c3
+java.lang.NullPointerException: Cannot invoke "org.example.service.PlayerService.updatePlayer(org.example.model.PlayerModel)" because "this.playerService" is null
+	at org.example.network.Server.endGameForRoom(Server.java:479)
+	at org.example.network.ClientHandler.handleDisconnect(ClientHandler.java:222)
+	at org.example.network.ClientHandler.run(ClientHandler.java:66)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:572)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1575)
+
+May 22, 2025 11:41:11 PM org.example.network.Server leaveRoom
+INFO: key rời phòng c794c3
+May 22, 2025 11:43:44 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 22, 2025 11:44:05 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 22, 2025 11:44:30 PM org.example.network.Server createRoom
+INFO: Phòng 12ef06 được tạo bởi ngocvien với mức cược 1000
+May 22, 2025 11:45:03 PM org.example.network.Server joinRoom
+INFO: key đã tham gia phòng 12ef06
+May 22, 2025 11:45:19 PM org.example.network.Server endGameForRoom
+INFO: Kết thúc game cho phòng 12ef06. Lý do: ngocvien đã ngắt kết nối.
+May 22, 2025 11:45:19 PM org.example.network.Server endGameForRoom
+SEVERE: Lỗi cập nhật điểm/tiền cho người chơi sau game 12ef06
+java.lang.NullPointerException: Cannot invoke "org.example.service.PlayerService.updatePlayer(org.example.model.PlayerModel)" because "this.playerService" is null
+	at org.example.network.Server.endGameForRoom(Server.java:479)
+	at org.example.network.ClientHandler.handleDisconnect(ClientHandler.java:222)
+	at org.example.network.ClientHandler.run(ClientHandler.java:66)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:572)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1575)
+
+May 22, 2025 11:46:37 PM org.example.network.Server leaveRoom
+INFO: key rời phòng 12ef06
+May 22, 2025 11:47:10 PM org.example.network.Server startServer
+INFO: Server Ai Là Triệu Phú Online đã khởi động trên cổng 12345
+May 22, 2025 11:54:09 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 22, 2025 11:54:32 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 22, 2025 11:54:35 PM org.example.network.Server createRoom
+INFO: Phòng a5250b được tạo bởi thiennhan với mức cược 1000
+May 22, 2025 11:54:42 PM org.example.network.Server joinRoom
+INFO: key đã tham gia phòng a5250b
+May 22, 2025 11:54:54 PM org.example.network.Server startGameForRoom
+INFO: Đã xác nhận tiền cược cho phòng a5250b
+May 22, 2025 11:54:54 PM org.example.network.Server endGameForRoom
+INFO: Kết thúc game cho phòng a5250b. Lý do: key đã ngắt kết nối.
+May 22, 2025 11:54:54 PM org.example.network.Server endGameForRoom
+SEVERE: Lỗi cập nhật điểm/tiền cho người chơi sau game a5250b
+java.lang.NullPointerException: Cannot invoke "org.example.service.PlayerService.updatePlayer(org.example.model.PlayerModel)" because "this.playerService" is null
+	at org.example.network.Server.endGameForRoom(Server.java:479)
+	at org.example.network.ClientHandler.handleDisconnect(ClientHandler.java:222)
+	at org.example.network.ClientHandler.run(ClientHandler.java:66)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:572)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1575)
+
+May 22, 2025 11:58:26 PM org.example.network.Server <init>
+INFO: QuestionController initialized with 15 questions.
+May 22, 2025 11:58:26 PM org.example.network.Server <init>
+INFO: PlayerService initialized successfully.
+May 22, 2025 11:58:26 PM org.example.network.Server startServer
+INFO: Server Ai Là Triệu Phú Online đã khởi động trên cổng 12345
+May 22, 2025 11:58:59 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 22, 2025 11:59:14 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 22, 2025 11:59:17 PM org.example.network.Server createRoom
+INFO: Phòng 9328f5 được tạo bởi key với mức cược 1000
+May 22, 2025 11:59:28 PM org.example.network.Server joinRoom
+INFO: ngocvien đã tham gia phòng 9328f5
+May 22, 2025 11:59:39 PM org.example.network.Server startGameForRoom
+INFO: Đã xác nhận tiền cược cho phòng 9328f5
+May 22, 2025 11:59:39 PM org.example.network.Server startGameForRoom
+INFO: Game bắt đầu cho phòng 9328f5 với 5 câu hỏi.
+May 22, 2025 11:59:39 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 1 (ID: 19) cho phòng 9328f5
+May 22, 2025 11:59:39 PM org.example.network.Server endGameForRoom
+INFO: Kết thúc game cho phòng 9328f5. Lý do: key đã ngắt kết nối.
+May 22, 2025 11:59:39 PM org.example.network.Server endGameForRoom
+INFO: Trao thưởng: ngocvien thắng 1000 xu. key thua.
+May 22, 2025 11:59:39 PM org.example.network.Server endGameForRoom
+INFO: Phòng 9328f5 đã kết thúc và bị xóa.
+May 22, 2025 11:59:39 PM org.example.network.Server endGameForRoom
+WARNING: endGameForRoom được gọi cho phòng 9328f5 nhưng phòng đã kết thúc hoặc không hợp lệ.
+May 23, 2025 12:00:48 AM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 23, 2025 12:01:06 AM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 23, 2025 12:01:11 AM org.example.network.Server createRoom
+INFO: Phòng 9dc870 được tạo bởi ngocvien với mức cược 1000
+May 23, 2025 12:01:20 AM org.example.network.Server joinRoom
+INFO: key đã tham gia phòng 9dc870
+May 23, 2025 12:01:29 AM org.example.network.Server startGameForRoom
+INFO: Đã xác nhận tiền cược cho phòng 9dc870
+May 23, 2025 12:01:29 AM org.example.network.Server startGameForRoom
+INFO: Game bắt đầu cho phòng 9dc870 với 5 câu hỏi.
+May 23, 2025 12:01:29 AM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 1 (ID: 57) cho phòng 9dc870
+May 23, 2025 12:01:29 AM org.example.network.Server endGameForRoom
+INFO: Kết thúc game cho phòng 9dc870. Lý do: ngocvien đã ngắt kết nối.
+May 23, 2025 12:01:29 AM org.example.network.Server endGameForRoom
+INFO: Trao thưởng: key thắng 1000 xu. ngocvien thua.
+May 23, 2025 12:01:29 AM org.example.network.Server endGameForRoom
+INFO: Phòng 9dc870 đã kết thúc và bị xóa.
+May 23, 2025 12:01:29 AM org.example.network.Server endGameForRoom
+WARNING: endGameForRoom được gọi cho phòng 9dc870 nhưng phòng đã kết thúc hoặc không hợp lệ.
+May 23, 2025 12:08:30 AM org.example.network.Server <init>
+INFO: QuestionController initialized with 15 questions.
+May 23, 2025 12:08:30 AM org.example.network.Server <init>
+INFO: PlayerService initialized successfully.
+May 23, 2025 12:08:30 AM org.example.network.Server startServer
+INFO: Server Ai Là Triệu Phú Online đã khởi động trên cổng 12345
+May 23, 2025 12:08:51 AM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 23, 2025 12:09:23 AM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 23, 2025 12:09:29 AM org.example.network.Server createRoom
+INFO: Phòng 0c0687 được tạo bởi key với mức cược 2000
+May 23, 2025 12:09:36 AM org.example.network.Server joinRoom
+INFO: ngocvien đã tham gia phòng 0c0687
+May 23, 2025 12:09:46 AM org.example.network.Server startGameForRoom
+INFO: Đã xác nhận tiền cược cho phòng 0c0687
+May 23, 2025 12:09:46 AM org.example.network.Server startGameForRoom
+INFO: Game bắt đầu cho phòng 0c0687 với 5 câu hỏi.
+May 23, 2025 12:09:46 AM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 1 (ID: 25) cho phòng 0c0687
+May 23, 2025 12:10:43 AM org.example.network.Server endGameForRoom
+INFO: Kết thúc game cho phòng 0c0687. Lý do: key đã rời trận.
+May 23, 2025 12:10:43 AM org.example.network.Server endGameForRoom
+INFO: Trao thưởng: ngocvien thắng 2000 xu. key thua.
+May 23, 2025 12:10:43 AM org.example.network.Server endGameForRoom
+INFO: Phòng 0c0687 đã kết thúc và bị xóa.
+May 23, 2025 12:20:39 AM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 23, 2025 12:20:44 AM org.example.network.Server createRoom
+INFO: Phòng ce6cdd được tạo bởi key với mức cược 1000
+May 23, 2025 12:20:50 AM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 23, 2025 12:20:56 AM org.example.network.Server joinRoom
+INFO: ngocvien đã tham gia phòng ce6cdd
+May 23, 2025 12:27:23 AM org.example.network.Server leaveRoom
+INFO: key rời phòng ce6cdd
+May 23, 2025 12:27:36 AM org.example.network.Server leaveRoom
+INFO: ngocvien rời phòng ce6cdd
+May 23, 2025 12:27:36 AM org.example.network.Server leaveRoom
+INFO: Phòng ce6cdd trống và đã bị xóa.
+May 24, 2025 6:01:37 PM org.example.network.Server <init>
+INFO: QuestionController initialized with 15 questions.
+May 24, 2025 6:01:37 PM org.example.network.Server <init>
+INFO: PlayerService initialized successfully.
+May 24, 2025 6:01:37 PM org.example.network.Server startServer
+INFO: Server Ai Là Triệu Phú Online đã khởi động trên cổng 12345
+May 24, 2025 6:02:21 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 24, 2025 6:02:33 PM org.example.network.Server createRoom
+INFO: Phòng 32deb9 được tạo bởi ngocvien với mức cược 4000
+May 24, 2025 6:03:03 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 24, 2025 6:03:08 PM org.example.network.Server joinRoom
+INFO: key đã tham gia phòng 32deb9
+May 24, 2025 6:03:36 PM org.example.network.Server startGameForRoom
+INFO: Đã xác nhận tiền cược cho phòng 32deb9
+May 24, 2025 6:03:36 PM org.example.network.Server startGameForRoom
+INFO: Game bắt đầu cho phòng 32deb9 với 5 câu hỏi.
+May 24, 2025 6:03:36 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 1 (ID: 15) cho phòng 32deb9
+May 24, 2025 6:04:06 PM org.example.network.Server endGameForRoom
+INFO: Kết thúc game cho phòng 32deb9. Lý do: ngocvien đã rời trận.
+May 24, 2025 6:04:06 PM org.example.network.Server endGameForRoom
+INFO: Trao thưởng: key thắng 4000 xu. ngocvien thua.
+May 24, 2025 6:04:06 PM org.example.network.Server endGameForRoom
+INFO: Phòng 32deb9 đã kết thúc và bị xóa.
+May 24, 2025 6:14:19 PM org.example.network.Server <init>
+INFO: QuestionController initialized with 15 questions.
+May 24, 2025 6:14:19 PM org.example.network.Server <init>
+INFO: PlayerService initialized successfully.
+May 24, 2025 6:14:19 PM org.example.network.Server startServer
+INFO: Server Ai Là Triệu Phú Online đã khởi động trên cổng 12345
+May 24, 2025 6:15:30 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 24, 2025 6:16:02 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 24, 2025 6:16:06 PM org.example.network.Server createRoom
+INFO: Phòng 0c2988 được tạo bởi key với mức cược 1000
+May 24, 2025 6:16:17 PM org.example.network.Server joinRoom
+INFO: ngocvien đã tham gia phòng 0c2988
+May 24, 2025 6:16:35 PM org.example.network.Server startGameForRoom
+INFO: Đã xác nhận tiền cược cho phòng 0c2988
+May 24, 2025 6:16:35 PM org.example.network.Server startGameForRoom
+INFO: Game bắt đầu cho phòng 0c2988 với 5 câu hỏi.
+May 24, 2025 6:16:35 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 1 (ID: 11) cho phòng 0c2988
+May 24, 2025 6:17:20 PM org.example.network.Server endGameForRoom
+INFO: Kết thúc game cho phòng 0c2988. Lý do: ngocvien đã rời trận.
+May 24, 2025 6:17:20 PM org.example.network.Server endGameForRoom
+INFO: Trao thưởng: key thắng 1000 xu. ngocvien thua.
+May 24, 2025 6:17:20 PM org.example.network.Server endGameForRoom
+INFO: Phòng 0c2988 đã kết thúc và bị xóa.
+May 24, 2025 6:26:48 PM org.example.network.Server <init>
+INFO: QuestionController initialized with 15 questions.
+May 24, 2025 6:26:48 PM org.example.network.Server <init>
+INFO: PlayerService initialized successfully.
+May 24, 2025 6:26:48 PM org.example.network.Server startServer
+INFO: Server Ai Là Triệu Phú Online đã khởi động trên cổng 12345
+May 24, 2025 6:27:02 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 24, 2025 6:27:05 PM org.example.network.Server createRoom
+INFO: Phòng 366ff7 được tạo bởi key với mức cược 1000
+May 24, 2025 6:27:27 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 24, 2025 6:27:32 PM org.example.network.Server joinRoom
+INFO: ngocvien đã tham gia phòng 366ff7
+May 24, 2025 6:27:40 PM org.example.network.Server startGameForRoom
+INFO: Đã xác nhận tiền cược cho phòng 366ff7
+May 24, 2025 6:27:40 PM org.example.network.Server startGameForRoom
+INFO: Game bắt đầu cho phòng 366ff7 với 5 câu hỏi.
+May 24, 2025 6:27:40 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 1 (ID: 50) cho phòng 366ff7
+May 24, 2025 6:28:40 PM org.example.network.Server lambda$0
+INFO: Hết giờ cho câu hỏi 1 phòng 366ff7
+May 24, 2025 6:28:40 PM org.example.network.Server processTimeUpForRoom
+INFO: Xử lý hết giờ cho câu hỏi 1 phòng 366ff7
+May 24, 2025 6:28:40 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 1 cho phòng 366ff7
+May 24, 2025 6:28:40 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 2 (ID: 63) cho phòng 366ff7
+May 24, 2025 6:28:54 PM org.example.network.Server handleSubmitAnswer
+INFO: ngocvien đã trả lời câu 2 với lựa chọn 1
+May 24, 2025 6:28:57 PM org.example.network.Server handleSubmitAnswer
+INFO: key đã trả lời câu 2 với lựa chọn 1
+May 24, 2025 6:28:57 PM org.example.network.Server handleSubmitAnswer
+INFO: Đã hủy timer cho câu hỏi 2 phòng 366ff7 vì cả 2 đã trả lời.
+May 24, 2025 6:28:57 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 2 cho phòng 366ff7
+May 24, 2025 6:28:57 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 3 (ID: 7) cho phòng 366ff7
+May 24, 2025 6:29:14 PM org.example.network.Server handleSubmitAnswer
+INFO: ngocvien đã trả lời câu 3 với lựa chọn 3
+May 24, 2025 6:29:18 PM org.example.network.Server handleSubmitAnswer
+INFO: key đã trả lời câu 3 với lựa chọn 3
+May 24, 2025 6:29:18 PM org.example.network.Server handleSubmitAnswer
+INFO: Đã hủy timer cho câu hỏi 3 phòng 366ff7 vì cả 2 đã trả lời.
+May 24, 2025 6:29:18 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 3 cho phòng 366ff7
+May 24, 2025 6:29:18 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 4 (ID: 37) cho phòng 366ff7
+May 24, 2025 6:29:51 PM org.example.network.Server handleSubmitAnswer
+INFO: ngocvien đã trả lời câu 4 với lựa chọn 1
+May 24, 2025 6:29:53 PM org.example.network.Server handleSubmitAnswer
+INFO: key đã trả lời câu 4 với lựa chọn 1
+May 24, 2025 6:29:53 PM org.example.network.Server handleSubmitAnswer
+INFO: Đã hủy timer cho câu hỏi 4 phòng 366ff7 vì cả 2 đã trả lời.
+May 24, 2025 6:29:53 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 4 cho phòng 366ff7
+May 24, 2025 6:29:53 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 5 (ID: 90) cho phòng 366ff7
+May 24, 2025 6:29:55 PM org.example.network.Server handleSubmitAnswer
+INFO: key đã trả lời câu 5 với lựa chọn 3
+May 24, 2025 6:29:56 PM org.example.network.Server handleSubmitAnswer
+INFO: ngocvien đã trả lời câu 5 với lựa chọn 3
+May 24, 2025 6:29:56 PM org.example.network.Server handleSubmitAnswer
+INFO: Đã hủy timer cho câu hỏi 5 phòng 366ff7 vì cả 2 đã trả lời.
+May 24, 2025 6:29:56 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 5 cho phòng 366ff7
+May 24, 2025 6:29:56 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Hết câu hỏi cho phòng 366ff7
+May 24, 2025 6:29:56 PM org.example.network.Server endGameForRoom
+INFO: Kết thúc game cho phòng 366ff7. Lý do: Đã hoàn thành tất cả câu hỏi.
+May 24, 2025 6:29:56 PM org.example.network.Server endGameForRoom
+INFO: Game hòa cho phòng 366ff7. Tiền cược có thể được hoàn (tùy logic).
+May 24, 2025 6:29:56 PM org.example.network.Server endGameForRoom
+INFO: Phòng 366ff7 đã kết thúc và bị xóa.
+May 24, 2025 6:33:51 PM org.example.network.Server <init>
+INFO: QuestionController initialized with 15 questions.
+May 24, 2025 6:33:51 PM org.example.network.Server <init>
+INFO: PlayerService initialized successfully.
+May 24, 2025 6:33:51 PM org.example.network.Server startServer
+INFO: Server Ai Là Triệu Phú Online đã khởi động trên cổng 12345
+May 24, 2025 6:34:03 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 24, 2025 6:34:07 PM org.example.network.Server createRoom
+INFO: Phòng 2ce17d được tạo bởi key với mức cược 1000
+May 24, 2025 6:34:30 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 24, 2025 6:34:35 PM org.example.network.Server joinRoom
+INFO: ngocvien đã tham gia phòng 2ce17d
+May 24, 2025 6:34:47 PM org.example.network.Server startGameForRoom
+INFO: Đã xác nhận tiền cược cho phòng 2ce17d
+May 24, 2025 6:34:47 PM org.example.network.Server startGameForRoom
+INFO: Game bắt đầu cho phòng 2ce17d với 5 câu hỏi.
+May 24, 2025 6:34:47 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 1 (ID: 51) cho phòng 2ce17d
+May 24, 2025 6:35:47 PM org.example.network.Server lambda$sendNextQuestionToRoom$0
+INFO: Hết giờ cho câu hỏi 1 phòng 2ce17d
+May 24, 2025 6:35:47 PM org.example.network.Server processTimeUpForRoom
+INFO: Xử lý hết giờ cho câu hỏi 1 phòng 2ce17d
+May 24, 2025 6:35:47 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 1 cho phòng 2ce17d
+May 24, 2025 6:35:47 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 2 (ID: 14) cho phòng 2ce17d
+May 24, 2025 6:36:05 PM org.example.network.Server handleSubmitAnswer
+INFO: key đã trả lời câu 2 với lựa chọn 4
+May 24, 2025 6:36:07 PM org.example.network.Server handleSubmitAnswer
+INFO: ngocvien đã trả lời câu 2 với lựa chọn 1
+May 24, 2025 6:36:07 PM org.example.network.Server handleSubmitAnswer
+INFO: Đã hủy timer cho câu hỏi 2 phòng 2ce17d vì cả 2 đã trả lời.
+May 24, 2025 6:36:07 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 2 cho phòng 2ce17d
+May 24, 2025 6:36:07 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 3 (ID: 82) cho phòng 2ce17d
+May 24, 2025 6:36:13 PM org.example.network.Server handleSubmitAnswer
+INFO: ngocvien đã trả lời câu 3 với lựa chọn 1
+May 24, 2025 6:36:15 PM org.example.network.Server handleSubmitAnswer
+INFO: key đã trả lời câu 3 với lựa chọn 3
+May 24, 2025 6:36:15 PM org.example.network.Server handleSubmitAnswer
+INFO: Đã hủy timer cho câu hỏi 3 phòng 2ce17d vì cả 2 đã trả lời.
+May 24, 2025 6:36:15 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 3 cho phòng 2ce17d
+May 24, 2025 6:36:15 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 4 (ID: 29) cho phòng 2ce17d
+May 24, 2025 6:36:29 PM org.example.network.Server handleSubmitAnswer
+INFO: key đã trả lời câu 4 với lựa chọn 2
+May 24, 2025 6:36:32 PM org.example.network.Server handleSubmitAnswer
+INFO: ngocvien đã trả lời câu 4 với lựa chọn 4
+May 24, 2025 6:36:32 PM org.example.network.Server handleSubmitAnswer
+INFO: Đã hủy timer cho câu hỏi 4 phòng 2ce17d vì cả 2 đã trả lời.
+May 24, 2025 6:36:32 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 4 cho phòng 2ce17d
+May 24, 2025 6:36:32 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 5 (ID: 60) cho phòng 2ce17d
+May 24, 2025 6:36:54 PM org.example.network.Server handleSubmitAnswer
+INFO: ngocvien đã trả lời câu 5 với lựa chọn 2
+May 24, 2025 6:36:57 PM org.example.network.Server handleSubmitAnswer
+INFO: key đã trả lời câu 5 với lựa chọn 1
+May 24, 2025 6:36:57 PM org.example.network.Server handleSubmitAnswer
+INFO: Đã hủy timer cho câu hỏi 5 phòng 2ce17d vì cả 2 đã trả lời.
+May 24, 2025 6:36:57 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 5 cho phòng 2ce17d
+May 24, 2025 6:36:57 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Hết câu hỏi cho phòng 2ce17d
+May 24, 2025 6:36:57 PM org.example.network.Server endGameForRoom
+INFO: Kết thúc game cho phòng 2ce17d. Lý do: Đã hoàn thành tất cả câu hỏi.
+May 24, 2025 6:36:57 PM org.example.network.Server endGameForRoom
+INFO: Game hòa cho phòng 2ce17d. Tiền cược có thể được hoàn (tùy logic).
+May 24, 2025 6:36:57 PM org.example.network.Server endGameForRoom
+INFO: Phòng 2ce17d đã kết thúc và bị xóa.
+May 24, 2025 6:48:32 PM org.example.network.Server <init>
+INFO: QuestionController initialized with 15 questions.
+May 24, 2025 6:48:32 PM org.example.network.Server <init>
+INFO: PlayerService initialized successfully.
+May 24, 2025 6:48:32 PM org.example.network.Server startServer
+INFO: Server Ai Là Triệu Phú Online đã khởi động trên cổng 12345
+May 24, 2025 6:48:46 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 24, 2025 6:48:52 PM org.example.network.Server createRoom
+INFO: Phòng f9cfff được tạo bởi key với mức cược 3000
+May 24, 2025 6:49:23 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 24, 2025 6:49:26 PM org.example.network.Server joinRoom
+INFO: ngocvien đã tham gia phòng f9cfff
+May 24, 2025 6:49:38 PM org.example.network.Server startGameForRoom
+INFO: Đã xác nhận tiền cược cho phòng f9cfff
+May 24, 2025 6:49:38 PM org.example.network.Server startGameForRoom
+INFO: Game bắt đầu cho phòng f9cfff với 5 câu hỏi.
+May 24, 2025 6:49:38 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 1 (ID: 87) cho phòng f9cfff
+May 24, 2025 6:50:38 PM org.example.network.Server lambda$sendNextQuestionToRoom$0
+INFO: Hết giờ cho câu hỏi 1 phòng f9cfff
+May 24, 2025 6:50:38 PM org.example.network.Server processTimeUpForRoom
+INFO: Xử lý hết giờ cho câu hỏi 1 phòng f9cfff
+May 24, 2025 6:50:38 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 1 cho phòng f9cfff
+May 24, 2025 6:50:38 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 2 (ID: 54) cho phòng f9cfff
+May 24, 2025 6:50:42 PM org.example.network.Server handleSubmitAnswer
+INFO: ngocvien đã trả lời câu 2 với lựa chọn 1
+May 24, 2025 6:50:48 PM org.example.network.Server handleSubmitAnswer
+INFO: key đã trả lời câu 2 với lựa chọn 3
+May 24, 2025 6:50:48 PM org.example.network.Server handleSubmitAnswer
+INFO: Đã hủy timer cho câu hỏi 2 phòng f9cfff vì cả 2 đã trả lời.
+May 24, 2025 6:50:48 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 2 cho phòng f9cfff
+May 24, 2025 6:50:48 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 3 (ID: 72) cho phòng f9cfff
+May 24, 2025 6:51:09 PM org.example.network.Server handleSubmitAnswer
+INFO: ngocvien đã trả lời câu 3 với lựa chọn 4
+May 24, 2025 6:51:11 PM org.example.network.Server handleSubmitAnswer
+INFO: key đã trả lời câu 3 với lựa chọn 3
+May 24, 2025 6:51:11 PM org.example.network.Server handleSubmitAnswer
+INFO: Đã hủy timer cho câu hỏi 3 phòng f9cfff vì cả 2 đã trả lời.
+May 24, 2025 6:51:11 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 3 cho phòng f9cfff
+May 24, 2025 6:51:11 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 4 (ID: 65) cho phòng f9cfff
+May 24, 2025 6:51:44 PM org.example.network.Server handleSubmitAnswer
+INFO: ngocvien đã trả lời câu 4 với lựa chọn 2
+May 24, 2025 6:51:46 PM org.example.network.Server handleSubmitAnswer
+INFO: key đã trả lời câu 4 với lựa chọn 1
+May 24, 2025 6:51:46 PM org.example.network.Server handleSubmitAnswer
+INFO: Đã hủy timer cho câu hỏi 4 phòng f9cfff vì cả 2 đã trả lời.
+May 24, 2025 6:51:46 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 4 cho phòng f9cfff
+May 24, 2025 6:51:46 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 5 (ID: 101) cho phòng f9cfff
+May 24, 2025 6:52:46 PM org.example.network.Server lambda$sendNextQuestionToRoom$0
+INFO: Hết giờ cho câu hỏi 5 phòng f9cfff
+May 24, 2025 6:52:46 PM org.example.network.Server processTimeUpForRoom
+INFO: Xử lý hết giờ cho câu hỏi 5 phòng f9cfff
+May 24, 2025 6:52:46 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 5 cho phòng f9cfff
+May 24, 2025 6:52:46 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Hết câu hỏi cho phòng f9cfff
+May 24, 2025 6:52:46 PM org.example.network.Server endGameForRoom
+INFO: Kết thúc game cho phòng f9cfff. Lý do: Đã hoàn thành tất cả câu hỏi.
+May 24, 2025 6:52:46 PM org.example.network.Server endGameForRoom
+INFO: Game hòa cho phòng f9cfff. Tiền cược có thể được hoàn (tùy logic).
+May 24, 2025 6:52:46 PM org.example.network.Server endGameForRoom
+INFO: Phòng f9cfff đã kết thúc và bị xóa.
+May 24, 2025 6:54:02 PM org.example.network.Server <init>
+INFO: QuestionController initialized with 15 questions.
+May 24, 2025 6:54:02 PM org.example.network.Server <init>
+INFO: PlayerService initialized successfully.
+May 24, 2025 6:54:02 PM org.example.network.Server startServer
+INFO: Server Ai Là Triệu Phú Online đã khởi động trên cổng 12345
+May 24, 2025 6:54:17 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 24, 2025 6:54:20 PM org.example.network.Server createRoom
+INFO: Phòng c17ffa được tạo bởi key với mức cược 1000
+May 24, 2025 6:54:49 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 24, 2025 6:54:56 PM org.example.network.Server joinRoom
+INFO: ngocvien đã tham gia phòng c17ffa
+May 24, 2025 6:55:03 PM org.example.network.Server startGameForRoom
+INFO: Đã xác nhận tiền cược cho phòng c17ffa
+May 24, 2025 6:55:03 PM org.example.network.Server startGameForRoom
+INFO: Game bắt đầu cho phòng c17ffa với 5 câu hỏi.
+May 24, 2025 6:55:03 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 1 (ID: 86) cho phòng c17ffa
+May 24, 2025 6:55:18 PM org.example.network.Server lambda$sendNextQuestionToRoom$0
+INFO: Hết giờ cho câu hỏi 1 phòng c17ffa
+May 24, 2025 6:55:18 PM org.example.network.Server processTimeUpForRoom
+INFO: Xử lý hết giờ cho câu hỏi 1 phòng c17ffa
+May 24, 2025 6:55:18 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 1 cho phòng c17ffa
+May 24, 2025 6:55:18 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 2 (ID: 59) cho phòng c17ffa
+May 24, 2025 6:55:22 PM org.example.network.Server handleSubmitAnswer
+INFO: key đã trả lời câu 2 với lựa chọn 2
+May 24, 2025 6:55:23 PM org.example.network.Server handleSubmitAnswer
+INFO: ngocvien đã trả lời câu 2 với lựa chọn 3
+May 24, 2025 6:55:23 PM org.example.network.Server handleSubmitAnswer
+INFO: Đã hủy timer cho câu hỏi 2 phòng c17ffa vì cả 2 đã trả lời.
+May 24, 2025 6:55:23 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 2 cho phòng c17ffa
+May 24, 2025 6:55:23 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 3 (ID: 19) cho phòng c17ffa
+May 24, 2025 6:55:38 PM org.example.network.Server lambda$sendNextQuestionToRoom$0
+INFO: Hết giờ cho câu hỏi 3 phòng c17ffa
+May 24, 2025 6:55:38 PM org.example.network.Server processTimeUpForRoom
+INFO: Xử lý hết giờ cho câu hỏi 3 phòng c17ffa
+May 24, 2025 6:55:38 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 3 cho phòng c17ffa
+May 24, 2025 6:55:38 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 4 (ID: 110) cho phòng c17ffa
+May 24, 2025 6:55:42 PM org.example.network.Server handleSubmitAnswer
+INFO: ngocvien đã trả lời câu 4 với lựa chọn 2
+May 24, 2025 6:55:42 PM org.example.network.Server handleSubmitAnswer
+INFO: key đã trả lời câu 4 với lựa chọn 1
+May 24, 2025 6:55:42 PM org.example.network.Server handleSubmitAnswer
+INFO: Đã hủy timer cho câu hỏi 4 phòng c17ffa vì cả 2 đã trả lời.
+May 24, 2025 6:55:42 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 4 cho phòng c17ffa
+May 24, 2025 6:55:42 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 5 (ID: 9) cho phòng c17ffa
+May 24, 2025 6:55:49 PM org.example.network.Server handleSubmitAnswer
+INFO: ngocvien đã trả lời câu 5 với lựa chọn 3
+May 24, 2025 6:55:53 PM org.example.network.Server handleSubmitAnswer
+INFO: key đã trả lời câu 5 với lựa chọn 3
+May 24, 2025 6:55:53 PM org.example.network.Server handleSubmitAnswer
+INFO: Đã hủy timer cho câu hỏi 5 phòng c17ffa vì cả 2 đã trả lời.
+May 24, 2025 6:55:53 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 5 cho phòng c17ffa
+May 24, 2025 6:55:53 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Hết câu hỏi cho phòng c17ffa
+May 24, 2025 6:55:53 PM org.example.network.Server endGameForRoom
+INFO: Kết thúc game cho phòng c17ffa. Lý do: Đã hoàn thành tất cả câu hỏi.
+May 24, 2025 6:55:53 PM org.example.network.Server endGameForRoom
+INFO: Trao thưởng: key thắng 1000 xu. ngocvien thua.
+May 24, 2025 6:55:53 PM org.example.network.Server endGameForRoom
+INFO: Phòng c17ffa đã kết thúc và bị xóa.
+May 24, 2025 7:00:41 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 24, 2025 7:00:45 PM org.example.network.Server createRoom
+INFO: Phòng f3ddae được tạo bởi key với mức cược 1000
+May 24, 2025 7:01:02 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 24, 2025 7:01:08 PM org.example.network.Server joinRoom
+INFO: ngocvien đã tham gia phòng f3ddae
+May 24, 2025 7:01:20 PM org.example.network.Server startGameForRoom
+INFO: Đã xác nhận tiền cược cho phòng f3ddae
+May 24, 2025 7:01:20 PM org.example.network.Server startGameForRoom
+INFO: Game bắt đầu cho phòng f3ddae với 5 câu hỏi.
+May 24, 2025 7:01:20 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 1 (ID: 18) cho phòng f3ddae
+May 24, 2025 7:01:35 PM org.example.network.Server lambda$sendNextQuestionToRoom$0
+INFO: Hết giờ cho câu hỏi 1 phòng f3ddae
+May 24, 2025 7:01:35 PM org.example.network.Server processTimeUpForRoom
+INFO: Xử lý hết giờ cho câu hỏi 1 phòng f3ddae
+May 24, 2025 7:01:35 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 1 cho phòng f3ddae
+May 24, 2025 7:01:35 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 2 (ID: 68) cho phòng f3ddae
+May 24, 2025 7:01:38 PM org.example.network.Server handleSubmitAnswer
+INFO: ngocvien đã trả lời câu 2 với lựa chọn 1
+May 24, 2025 7:01:39 PM org.example.network.Server handleSubmitAnswer
+INFO: key đã trả lời câu 2 với lựa chọn 3
+May 24, 2025 7:01:39 PM org.example.network.Server handleSubmitAnswer
+INFO: Đã hủy timer cho câu hỏi 2 phòng f3ddae vì cả 2 đã trả lời.
+May 24, 2025 7:01:39 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 2 cho phòng f3ddae
+May 24, 2025 7:01:39 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 3 (ID: 7) cho phòng f3ddae
+May 24, 2025 7:01:48 PM org.example.network.Server handleSubmitAnswer
+INFO: key đã trả lời câu 3 với lựa chọn 3
+May 24, 2025 7:01:49 PM org.example.network.Server handleSubmitAnswer
+INFO: ngocvien đã trả lời câu 3 với lựa chọn 3
+May 24, 2025 7:01:49 PM org.example.network.Server handleSubmitAnswer
+INFO: Đã hủy timer cho câu hỏi 3 phòng f3ddae vì cả 2 đã trả lời.
+May 24, 2025 7:01:49 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 3 cho phòng f3ddae
+May 24, 2025 7:01:49 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 4 (ID: 86) cho phòng f3ddae
+May 24, 2025 7:01:58 PM org.example.network.Server handleSubmitAnswer
+INFO: ngocvien đã trả lời câu 4 với lựa chọn 3
+May 24, 2025 7:01:59 PM org.example.network.Server handleSubmitAnswer
+INFO: key đã trả lời câu 4 với lựa chọn 1
+May 24, 2025 7:01:59 PM org.example.network.Server handleSubmitAnswer
+INFO: Đã hủy timer cho câu hỏi 4 phòng f3ddae vì cả 2 đã trả lời.
+May 24, 2025 7:01:59 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 4 cho phòng f3ddae
+May 24, 2025 7:01:59 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 5 (ID: 110) cho phòng f3ddae
+May 24, 2025 7:02:06 PM org.example.network.Server handleSubmitAnswer
+INFO: ngocvien đã trả lời câu 5 với lựa chọn 1
+May 24, 2025 7:02:07 PM org.example.network.Server handleSubmitAnswer
+INFO: key đã trả lời câu 5 với lựa chọn 3
+May 24, 2025 7:02:07 PM org.example.network.Server handleSubmitAnswer
+INFO: Đã hủy timer cho câu hỏi 5 phòng f3ddae vì cả 2 đã trả lời.
+May 24, 2025 7:02:07 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 5 cho phòng f3ddae
+May 24, 2025 7:02:07 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Hết câu hỏi cho phòng f3ddae
+May 24, 2025 7:02:07 PM org.example.network.Server endGameForRoom
+INFO: Kết thúc game cho phòng f3ddae. Lý do: Đã hoàn thành tất cả câu hỏi.
+May 24, 2025 7:02:07 PM org.example.network.Server endGameForRoom
+INFO: Trao thưởng: ngocvien thắng 1000 xu. key thua.
+May 24, 2025 7:02:07 PM org.example.network.Server endGameForRoom
+INFO: Phòng f3ddae đã kết thúc và bị xóa.
+May 24, 2025 7:07:48 PM org.example.network.Server <init>
+INFO: QuestionController initialized with 15 questions.
+May 24, 2025 7:07:48 PM org.example.network.Server <init>
+INFO: PlayerService initialized successfully.
+May 24, 2025 7:07:48 PM org.example.network.Server startServer
+INFO: Server Ai Là Triệu Phú Online đã khởi động trên cổng 12345
+May 24, 2025 7:08:20 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 24, 2025 7:08:26 PM org.example.network.Server createRoom
+INFO: Phòng 043fc8 được tạo bởi key với mức cược 1000
+May 24, 2025 7:08:45 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 24, 2025 7:08:49 PM org.example.network.Server joinRoom
+INFO: ngocvien đã tham gia phòng 043fc8
+May 24, 2025 7:08:57 PM org.example.network.Server startGameForRoom
+INFO: Đã xác nhận tiền cược cho phòng 043fc8
+May 24, 2025 7:08:57 PM org.example.network.Server startGameForRoom
+INFO: Game bắt đầu cho phòng 043fc8 với 15 câu hỏi.
+May 24, 2025 7:08:57 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 1 (ID: 58) cho phòng 043fc8
+May 24, 2025 7:09:12 PM org.example.network.Server lambda$sendNextQuestionToRoom$0
+INFO: Hết giờ cho câu hỏi 1 phòng 043fc8
+May 24, 2025 7:09:12 PM org.example.network.Server processTimeUpForRoom
+INFO: Xử lý hết giờ cho câu hỏi 1 phòng 043fc8
+May 24, 2025 7:09:12 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 1 cho phòng 043fc8
+May 24, 2025 7:09:12 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 2 (ID: 15) cho phòng 043fc8
+May 24, 2025 7:09:15 PM org.example.network.Server handleSubmitAnswer
+INFO: ngocvien đã trả lời câu 2 với lựa chọn 1
+May 24, 2025 7:09:18 PM org.example.network.Server handleSubmitAnswer
+INFO: key đã trả lời câu 2 với lựa chọn 3
+May 24, 2025 7:09:18 PM org.example.network.Server handleSubmitAnswer
+INFO: Đã hủy timer cho câu hỏi 2 phòng 043fc8 vì cả 2 đã trả lời.
+May 24, 2025 7:09:18 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 2 cho phòng 043fc8
+May 24, 2025 7:09:18 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 3 (ID: 65) cho phòng 043fc8
+May 24, 2025 7:09:33 PM org.example.network.Server lambda$sendNextQuestionToRoom$0
+INFO: Hết giờ cho câu hỏi 3 phòng 043fc8
+May 24, 2025 7:09:33 PM org.example.network.Server processTimeUpForRoom
+INFO: Xử lý hết giờ cho câu hỏi 3 phòng 043fc8
+May 24, 2025 7:09:33 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 3 cho phòng 043fc8
+May 24, 2025 7:09:33 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 4 (ID: 14) cho phòng 043fc8
+May 24, 2025 7:09:39 PM org.example.network.Server handleSubmitAnswer
+INFO: key đã trả lời câu 4 với lựa chọn 4
+May 24, 2025 7:09:45 PM org.example.network.Server handleSubmitAnswer
+INFO: ngocvien đã trả lời câu 4 với lựa chọn 3
+May 24, 2025 7:09:45 PM org.example.network.Server handleSubmitAnswer
+INFO: Đã hủy timer cho câu hỏi 4 phòng 043fc8 vì cả 2 đã trả lời.
+May 24, 2025 7:09:45 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 4 cho phòng 043fc8
+May 24, 2025 7:09:45 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 5 (ID: 26) cho phòng 043fc8
+May 24, 2025 7:10:00 PM org.example.network.Server lambda$sendNextQuestionToRoom$0
+INFO: Hết giờ cho câu hỏi 5 phòng 043fc8
+May 24, 2025 7:10:00 PM org.example.network.Server processTimeUpForRoom
+INFO: Xử lý hết giờ cho câu hỏi 5 phòng 043fc8
+May 24, 2025 7:10:00 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 5 cho phòng 043fc8
+May 24, 2025 7:10:00 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 6 (ID: 53) cho phòng 043fc8
+May 24, 2025 7:10:06 PM org.example.network.Server handleSubmitAnswer
+INFO: key đã trả lời câu 6 với lựa chọn 2
+May 24, 2025 7:10:10 PM org.example.network.Server handleSubmitAnswer
+INFO: ngocvien đã trả lời câu 6 với lựa chọn 4
+May 24, 2025 7:10:10 PM org.example.network.Server handleSubmitAnswer
+INFO: Đã hủy timer cho câu hỏi 6 phòng 043fc8 vì cả 2 đã trả lời.
+May 24, 2025 7:10:10 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 6 cho phòng 043fc8
+May 24, 2025 7:10:10 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 7 (ID: 72) cho phòng 043fc8
+May 24, 2025 7:10:25 PM org.example.network.Server lambda$sendNextQuestionToRoom$0
+INFO: Hết giờ cho câu hỏi 7 phòng 043fc8
+May 24, 2025 7:10:25 PM org.example.network.Server processTimeUpForRoom
+INFO: Xử lý hết giờ cho câu hỏi 7 phòng 043fc8
+May 24, 2025 7:10:25 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 7 cho phòng 043fc8
+May 24, 2025 7:10:25 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 8 (ID: 38) cho phòng 043fc8
+May 24, 2025 7:10:30 PM org.example.network.Server handleSubmitAnswer
+INFO: ngocvien đã trả lời câu 8 với lựa chọn 2
+May 24, 2025 7:10:32 PM org.example.network.Server handleSubmitAnswer
+INFO: key đã trả lời câu 8 với lựa chọn 3
+May 24, 2025 7:10:32 PM org.example.network.Server handleSubmitAnswer
+INFO: Đã hủy timer cho câu hỏi 8 phòng 043fc8 vì cả 2 đã trả lời.
+May 24, 2025 7:10:32 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 8 cho phòng 043fc8
+May 24, 2025 7:10:32 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 9 (ID: 89) cho phòng 043fc8
+May 24, 2025 7:10:36 PM org.example.network.Server handleSubmitAnswer
+INFO: key đã trả lời câu 9 với lựa chọn 3
+May 24, 2025 7:10:38 PM org.example.network.Server handleSubmitAnswer
+INFO: ngocvien đã trả lời câu 9 với lựa chọn 3
+May 24, 2025 7:10:38 PM org.example.network.Server handleSubmitAnswer
+INFO: Đã hủy timer cho câu hỏi 9 phòng 043fc8 vì cả 2 đã trả lời.
+May 24, 2025 7:10:38 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 9 cho phòng 043fc8
+May 24, 2025 7:10:38 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 10 (ID: 97) cho phòng 043fc8
+May 24, 2025 7:10:48 PM org.example.network.Server handleSubmitAnswer
+INFO: key đã trả lời câu 10 với lựa chọn 3
+May 24, 2025 7:10:49 PM org.example.network.Server handleSubmitAnswer
+INFO: ngocvien đã trả lời câu 10 với lựa chọn 3
+May 24, 2025 7:10:49 PM org.example.network.Server handleSubmitAnswer
+INFO: Đã hủy timer cho câu hỏi 10 phòng 043fc8 vì cả 2 đã trả lời.
+May 24, 2025 7:10:49 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 10 cho phòng 043fc8
+May 24, 2025 7:10:49 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 11 (ID: 109) cho phòng 043fc8
+May 24, 2025 7:11:02 PM org.example.network.Server handleSubmitAnswer
+INFO: key đã trả lời câu 11 với lựa chọn 3
+May 24, 2025 7:11:04 PM org.example.network.Server lambda$sendNextQuestionToRoom$0
+INFO: Hết giờ cho câu hỏi 11 phòng 043fc8
+May 24, 2025 7:11:04 PM org.example.network.Server processTimeUpForRoom
+INFO: Xử lý hết giờ cho câu hỏi 11 phòng 043fc8
+May 24, 2025 7:11:04 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 11 cho phòng 043fc8
+May 24, 2025 7:11:04 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 12 (ID: 41) cho phòng 043fc8
+May 24, 2025 7:11:14 PM org.example.network.Server handleSubmitAnswer
+INFO: key đã trả lời câu 12 với lựa chọn 3
+May 24, 2025 7:11:15 PM org.example.network.Server handleSubmitAnswer
+INFO: ngocvien đã trả lời câu 12 với lựa chọn 1
+May 24, 2025 7:11:15 PM org.example.network.Server handleSubmitAnswer
+INFO: Đã hủy timer cho câu hỏi 12 phòng 043fc8 vì cả 2 đã trả lời.
+May 24, 2025 7:11:15 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 12 cho phòng 043fc8
+May 24, 2025 7:11:15 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 13 (ID: 102) cho phòng 043fc8
+May 24, 2025 7:11:26 PM org.example.network.Server handleSubmitAnswer
+INFO: key đã trả lời câu 13 với lựa chọn 3
+May 24, 2025 7:11:27 PM org.example.network.Server handleSubmitAnswer
+INFO: ngocvien đã trả lời câu 13 với lựa chọn 3
+May 24, 2025 7:11:27 PM org.example.network.Server handleSubmitAnswer
+INFO: Đã hủy timer cho câu hỏi 13 phòng 043fc8 vì cả 2 đã trả lời.
+May 24, 2025 7:11:27 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 13 cho phòng 043fc8
+May 24, 2025 7:11:27 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 14 (ID: 18) cho phòng 043fc8
+May 24, 2025 7:11:32 PM org.example.network.Server handleSubmitAnswer
+INFO: key đã trả lời câu 14 với lựa chọn 1
+May 24, 2025 7:11:33 PM org.example.network.Server handleSubmitAnswer
+INFO: ngocvien đã trả lời câu 14 với lựa chọn 4
+May 24, 2025 7:11:33 PM org.example.network.Server handleSubmitAnswer
+INFO: Đã hủy timer cho câu hỏi 14 phòng 043fc8 vì cả 2 đã trả lời.
+May 24, 2025 7:11:33 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 14 cho phòng 043fc8
+May 24, 2025 7:11:33 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 15 (ID: 24) cho phòng 043fc8
+May 24, 2025 7:11:41 PM org.example.network.Server handleSubmitAnswer
+INFO: key đã trả lời câu 15 với lựa chọn 1
+May 24, 2025 7:11:42 PM org.example.network.Server handleSubmitAnswer
+INFO: ngocvien đã trả lời câu 15 với lựa chọn 2
+May 24, 2025 7:11:42 PM org.example.network.Server handleSubmitAnswer
+INFO: Đã hủy timer cho câu hỏi 15 phòng 043fc8 vì cả 2 đã trả lời.
+May 24, 2025 7:11:42 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 15 cho phòng 043fc8
+May 24, 2025 7:11:42 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Hết câu hỏi cho phòng 043fc8
+May 24, 2025 7:11:42 PM org.example.network.Server endGameForRoom
+INFO: Kết thúc game cho phòng 043fc8. Lý do: Đã hoàn thành tất cả câu hỏi.
+May 24, 2025 7:11:42 PM org.example.network.Server endGameForRoom
+INFO: Trao thưởng: key thắng 1000 xu. ngocvien thua.
+May 24, 2025 7:11:42 PM org.example.network.Server endGameForRoom
+INFO: Phòng 043fc8 đã kết thúc và bị xóa.
+May 24, 2025 7:17:13 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 24, 2025 7:17:23 PM org.example.network.Server createRoom
+INFO: Phòng da97bc được tạo bởi key với mức cược 2000
+May 24, 2025 7:17:42 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 24, 2025 7:17:46 PM org.example.network.Server joinRoom
+INFO: ngocvien đã tham gia phòng da97bc
+May 24, 2025 7:17:52 PM org.example.network.Server startGameForRoom
+INFO: Đã xác nhận tiền cược cho phòng da97bc
+May 24, 2025 7:17:52 PM org.example.network.Server startGameForRoom
+INFO: Game bắt đầu cho phòng da97bc với 15 câu hỏi.
+May 24, 2025 7:17:52 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 1 (ID: 26) cho phòng da97bc
+May 24, 2025 7:18:07 PM org.example.network.Server lambda$sendNextQuestionToRoom$0
+INFO: Hết giờ cho câu hỏi 1 phòng da97bc
+May 24, 2025 7:18:07 PM org.example.network.Server processTimeUpForRoom
+INFO: Xử lý hết giờ cho câu hỏi 1 phòng da97bc
+May 24, 2025 7:18:07 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 1 cho phòng da97bc
+May 24, 2025 7:18:07 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 2 (ID: 38) cho phòng da97bc
+May 24, 2025 7:18:19 PM org.example.network.Server handleSubmitAnswer
+INFO: ngocvien đã trả lời câu 2 với lựa chọn 3
+May 24, 2025 7:18:22 PM org.example.network.Server lambda$sendNextQuestionToRoom$0
+INFO: Hết giờ cho câu hỏi 2 phòng da97bc
+May 24, 2025 7:18:22 PM org.example.network.Server processTimeUpForRoom
+INFO: Xử lý hết giờ cho câu hỏi 2 phòng da97bc
+May 24, 2025 7:18:22 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 2 cho phòng da97bc
+May 24, 2025 7:18:22 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 3 (ID: 58) cho phòng da97bc
+May 24, 2025 7:18:31 PM org.example.network.Server handleSubmitAnswer
+INFO: ngocvien đã trả lời câu 3 với lựa chọn 4
+May 24, 2025 7:18:34 PM org.example.network.Server handleSubmitAnswer
+INFO: key đã trả lời câu 3 với lựa chọn 4
+May 24, 2025 7:18:34 PM org.example.network.Server handleSubmitAnswer
+INFO: Đã hủy timer cho câu hỏi 3 phòng da97bc vì cả 2 đã trả lời.
+May 24, 2025 7:18:34 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 3 cho phòng da97bc
+May 24, 2025 7:18:34 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 4 (ID: 97) cho phòng da97bc
+May 24, 2025 7:18:41 PM org.example.network.Server handleSubmitAnswer
+INFO: ngocvien đã trả lời câu 4 với lựa chọn 4
+May 24, 2025 7:18:43 PM org.example.network.Server handleSubmitAnswer
+INFO: key đã trả lời câu 4 với lựa chọn 2
+May 24, 2025 7:18:43 PM org.example.network.Server handleSubmitAnswer
+INFO: Đã hủy timer cho câu hỏi 4 phòng da97bc vì cả 2 đã trả lời.
+May 24, 2025 7:18:43 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 4 cho phòng da97bc
+May 24, 2025 7:18:43 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 5 (ID: 14) cho phòng da97bc
+May 24, 2025 7:18:58 PM org.example.network.Server lambda$sendNextQuestionToRoom$0
+INFO: Hết giờ cho câu hỏi 5 phòng da97bc
+May 24, 2025 7:18:58 PM org.example.network.Server processTimeUpForRoom
+INFO: Xử lý hết giờ cho câu hỏi 5 phòng da97bc
+May 24, 2025 7:18:58 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 5 cho phòng da97bc
+May 24, 2025 7:18:58 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 6 (ID: 65) cho phòng da97bc
+May 24, 2025 7:19:13 PM org.example.network.Server lambda$sendNextQuestionToRoom$0
+INFO: Hết giờ cho câu hỏi 6 phòng da97bc
+May 24, 2025 7:19:13 PM org.example.network.Server processTimeUpForRoom
+INFO: Xử lý hết giờ cho câu hỏi 6 phòng da97bc
+May 24, 2025 7:19:13 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 6 cho phòng da97bc
+May 24, 2025 7:19:13 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 7 (ID: 53) cho phòng da97bc
+May 24, 2025 7:19:28 PM org.example.network.Server lambda$sendNextQuestionToRoom$0
+INFO: Hết giờ cho câu hỏi 7 phòng da97bc
+May 24, 2025 7:19:28 PM org.example.network.Server processTimeUpForRoom
+INFO: Xử lý hết giờ cho câu hỏi 7 phòng da97bc
+May 24, 2025 7:19:28 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 7 cho phòng da97bc
+May 24, 2025 7:19:28 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 8 (ID: 18) cho phòng da97bc
+May 24, 2025 7:19:30 PM org.example.network.Server handleSubmitAnswer
+INFO: key đã trả lời câu 8 với lựa chọn 1
+May 24, 2025 7:19:32 PM org.example.network.Server handleSubmitAnswer
+INFO: ngocvien đã trả lời câu 8 với lựa chọn 4
+May 24, 2025 7:19:32 PM org.example.network.Server handleSubmitAnswer
+INFO: Đã hủy timer cho câu hỏi 8 phòng da97bc vì cả 2 đã trả lời.
+May 24, 2025 7:19:32 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 8 cho phòng da97bc
+May 24, 2025 7:19:32 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 9 (ID: 109) cho phòng da97bc
+May 24, 2025 7:19:43 PM org.example.network.Server handleSubmitAnswer
+INFO: key đã trả lời câu 9 với lựa chọn 3
+May 24, 2025 7:19:45 PM org.example.network.Server handleSubmitAnswer
+INFO: ngocvien đã trả lời câu 9 với lựa chọn 4
+May 24, 2025 7:19:45 PM org.example.network.Server handleSubmitAnswer
+INFO: Đã hủy timer cho câu hỏi 9 phòng da97bc vì cả 2 đã trả lời.
+May 24, 2025 7:19:45 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 9 cho phòng da97bc
+May 24, 2025 7:19:45 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 10 (ID: 89) cho phòng da97bc
+May 24, 2025 7:20:00 PM org.example.network.Server lambda$sendNextQuestionToRoom$0
+INFO: Hết giờ cho câu hỏi 10 phòng da97bc
+May 24, 2025 7:20:00 PM org.example.network.Server processTimeUpForRoom
+INFO: Xử lý hết giờ cho câu hỏi 10 phòng da97bc
+May 24, 2025 7:20:00 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 10 cho phòng da97bc
+May 24, 2025 7:20:00 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 11 (ID: 102) cho phòng da97bc
+May 24, 2025 7:20:09 PM org.example.network.Server handleSubmitAnswer
+INFO: ngocvien đã trả lời câu 11 với lựa chọn 4
+May 24, 2025 7:20:10 PM org.example.network.Server handleSubmitAnswer
+INFO: key đã trả lời câu 11 với lựa chọn 4
+May 24, 2025 7:20:10 PM org.example.network.Server handleSubmitAnswer
+INFO: Đã hủy timer cho câu hỏi 11 phòng da97bc vì cả 2 đã trả lời.
+May 24, 2025 7:20:10 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 11 cho phòng da97bc
+May 24, 2025 7:20:10 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 12 (ID: 72) cho phòng da97bc
+May 24, 2025 7:20:15 PM org.example.network.Server handleSubmitAnswer
+INFO: ngocvien đã trả lời câu 12 với lựa chọn 4
+May 24, 2025 7:20:17 PM org.example.network.Server handleSubmitAnswer
+INFO: key đã trả lời câu 12 với lựa chọn 3
+May 24, 2025 7:20:17 PM org.example.network.Server handleSubmitAnswer
+INFO: Đã hủy timer cho câu hỏi 12 phòng da97bc vì cả 2 đã trả lời.
+May 24, 2025 7:20:17 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 12 cho phòng da97bc
+May 24, 2025 7:20:17 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 13 (ID: 41) cho phòng da97bc
+May 24, 2025 7:20:32 PM org.example.network.Server lambda$sendNextQuestionToRoom$0
+INFO: Hết giờ cho câu hỏi 13 phòng da97bc
+May 24, 2025 7:20:32 PM org.example.network.Server processTimeUpForRoom
+INFO: Xử lý hết giờ cho câu hỏi 13 phòng da97bc
+May 24, 2025 7:20:32 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 13 cho phòng da97bc
+May 24, 2025 7:20:32 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 14 (ID: 24) cho phòng da97bc
+May 24, 2025 7:20:41 PM org.example.network.Server endGameForRoom
+INFO: Kết thúc game cho phòng da97bc. Lý do: key đã rời trận.
+May 24, 2025 7:20:41 PM org.example.network.Server endGameForRoom
+INFO: Trao thưởng: ngocvien thắng 2000 xu. key thua.
+May 24, 2025 7:20:41 PM org.example.network.Server endGameForRoom
+INFO: Phòng da97bc đã kết thúc và bị xóa.
+May 24, 2025 7:23:52 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 24, 2025 7:23:55 PM org.example.network.Server createRoom
+INFO: Phòng f063d5 được tạo bởi key với mức cược 1000
+May 24, 2025 7:26:23 PM org.example.network.Server leaveRoom
+INFO: key rời phòng f063d5
+May 24, 2025 7:26:23 PM org.example.network.Server leaveRoom
+INFO: Phòng f063d5 trống và đã bị xóa.
+May 24, 2025 7:26:37 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 24, 2025 7:26:39 PM org.example.network.Server createRoom
+INFO: Phòng 918fe9 được tạo bởi key với mức cược 1000
+May 24, 2025 7:26:59 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 24, 2025 7:27:05 PM org.example.network.Server joinRoom
+INFO: ngocvien đã tham gia phòng 918fe9
+May 24, 2025 7:27:12 PM org.example.network.Server startGameForRoom
+INFO: Đã xác nhận tiền cược cho phòng 918fe9
+May 24, 2025 7:27:12 PM org.example.network.Server startGameForRoom
+INFO: Game bắt đầu cho phòng 918fe9 với 15 câu hỏi.
+May 24, 2025 7:27:12 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 1 (ID: 38) cho phòng 918fe9
+May 24, 2025 7:27:27 PM org.example.network.Server lambda$sendNextQuestionToRoom$0
+INFO: Hết giờ cho câu hỏi 1 phòng 918fe9
+May 24, 2025 7:27:27 PM org.example.network.Server processTimeUpForRoom
+INFO: Xử lý hết giờ cho câu hỏi 1 phòng 918fe9
+May 24, 2025 7:27:27 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 1 cho phòng 918fe9
+May 24, 2025 7:27:27 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 2 (ID: 24) cho phòng 918fe9
+May 24, 2025 7:27:34 PM org.example.network.Server handleSubmitAnswer
+INFO: ngocvien đã trả lời câu 2 với lựa chọn 1
+May 24, 2025 7:27:37 PM org.example.network.Server handleSubmitAnswer
+INFO: key đã trả lời câu 2 với lựa chọn 2
+May 24, 2025 7:27:37 PM org.example.network.Server handleSubmitAnswer
+INFO: Đã hủy timer cho câu hỏi 2 phòng 918fe9 vì cả 2 đã trả lời.
+May 24, 2025 7:27:37 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 2 cho phòng 918fe9
+May 24, 2025 7:27:37 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 3 (ID: 109) cho phòng 918fe9
+May 24, 2025 7:27:50 PM org.example.network.Server handleSubmitAnswer
+INFO: key đã trả lời câu 3 với lựa chọn 3
+May 24, 2025 7:27:52 PM org.example.network.Server lambda$sendNextQuestionToRoom$0
+INFO: Hết giờ cho câu hỏi 3 phòng 918fe9
+May 24, 2025 7:27:52 PM org.example.network.Server processTimeUpForRoom
+INFO: Xử lý hết giờ cho câu hỏi 3 phòng 918fe9
+May 24, 2025 7:27:52 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 3 cho phòng 918fe9
+May 24, 2025 7:27:52 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 4 (ID: 53) cho phòng 918fe9
+May 24, 2025 7:27:52 PM org.example.network.Server handleSubmitAnswer
+INFO: ngocvien đã trả lời câu 4 với lựa chọn 4
+May 24, 2025 7:28:07 PM org.example.network.Server lambda$sendNextQuestionToRoom$0
+INFO: Hết giờ cho câu hỏi 4 phòng 918fe9
+May 24, 2025 7:28:07 PM org.example.network.Server processTimeUpForRoom
+INFO: Xử lý hết giờ cho câu hỏi 4 phòng 918fe9
+May 24, 2025 7:28:07 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 4 cho phòng 918fe9
+May 24, 2025 7:28:07 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 5 (ID: 89) cho phòng 918fe9
+May 24, 2025 7:28:22 PM org.example.network.Server lambda$sendNextQuestionToRoom$0
+INFO: Hết giờ cho câu hỏi 5 phòng 918fe9
+May 24, 2025 7:28:22 PM org.example.network.Server processTimeUpForRoom
+INFO: Xử lý hết giờ cho câu hỏi 5 phòng 918fe9
+May 24, 2025 7:28:22 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 5 cho phòng 918fe9
+May 24, 2025 7:28:22 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 6 (ID: 18) cho phòng 918fe9
+May 24, 2025 7:28:30 PM org.example.network.Server handleSubmitAnswer
+INFO: ngocvien đã trả lời câu 6 với lựa chọn 1
+May 24, 2025 7:28:34 PM org.example.network.Server handleSubmitAnswer
+INFO: key đã trả lời câu 6 với lựa chọn 4
+May 24, 2025 7:28:34 PM org.example.network.Server handleSubmitAnswer
+INFO: Đã hủy timer cho câu hỏi 6 phòng 918fe9 vì cả 2 đã trả lời.
+May 24, 2025 7:28:34 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 6 cho phòng 918fe9
+May 24, 2025 7:28:34 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 7 (ID: 97) cho phòng 918fe9
+May 24, 2025 7:28:49 PM org.example.network.Server lambda$sendNextQuestionToRoom$0
+INFO: Hết giờ cho câu hỏi 7 phòng 918fe9
+May 24, 2025 7:28:49 PM org.example.network.Server processTimeUpForRoom
+INFO: Xử lý hết giờ cho câu hỏi 7 phòng 918fe9
+May 24, 2025 7:28:49 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 7 cho phòng 918fe9
+May 24, 2025 7:28:49 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 8 (ID: 72) cho phòng 918fe9
+May 24, 2025 7:28:53 PM org.example.network.Server handleSubmitAnswer
+INFO: key đã trả lời câu 8 với lựa chọn 4
+May 24, 2025 7:28:57 PM org.example.network.Server handleSubmitAnswer
+INFO: ngocvien đã trả lời câu 8 với lựa chọn 3
+May 24, 2025 7:28:57 PM org.example.network.Server handleSubmitAnswer
+INFO: Đã hủy timer cho câu hỏi 8 phòng 918fe9 vì cả 2 đã trả lời.
+May 24, 2025 7:28:57 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 8 cho phòng 918fe9
+May 24, 2025 7:28:57 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 9 (ID: 41) cho phòng 918fe9
+May 24, 2025 7:29:07 PM org.example.network.Server handleSubmitAnswer
+INFO: key đã trả lời câu 9 với lựa chọn 3
+May 24, 2025 7:29:09 PM org.example.network.Server handleSubmitAnswer
+INFO: ngocvien đã trả lời câu 9 với lựa chọn 4
+May 24, 2025 7:29:09 PM org.example.network.Server handleSubmitAnswer
+INFO: Đã hủy timer cho câu hỏi 9 phòng 918fe9 vì cả 2 đã trả lời.
+May 24, 2025 7:29:09 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 9 cho phòng 918fe9
+May 24, 2025 7:29:09 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 10 (ID: 58) cho phòng 918fe9
+May 24, 2025 7:29:24 PM org.example.network.Server handleSubmitAnswer
+INFO: key đã trả lời câu 10 với lựa chọn 2
+May 24, 2025 7:29:24 PM org.example.network.Server lambda$sendNextQuestionToRoom$0
+INFO: Hết giờ cho câu hỏi 10 phòng 918fe9
+May 24, 2025 7:29:24 PM org.example.network.Server processTimeUpForRoom
+INFO: Xử lý hết giờ cho câu hỏi 10 phòng 918fe9
+May 24, 2025 7:29:24 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 10 cho phòng 918fe9
+May 24, 2025 7:29:24 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 11 (ID: 102) cho phòng 918fe9
+May 24, 2025 7:29:32 PM org.example.network.Server handleSubmitAnswer
+INFO: ngocvien đã trả lời câu 11 với lựa chọn 2
+May 24, 2025 7:29:34 PM org.example.network.Server handleSubmitAnswer
+INFO: key đã trả lời câu 11 với lựa chọn 3
+May 24, 2025 7:29:34 PM org.example.network.Server handleSubmitAnswer
+INFO: Đã hủy timer cho câu hỏi 11 phòng 918fe9 vì cả 2 đã trả lời.
+May 24, 2025 7:29:34 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 11 cho phòng 918fe9
+May 24, 2025 7:29:34 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 12 (ID: 14) cho phòng 918fe9
+May 24, 2025 7:29:49 PM org.example.network.Server lambda$sendNextQuestionToRoom$0
+INFO: Hết giờ cho câu hỏi 12 phòng 918fe9
+May 24, 2025 7:29:49 PM org.example.network.Server processTimeUpForRoom
+INFO: Xử lý hết giờ cho câu hỏi 12 phòng 918fe9
+May 24, 2025 7:29:49 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 12 cho phòng 918fe9
+May 24, 2025 7:29:49 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 13 (ID: 15) cho phòng 918fe9
+May 24, 2025 7:29:51 PM org.example.network.Server endGameForRoom
+INFO: Kết thúc game cho phòng 918fe9. Lý do: ngocvien đã rời trận.
+May 24, 2025 7:29:51 PM org.example.network.Server endGameForRoom
+INFO: Trao thưởng: key thắng 1000 xu. ngocvien thua.
+May 24, 2025 7:29:51 PM org.example.network.Server endGameForRoom
+INFO: Phòng 918fe9 đã kết thúc và bị xóa.
+May 24, 2025 7:40:28 PM org.example.network.Server <init>
+INFO: QuestionController initialized with 15 questions.
+May 24, 2025 7:40:28 PM org.example.network.Server <init>
+INFO: PlayerService initialized successfully.
+May 24, 2025 7:40:28 PM org.example.network.Server startServer
+INFO: Server Ai Là Triệu Phú Online đã khởi động trên cổng 12345
+May 24, 2025 7:40:33 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 24, 2025 7:40:38 PM org.example.network.Server createRoom
+INFO: Phòng d2875e được tạo bởi key với mức cược 1000
+May 24, 2025 7:40:59 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 24, 2025 7:41:06 PM org.example.network.Server joinRoom
+INFO: ngocvien đã tham gia phòng d2875e
+May 24, 2025 7:41:16 PM org.example.network.Server startGameForRoom
+INFO: Đã xác nhận tiền cược cho phòng d2875e
+May 24, 2025 7:41:16 PM org.example.network.Server startGameForRoom
+INFO: Game bắt đầu cho phòng d2875e với 15 câu hỏi.
+May 24, 2025 7:41:16 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 1 (ID: 10) cho phòng d2875e
+May 24, 2025 7:41:31 PM org.example.network.Server lambda$sendNextQuestionToRoom$0
+INFO: Hết giờ cho câu hỏi 1 phòng d2875e
+May 24, 2025 7:41:31 PM org.example.network.Server processTimeUpForRoom
+INFO: Xử lý hết giờ cho câu hỏi 1 phòng d2875e
+May 24, 2025 7:41:31 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 1 cho phòng d2875e
+May 24, 2025 7:41:31 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 2 (ID: 94) cho phòng d2875e
+May 24, 2025 7:41:39 PM org.example.network.Server endGameForRoom
+INFO: Kết thúc game cho phòng d2875e. Lý do: ngocvien đã ngắt kết nối.
+May 24, 2025 7:41:39 PM org.example.network.Server endGameForRoom
+INFO: Trao thưởng: key thắng 1000 xu. ngocvien thua.
+May 24, 2025 7:41:39 PM org.example.network.Server endGameForRoom
+INFO: Phòng d2875e đã kết thúc và bị xóa.
+May 24, 2025 7:43:56 PM org.example.network.Server <init>
+INFO: QuestionController initialized with 15 questions.
+May 24, 2025 7:43:56 PM org.example.network.Server <init>
+INFO: PlayerService initialized successfully.
+May 24, 2025 7:43:56 PM org.example.network.Server startServer
+INFO: Server Ai Là Triệu Phú Online đã khởi động trên cổng 12345
+May 24, 2025 7:44:10 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 24, 2025 7:44:12 PM org.example.network.Server createRoom
+INFO: Phòng a6c891 được tạo bởi key với mức cược 1000
+May 24, 2025 7:44:32 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 24, 2025 7:44:37 PM org.example.network.Server joinRoom
+INFO: ngocvien đã tham gia phòng a6c891
+May 24, 2025 7:44:42 PM org.example.network.Server startGameForRoom
+INFO: Đã xác nhận tiền cược cho phòng a6c891
+May 24, 2025 7:44:42 PM org.example.network.Server startGameForRoom
+INFO: Game bắt đầu cho phòng a6c891 với 15 câu hỏi.
+May 24, 2025 7:44:42 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 1 (ID: 103) cho phòng a6c891
+May 24, 2025 7:44:57 PM org.example.network.Server lambda$sendNextQuestionToRoom$0
+INFO: Hết giờ cho câu hỏi 1 phòng a6c891
+May 24, 2025 7:44:57 PM org.example.network.Server processTimeUpForRoom
+INFO: Xử lý hết giờ cho câu hỏi 1 phòng a6c891
+May 24, 2025 7:44:57 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 1 cho phòng a6c891
+May 24, 2025 7:44:57 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 2 (ID: 72) cho phòng a6c891
+May 24, 2025 7:45:01 PM org.example.network.Server handleSubmitAnswer
+INFO: ngocvien đã trả lời câu 2 với lựa chọn 4
+May 24, 2025 7:45:03 PM org.example.network.Server handleSubmitAnswer
+INFO: key đã trả lời câu 2 với lựa chọn 3
+May 24, 2025 7:45:03 PM org.example.network.Server handleSubmitAnswer
+INFO: Đã hủy timer cho câu hỏi 2 phòng a6c891 vì cả 2 đã trả lời.
+May 24, 2025 7:45:03 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 2 cho phòng a6c891
+May 24, 2025 7:45:03 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 3 (ID: 38) cho phòng a6c891
+May 24, 2025 7:45:18 PM org.example.network.Server handleSubmitAnswer
+INFO: key đã trả lời câu 3 với lựa chọn 3
+May 24, 2025 7:45:18 PM org.example.network.Server lambda$sendNextQuestionToRoom$0
+INFO: Hết giờ cho câu hỏi 3 phòng a6c891
+May 24, 2025 7:45:18 PM org.example.network.Server processTimeUpForRoom
+INFO: Xử lý hết giờ cho câu hỏi 3 phòng a6c891
+May 24, 2025 7:45:18 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 3 cho phòng a6c891
+May 24, 2025 7:45:18 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 4 (ID: 20) cho phòng a6c891
+May 24, 2025 7:45:23 PM org.example.network.Server handleSubmitAnswer
+INFO: key đã trả lời câu 4 với lựa chọn 4
+May 24, 2025 7:45:24 PM org.example.network.Server handleSubmitAnswer
+INFO: ngocvien đã trả lời câu 4 với lựa chọn 4
+May 24, 2025 7:45:24 PM org.example.network.Server handleSubmitAnswer
+INFO: Đã hủy timer cho câu hỏi 4 phòng a6c891 vì cả 2 đã trả lời.
+May 24, 2025 7:45:24 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 4 cho phòng a6c891
+May 24, 2025 7:45:24 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 5 (ID: 85) cho phòng a6c891
+May 24, 2025 7:45:33 PM org.example.network.Server handleSubmitAnswer
+INFO: ngocvien đã trả lời câu 5 với lựa chọn 1
+May 24, 2025 7:45:34 PM org.example.network.Server handleSubmitAnswer
+INFO: key đã trả lời câu 5 với lựa chọn 1
+May 24, 2025 7:45:34 PM org.example.network.Server handleSubmitAnswer
+INFO: Đã hủy timer cho câu hỏi 5 phòng a6c891 vì cả 2 đã trả lời.
+May 24, 2025 7:45:34 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 5 cho phòng a6c891
+May 24, 2025 7:45:34 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 6 (ID: 61) cho phòng a6c891
+May 24, 2025 7:45:39 PM org.example.network.Server handleSubmitAnswer
+INFO: ngocvien đã trả lời câu 6 với lựa chọn 4
+May 24, 2025 7:45:40 PM org.example.network.Server handleSubmitAnswer
+INFO: key đã trả lời câu 6 với lựa chọn 3
+May 24, 2025 7:45:40 PM org.example.network.Server handleSubmitAnswer
+INFO: Đã hủy timer cho câu hỏi 6 phòng a6c891 vì cả 2 đã trả lời.
+May 24, 2025 7:45:40 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 6 cho phòng a6c891
+May 24, 2025 7:45:40 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 7 (ID: 64) cho phòng a6c891
+May 24, 2025 7:45:52 PM org.example.network.Server handleSubmitAnswer
+INFO: key đã trả lời câu 7 với lựa chọn 1
+May 24, 2025 7:45:52 PM org.example.network.Server handleSubmitAnswer
+INFO: ngocvien đã trả lời câu 7 với lựa chọn 1
+May 24, 2025 7:45:52 PM org.example.network.Server handleSubmitAnswer
+INFO: Đã hủy timer cho câu hỏi 7 phòng a6c891 vì cả 2 đã trả lời.
+May 24, 2025 7:45:52 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 7 cho phòng a6c891
+May 24, 2025 7:45:52 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 8 (ID: 40) cho phòng a6c891
+May 24, 2025 7:46:01 PM org.example.network.Server handleSubmitAnswer
+INFO: ngocvien đã trả lời câu 8 với lựa chọn 2
+May 24, 2025 7:46:02 PM org.example.network.Server handleSubmitAnswer
+INFO: key đã trả lời câu 8 với lựa chọn 4
+May 24, 2025 7:46:02 PM org.example.network.Server handleSubmitAnswer
+INFO: Đã hủy timer cho câu hỏi 8 phòng a6c891 vì cả 2 đã trả lời.
+May 24, 2025 7:46:02 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 8 cho phòng a6c891
+May 24, 2025 7:46:02 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 9 (ID: 58) cho phòng a6c891
+May 24, 2025 7:46:12 PM org.example.network.Server handleSubmitAnswer
+INFO: ngocvien đã trả lời câu 9 với lựa chọn 2
+May 24, 2025 7:46:13 PM org.example.network.Server handleSubmitAnswer
+INFO: key đã trả lời câu 9 với lựa chọn 2
+May 24, 2025 7:46:13 PM org.example.network.Server handleSubmitAnswer
+INFO: Đã hủy timer cho câu hỏi 9 phòng a6c891 vì cả 2 đã trả lời.
+May 24, 2025 7:46:13 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 9 cho phòng a6c891
+May 24, 2025 7:46:13 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 10 (ID: 5) cho phòng a6c891
+May 24, 2025 7:46:20 PM org.example.network.Server handleSubmitAnswer
+INFO: ngocvien đã trả lời câu 10 với lựa chọn 3
+May 24, 2025 7:46:20 PM org.example.network.Server handleSubmitAnswer
+INFO: key đã trả lời câu 10 với lựa chọn 3
+May 24, 2025 7:46:20 PM org.example.network.Server handleSubmitAnswer
+INFO: Đã hủy timer cho câu hỏi 10 phòng a6c891 vì cả 2 đã trả lời.
+May 24, 2025 7:46:20 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 10 cho phòng a6c891
+May 24, 2025 7:46:20 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 11 (ID: 78) cho phòng a6c891
+May 24, 2025 7:46:25 PM org.example.network.Server handleSubmitAnswer
+INFO: ngocvien đã trả lời câu 11 với lựa chọn 1
+May 24, 2025 7:46:26 PM org.example.network.Server handleSubmitAnswer
+INFO: key đã trả lời câu 11 với lựa chọn 4
+May 24, 2025 7:46:26 PM org.example.network.Server handleSubmitAnswer
+INFO: Đã hủy timer cho câu hỏi 11 phòng a6c891 vì cả 2 đã trả lời.
+May 24, 2025 7:46:26 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 11 cho phòng a6c891
+May 24, 2025 7:46:26 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 12 (ID: 47) cho phòng a6c891
+May 24, 2025 7:46:31 PM org.example.network.Server handleSubmitAnswer
+INFO: ngocvien đã trả lời câu 12 với lựa chọn 1
+May 24, 2025 7:46:33 PM org.example.network.Server handleSubmitAnswer
+INFO: key đã trả lời câu 12 với lựa chọn 1
+May 24, 2025 7:46:33 PM org.example.network.Server handleSubmitAnswer
+INFO: Đã hủy timer cho câu hỏi 12 phòng a6c891 vì cả 2 đã trả lời.
+May 24, 2025 7:46:33 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 12 cho phòng a6c891
+May 24, 2025 7:46:33 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 13 (ID: 100) cho phòng a6c891
+May 24, 2025 7:46:40 PM org.example.network.Server handleSubmitAnswer
+INFO: ngocvien đã trả lời câu 13 với lựa chọn 4
+May 24, 2025 7:46:42 PM org.example.network.Server handleSubmitAnswer
+INFO: key đã trả lời câu 13 với lựa chọn 3
+May 24, 2025 7:46:42 PM org.example.network.Server handleSubmitAnswer
+INFO: Đã hủy timer cho câu hỏi 13 phòng a6c891 vì cả 2 đã trả lời.
+May 24, 2025 7:46:42 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 13 cho phòng a6c891
+May 24, 2025 7:46:42 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 14 (ID: 107) cho phòng a6c891
+May 24, 2025 7:46:46 PM org.example.network.Server handleSubmitAnswer
+INFO: ngocvien đã trả lời câu 14 với lựa chọn 4
+May 24, 2025 7:46:46 PM org.example.network.Server handleSubmitAnswer
+INFO: key đã trả lời câu 14 với lựa chọn 2
+May 24, 2025 7:46:46 PM org.example.network.Server handleSubmitAnswer
+INFO: Đã hủy timer cho câu hỏi 14 phòng a6c891 vì cả 2 đã trả lời.
+May 24, 2025 7:46:46 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 14 cho phòng a6c891
+May 24, 2025 7:46:46 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 15 (ID: 9) cho phòng a6c891
+May 24, 2025 7:46:53 PM org.example.network.Server handleSubmitAnswer
+INFO: ngocvien đã trả lời câu 15 với lựa chọn 3
+May 24, 2025 7:46:55 PM org.example.network.Server handleSubmitAnswer
+INFO: key đã trả lời câu 15 với lựa chọn 3
+May 24, 2025 7:46:55 PM org.example.network.Server handleSubmitAnswer
+INFO: Đã hủy timer cho câu hỏi 15 phòng a6c891 vì cả 2 đã trả lời.
+May 24, 2025 7:46:55 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 15 cho phòng a6c891
+May 24, 2025 7:46:55 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Hết câu hỏi cho phòng a6c891
+May 24, 2025 7:46:55 PM org.example.network.Server endGameForRoom
+INFO: Kết thúc game cho phòng a6c891. Lý do: Đã hoàn thành tất cả câu hỏi.
+May 24, 2025 7:46:55 PM org.example.network.Server endGameForRoom
+INFO: Trao thưởng: ngocvien thắng 1000 xu. key thua.
+May 24, 2025 7:46:55 PM org.example.network.Server endGameForRoom
+INFO: Phòng a6c891 đã kết thúc và bị xóa.
+May 24, 2025 7:57:24 PM org.example.network.Server <init>
+INFO: QuestionController initialized with 15 questions.
+May 24, 2025 7:57:24 PM org.example.network.Server <init>
+INFO: PlayerService initialized successfully.
+May 24, 2025 7:57:24 PM org.example.network.Server startServer
+INFO: Server Ai Là Triệu Phú Online đã khởi động trên cổng 12345
+May 24, 2025 7:57:41 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 24, 2025 7:57:44 PM org.example.network.Server createRoom
+INFO: Phòng be7458 được tạo bởi key với mức cược 1000
+May 24, 2025 7:58:04 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 24, 2025 7:58:09 PM org.example.network.Server joinRoom
+INFO: ngocvien đã tham gia phòng be7458
+May 24, 2025 7:58:14 PM org.example.network.Server startGameForRoom
+INFO: Đã xác nhận tiền cược cho phòng be7458
+May 24, 2025 7:58:14 PM org.example.network.Server startGameForRoom
+INFO: Game bắt đầu cho phòng be7458 với 15 câu hỏi.
+May 24, 2025 7:58:14 PM org.example.network.Server lambda$startGameForRoom$0
+INFO: Đã trì hoãn, bây giờ gửi câu hỏi đầu tiên cho phòng be7458
+May 24, 2025 7:58:14 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 1 (ID: 72) cho phòng be7458
+May 24, 2025 7:58:31 PM org.example.network.Server endGameForRoom
+INFO: Kết thúc game cho phòng be7458. Lý do: ngocvien đã rời trận.
+May 24, 2025 7:58:31 PM org.example.network.Server endGameForRoom
+INFO: Trao thưởng: key thắng 1000 xu. ngocvien thua.
+May 24, 2025 7:58:32 PM org.example.network.Server endGameForRoom
+INFO: Phòng be7458 đã kết thúc và bị xóa.
+May 24, 2025 7:59:12 PM org.example.network.Server <init>
+INFO: QuestionController initialized with 15 questions.
+May 24, 2025 7:59:12 PM org.example.network.Server <init>
+INFO: PlayerService initialized successfully.
+May 24, 2025 7:59:12 PM org.example.network.Server startServer
+INFO: Server Ai Là Triệu Phú Online đã khởi động trên cổng 12345
+May 24, 2025 7:59:23 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 24, 2025 7:59:26 PM org.example.network.Server createRoom
+INFO: Phòng e913f8 được tạo bởi ngocvien với mức cược 1000
+May 24, 2025 7:59:33 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 24, 2025 7:59:38 PM org.example.network.Server joinRoom
+INFO: key đã tham gia phòng e913f8
+May 24, 2025 7:59:49 PM org.example.network.Server startGameForRoom
+INFO: Đã xác nhận tiền cược cho phòng e913f8
+May 24, 2025 7:59:49 PM org.example.network.Server startGameForRoom
+INFO: Game bắt đầu cho phòng e913f8 với 15 câu hỏi.
+May 24, 2025 7:59:51 PM org.example.network.Server lambda$startGameForRoom$0
+INFO: Đã trì hoãn, bây giờ gửi câu hỏi đầu tiên cho phòng e913f8
+May 24, 2025 7:59:51 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 1 (ID: 67) cho phòng e913f8
+May 24, 2025 8:00:22 PM org.example.network.Server handleSubmitAnswer
+INFO: ngocvien đã trả lời câu 1 với lựa chọn 2
+May 24, 2025 8:00:27 PM org.example.network.Server handleSubmitAnswer
+INFO: key đã trả lời câu 1 với lựa chọn 2
+May 24, 2025 8:00:27 PM org.example.network.Server handleSubmitAnswer
+INFO: Đã hủy timer cho câu hỏi 1 phòng e913f8 vì cả 2 đã trả lời.
+May 24, 2025 8:00:27 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 1 cho phòng e913f8
+May 24, 2025 8:00:27 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 2 (ID: 46) cho phòng e913f8
+May 24, 2025 8:00:32 PM org.example.network.Server handleSubmitAnswer
+INFO: ngocvien đã trả lời câu 2 với lựa chọn 4
+May 24, 2025 8:00:33 PM org.example.network.Server handleSubmitAnswer
+INFO: key đã trả lời câu 2 với lựa chọn 1
+May 24, 2025 8:00:33 PM org.example.network.Server handleSubmitAnswer
+INFO: Đã hủy timer cho câu hỏi 2 phòng e913f8 vì cả 2 đã trả lời.
+May 24, 2025 8:00:33 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 2 cho phòng e913f8
+May 24, 2025 8:00:33 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 3 (ID: 89) cho phòng e913f8
+May 24, 2025 8:00:40 PM org.example.network.Server handleSubmitAnswer
+INFO: ngocvien đã trả lời câu 3 với lựa chọn 1
+May 24, 2025 8:00:43 PM org.example.network.Server handleSubmitAnswer
+INFO: key đã trả lời câu 3 với lựa chọn 1
+May 24, 2025 8:00:43 PM org.example.network.Server handleSubmitAnswer
+INFO: Đã hủy timer cho câu hỏi 3 phòng e913f8 vì cả 2 đã trả lời.
+May 24, 2025 8:00:43 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 3 cho phòng e913f8
+May 24, 2025 8:00:43 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 4 (ID: 56) cho phòng e913f8
+May 24, 2025 8:00:48 PM org.example.network.Server handleSubmitAnswer
+INFO: ngocvien đã trả lời câu 4 với lựa chọn 1
+May 24, 2025 8:00:50 PM org.example.network.Server handleSubmitAnswer
+INFO: key đã trả lời câu 4 với lựa chọn 4
+May 24, 2025 8:00:50 PM org.example.network.Server handleSubmitAnswer
+INFO: Đã hủy timer cho câu hỏi 4 phòng e913f8 vì cả 2 đã trả lời.
+May 24, 2025 8:00:50 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 4 cho phòng e913f8
+May 24, 2025 8:00:50 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 5 (ID: 61) cho phòng e913f8
+May 24, 2025 8:00:57 PM org.example.network.Server handleSubmitAnswer
+INFO: ngocvien đã trả lời câu 5 với lựa chọn 4
+May 24, 2025 8:00:58 PM org.example.network.Server handleSubmitAnswer
+INFO: key đã trả lời câu 5 với lựa chọn 3
+May 24, 2025 8:00:58 PM org.example.network.Server handleSubmitAnswer
+INFO: Đã hủy timer cho câu hỏi 5 phòng e913f8 vì cả 2 đã trả lời.
+May 24, 2025 8:00:58 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 5 cho phòng e913f8
+May 24, 2025 8:00:58 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 6 (ID: 107) cho phòng e913f8
+May 24, 2025 8:01:05 PM org.example.network.Server endGameForRoom
+INFO: Kết thúc game cho phòng e913f8. Lý do: key đã rời trận.
+May 24, 2025 8:01:05 PM org.example.network.Server endGameForRoom
+INFO: Trao thưởng: ngocvien thắng 1000 xu. key thua.
+May 24, 2025 8:01:05 PM org.example.network.Server endGameForRoom
+INFO: Phòng e913f8 đã kết thúc và bị xóa.
+May 24, 2025 11:09:48 PM org.example.network.Server <init>
+INFO: QuestionController initialized with 15 questions.
+May 24, 2025 11:09:48 PM org.example.network.Server <init>
+INFO: PlayerService initialized successfully.
+May 24, 2025 11:09:48 PM org.example.network.Server startServer
+INFO: Server Ai Là Triệu Phú Online đã khởi động trên cổng 12345
+May 24, 2025 11:10:19 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 24, 2025 11:10:22 PM org.example.network.Server createRoom
+INFO: Phòng 609f22 được tạo bởi ngocvien với mức cược 1000
+May 24, 2025 11:10:39 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 24, 2025 11:10:59 PM org.example.network.Server createRoom
+INFO: Phòng 247ca6 được tạo bởi thiennhan với mức cược 1000
+May 24, 2025 11:11:32 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 24, 2025 11:11:48 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 24, 2025 11:11:53 PM org.example.network.Server joinRoom
+INFO: quoc đã tham gia phòng 247ca6
+May 24, 2025 11:12:02 PM org.example.network.Server startGameForRoom
+INFO: Đã xác nhận tiền cược cho phòng 247ca6
+May 24, 2025 11:12:02 PM org.example.network.Server startGameForRoom
+INFO: Game bắt đầu cho phòng 247ca6 với 15 câu hỏi.
+May 24, 2025 11:12:04 PM org.example.network.Server lambda$startGameForRoom$0
+INFO: Đã trì hoãn, bây giờ gửi câu hỏi đầu tiên cho phòng 247ca6
+May 24, 2025 11:12:04 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 1 (ID: 14) cho phòng 247ca6
+May 24, 2025 11:12:11 PM org.example.network.Server handleSubmitAnswer
+INFO: quoc đã trả lời câu 1 với lựa chọn 4
+May 24, 2025 11:12:12 PM org.example.network.Server handleSubmitAnswer
+INFO: thiennhan đã trả lời câu 1 với lựa chọn 3
+May 24, 2025 11:12:12 PM org.example.network.Server handleSubmitAnswer
+INFO: Đã hủy timer cho câu hỏi 1 phòng 247ca6 vì cả 2 đã trả lời.
+May 24, 2025 11:12:12 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 1 cho phòng 247ca6
+May 24, 2025 11:12:12 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 2 (ID: 70) cho phòng 247ca6
+May 24, 2025 11:12:25 PM org.example.network.Server handleSubmitAnswer
+INFO: thiennhan đã trả lời câu 2 với lựa chọn 3
+May 24, 2025 11:12:27 PM org.example.network.Server handleSubmitAnswer
+INFO: quoc đã trả lời câu 2 với lựa chọn 3
+May 24, 2025 11:12:27 PM org.example.network.Server handleSubmitAnswer
+INFO: Đã hủy timer cho câu hỏi 2 phòng 247ca6 vì cả 2 đã trả lời.
+May 24, 2025 11:12:27 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 2 cho phòng 247ca6
+May 24, 2025 11:12:27 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 3 (ID: 36) cho phòng 247ca6
+May 24, 2025 11:12:34 PM org.example.network.Server joinRoom
+INFO: key đã tham gia phòng 609f22
+May 24, 2025 11:12:41 PM org.example.network.Server startGameForRoom
+INFO: Đã xác nhận tiền cược cho phòng 609f22
+May 24, 2025 11:12:41 PM org.example.network.Server startGameForRoom
+INFO: Game bắt đầu cho phòng 609f22 với 15 câu hỏi.
+May 24, 2025 11:12:43 PM org.example.network.Server lambda$startGameForRoom$0
+INFO: Đã trì hoãn, bây giờ gửi câu hỏi đầu tiên cho phòng 609f22
+May 24, 2025 11:12:43 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 1 (ID: 107) cho phòng 609f22
+May 24, 2025 11:12:53 PM org.example.network.Server handleSubmitAnswer
+INFO: thiennhan đã trả lời câu 3 với lựa chọn 2
+May 24, 2025 11:13:00 PM org.example.network.Server handleSubmitAnswer
+INFO: quoc đã trả lời câu 3 với lựa chọn 2
+May 24, 2025 11:13:00 PM org.example.network.Server handleSubmitAnswer
+INFO: Đã hủy timer cho câu hỏi 3 phòng 247ca6 vì cả 2 đã trả lời.
+May 24, 2025 11:13:00 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 3 cho phòng 247ca6
+May 24, 2025 11:13:00 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 4 (ID: 53) cho phòng 247ca6
+May 24, 2025 11:13:29 PM org.example.network.Server handleSubmitAnswer
+INFO: quoc đã trả lời câu 4 với lựa chọn 4
+May 24, 2025 11:13:33 PM org.example.network.Server handleSubmitAnswer
+INFO: thiennhan đã trả lời câu 4 với lựa chọn 4
+May 24, 2025 11:13:33 PM org.example.network.Server handleSubmitAnswer
+INFO: Đã hủy timer cho câu hỏi 4 phòng 247ca6 vì cả 2 đã trả lời.
+May 24, 2025 11:13:33 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 4 cho phòng 247ca6
+May 24, 2025 11:13:33 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 5 (ID: 107) cho phòng 247ca6
+May 24, 2025 11:13:41 PM org.example.network.Server handleSubmitAnswer
+INFO: thiennhan đã trả lời câu 5 với lựa chọn 4
+May 24, 2025 11:13:42 PM org.example.network.Server handleSubmitAnswer
+INFO: quoc đã trả lời câu 5 với lựa chọn 2
+May 24, 2025 11:13:42 PM org.example.network.Server handleSubmitAnswer
+INFO: Đã hủy timer cho câu hỏi 5 phòng 247ca6 vì cả 2 đã trả lời.
+May 24, 2025 11:13:42 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 5 cho phòng 247ca6
+May 24, 2025 11:13:42 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 6 (ID: 9) cho phòng 247ca6
+May 24, 2025 11:13:43 PM org.example.network.Server lambda$sendNextQuestionToRoom$1
+INFO: Hết giờ cho câu hỏi 1 phòng 609f22
+May 24, 2025 11:13:43 PM org.example.network.Server processTimeUpForRoom
+INFO: Xử lý hết giờ cho câu hỏi 1 phòng 609f22
+May 24, 2025 11:13:43 PM org.example.network.Server processAnswersAndContinue
+INFO: Đã xử lý và gửi kết quả câu hỏi 1 cho phòng 609f22
+May 24, 2025 11:13:43 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 2 (ID: 36) cho phòng 609f22
+May 24, 2025 11:13:45 PM org.example.network.Server endGameForRoom
+INFO: Kết thúc game cho phòng 247ca6. Lý do: quoc đã rời trận.
+May 24, 2025 11:13:45 PM org.example.network.Server endGameForRoom
+INFO: Trao thưởng: thiennhan thắng 1000 xu. quoc thua.
+May 24, 2025 11:13:45 PM org.example.network.Server endGameForRoom
+INFO: Phòng 247ca6 đã kết thúc và bị xóa.
+May 24, 2025 11:14:01 PM org.example.network.Server endGameForRoom
+INFO: Kết thúc game cho phòng 609f22. Lý do: key đã rời trận.
+May 24, 2025 11:14:01 PM org.example.network.Server endGameForRoom
+INFO: Trao thưởng: ngocvien thắng 1000 xu. key thua.
+May 24, 2025 11:14:01 PM org.example.network.Server endGameForRoom
+INFO: Phòng 609f22 đã kết thúc và bị xóa.
+May 24, 2025 11:15:26 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 24, 2025 11:15:32 PM org.example.network.Server createRoom
+INFO: Phòng 6ec895 được tạo bởi key với mức cược 1000
+May 24, 2025 11:15:36 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 24, 2025 11:15:39 PM org.example.network.Server joinRoom
+INFO: ngocvien đã tham gia phòng 6ec895
+May 24, 2025 11:16:28 PM org.example.network.Server startGameForRoom
+INFO: Đã xác nhận tiền cược cho phòng 6ec895
+May 24, 2025 11:16:28 PM org.example.network.Server startGameForRoom
+INFO: Game bắt đầu cho phòng 6ec895 với 15 câu hỏi.
+May 24, 2025 11:16:31 PM org.example.network.Server lambda$startGameForRoom$0
+INFO: Đã trì hoãn, bây giờ gửi câu hỏi đầu tiên cho phòng 6ec895
+May 24, 2025 11:16:31 PM org.example.network.Server sendNextQuestionToRoom
+INFO: Đã gửi câu hỏi 1 (ID: 25) cho phòng 6ec895
+May 24, 2025 11:16:38 PM org.example.network.Server endGameForRoom
+INFO: Kết thúc game cho phòng 6ec895. Lý do: ngocvien đã rời trận.
+May 24, 2025 11:16:38 PM org.example.network.Server endGameForRoom
+INFO: Trao thưởng: key thắng 1000 xu. ngocvien thua.
+May 24, 2025 11:16:38 PM org.example.network.Server endGameForRoom
+INFO: Phòng 6ec895 đã kết thúc và bị xóa.

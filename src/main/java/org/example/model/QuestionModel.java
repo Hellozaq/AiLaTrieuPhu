@@ -1,9 +1,11 @@
 package org.example.model;
 import jakarta.persistence.*;
 
+import java.io.Serializable;
+
 @Entity
 @Table(name = "questions")
-public class QuestionModel {
+public class QuestionModel implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
