@@ -33,5 +33,18 @@ public enum MessageType {
     S2C_GAME_OVER_SCORE,
     S2C_GAME_QUESTION, // Server thông báo kết thúc game
     S2C_OPPONENT_ANSWERED,  // (Tùy chọn) Thông báo đối thủ đã trả lời
-    S2C_TIME_UP
-    }
+    S2C_TIME_UP,
+
+
+    // Client to Server - Yêu cầu sử dụng trợ giúp
+    C2S_USE_HELP_5050,      // Payload: new Object[]{roomId, questionId} (questionId để xác nhận)
+    C2S_USE_HELP_CALL,      // Payload: new Object[]{roomId, questionId}
+    C2S_USE_HELP_AUDIENCE,  // Payload: new Object[]{roomId, questionId}
+
+    // Server to Client - Kết quả của việc sử dụng trợ giúp HOẶC thông báo đối thủ dùng
+    S2C_HELP_RESULT_5050,   // Payload: new Object[]{questionId, optionIndexToRemove1, optionIndexToRemove2} (1-4)
+    S2C_HELP_RESULT_CALL,   // Payload: new Object[]{questionId, suggestedOptionIndex, confidence} (ví dụ: "Chuyên gia gợi ý: C (70%)")
+    S2C_HELP_RESULT_AUDIENCE,// Payload: new Object[]{questionId, Map<Integer, Double> pollResults} (ví dụ: {1:0.6, 2:0.1, 3:0.2, 4:0.1})
+    S2C_OPPONENT_USED_HELP, // Payload: new Object[]{opponentUsername, String helpTypeDescription} (ví dụ: "đã dùng 50/50")
+    S2C_HELP_UNAVAILABLE
+}

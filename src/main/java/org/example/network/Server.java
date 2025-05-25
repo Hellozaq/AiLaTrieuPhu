@@ -5,15 +5,12 @@ import org.example.model.PlayerModel; // Import PlayerModel
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.*;
 
 import org.example.model.QuestionModel;     // Thêm import
 import org.example.controllers.QuestionController; // Thêm import (để lấy câu hỏi)
 import org.example.service.PlayerService;
 
-import java.util.List;
-import java.util.Map;
 import java.util.concurrent.*;
 import java.util.logging.*;
 
@@ -543,6 +540,102 @@ public class Server {
         activeRooms.remove(room.getRoomId());
         logger.info("Phòng " + room.getRoomId() + " đã kết thúc và bị xóa.");
         broadcastRoomList();
+    }
+    // Trong Server.java
+    public synchronized void processPlayerHelpRequest(Room room, ClientHandler handler, MessageType helpType, int clientQuestionId) {
+        if (room == null || !"PLAYING".equals(room.getStatus()) || handler == null || handler.getPlayer() == null) {
+            logger.warning("Yêu cầu trợ giúp không hợp lệ: phòng hoặc người chơi không hợp lệ.");
+            if (handler != null) handler.sendMessage(new Message(MessageType.S2C_ERROR, "Yêu cầu trợ giúp không hợp lệ."));
+            return;
+        }
+
+        QuestionModel currentQuestionInServer = room.getCurrentQuestionInRoom();
+        if (currentQuestionInServer == null || currentQuestionInServer.getId() != clientQuestionId) {
+            logger.warning(handler.getPlayer().getUsername() + " yêu cầu trợ giúp cho câu hỏi ID " + clientQuestionId +
+                    " nhưng câu hỏi hiện tại của server là " + (currentQuestionInServer != null ? currentQuestionInServer.getId() : "null") +
+                    " cho phòng " + room.getRoomId());
+            handler.sendMessage(new Message(MessageType.S2C_ERROR, "Yêu cầu trợ giúp không khớp câu hỏi hiện tại."));
+            return;
+        }
+
+        String helpTypeDescription = "";
+        MessageType resultType = null;
+        Object resultPayload = null;
+
+        boolean canUseHelp = room.tryUseHelp(handler, helpType);
+
+        if (canUseHelp) {
+            switch (helpType) {
+                case C2S_USE_HELP_5050:
+                    helpTypeDescription = "đã sử dụng trợ giúp 50/50";
+                    resultType = MessageType.S2C_HELP_RESULT_5050;
+                    // Logic tính toán 2 đáp án sai
+                    int correctAnswer5050 = currentQuestionInServer.getCorrectAnswer();
+                    List<Integer> options = new ArrayList<>(List.of(1, 2, 3, 4));
+                    options.remove(Integer.valueOf(correctAnswer5050)); // Bỏ đáp án đúng
+                    Collections.shuffle(options); // Xáo trộn các đáp án sai
+                    resultPayload = new Object[]{clientQuestionId, options.get(0), options.get(1)}; // Gửi 2 đáp án sai đầu tiên
+                    break;
+
+                case C2S_USE_HELP_CALL:
+                    helpTypeDescription = "đã sử dụng Gọi điện thoại";
+                    resultType = MessageType.S2C_HELP_RESULT_CALL;
+                    // Với Lựa chọn A (client tự mở HelpCallFrame), server chỉ cần gửi xác nhận
+                    // Payload chỉ cần là questionId để client xác nhận
+                    resultPayload = new Object[]{clientQuestionId};
+                    // Nếu Lựa chọn B (server gửi gợi ý), thì resultPayload sẽ chứa gợi ý đó.
+                    break;
+
+                case C2S_USE_HELP_AUDIENCE:
+                    helpTypeDescription = "đã sử dụng Hỏi ý kiến khán giả";
+                    resultType = MessageType.S2C_HELP_RESULT_AUDIENCE;
+                    // Logic tính toán poll và mostVotedOption
+                    Map<Integer, Double> poll = new HashMap<>();
+                    int correctAnswerAudience = currentQuestionInServer.getCorrectAnswer();
+                    double correctPercent = 0.5 + (new Random().nextDouble() * 0.3); // 50-80% cho đáp án đúng
+                    double remainingPercent = 1.0 - correctPercent;
+                    poll.put(correctAnswerAudience, correctPercent);
+
+                    List<Integer> wrongOptions = new ArrayList<>(List.of(1,2,3,4));
+                    wrongOptions.remove(Integer.valueOf(correctAnswerAudience));
+                    Collections.shuffle(wrongOptions);
+
+                    if (wrongOptions.size() == 3) {
+                        double p1 = remainingPercent * (new Random().nextDouble() * 0.6 + 0.2); // 20-80% của phần còn lại
+                        double p2 = remainingPercent * (new Random().nextDouble() * ( (1- (p1/remainingPercent) )*0.8 ) ); // còn lại
+                        double p3 = remainingPercent - p1 - p2;
+                        if(p3 <0) { //điều chỉnh nếu số âm
+                            p3 =0; p2 = remainingPercent-p1;
+                            if(p2 <0) {p2=0; p1=remainingPercent;}
+                        }
+
+                        poll.put(wrongOptions.get(0), p1);
+                        poll.put(wrongOptions.get(1), p2);
+                        poll.put(wrongOptions.get(2), p3);
+                    } else { // Xử lý trường hợp ít hơn 3 đáp án sai (ít xảy ra với 4 lựa chọn)
+                        for(Integer option : wrongOptions) poll.put(option, remainingPercent / wrongOptions.size());
+                    }
+                    // Làm tròn và đảm bảo tổng là 1.0 (có thể bỏ qua nếu không quá quan trọng)
+                    resultPayload = new Object[]{clientQuestionId, poll, correctAnswerAudience /*mostVotedOptionIndex*/};
+                    break;
+            }
+
+            // Gửi kết quả/xác nhận cho người yêu cầu
+            handler.sendMessage(new Message(resultType, resultPayload));
+            logger.info(handler.getPlayer().getUsername() + " " + helpTypeDescription + " cho câu hỏi ID " + clientQuestionId + " phòng " + room.getRoomId());
+
+            // Thông báo cho đối thủ
+            ClientHandler opponentHandler = room.getOpponentHandler(handler);
+            if (opponentHandler != null) {
+                opponentHandler.sendMessage(new Message(MessageType.S2C_OPPONENT_USED_HELP,
+                        new Object[]{handler.getPlayer().getUsername(), helpTypeDescription}));
+            }
+            broadcastRoomList(); // Trạng thái trợ giúp có thể ảnh hưởng đến RoomInfo (nếu bạn thêm cờ vào RoomInfo)
+        } else {
+            // Gửi thông báo không thể sử dụng trợ giúp
+            handler.sendMessage(new Message(MessageType.S2C_HELP_UNAVAILABLE, "Bạn đã sử dụng trợ giúp '" + helpType.toString().replace("C2S_USE_HELP_", "") + "' rồi."));
+            logger.info(handler.getPlayer().getUsername() + " không thể dùng " + helpType + " (đã dùng) cho câu hỏi ID " + clientQuestionId + " phòng " + room.getRoomId());
+        }
     }
 
     public static void main(String[] args) {

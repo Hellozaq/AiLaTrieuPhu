@@ -19,12 +19,13 @@ import java.awt.event.WindowListener;
  *
  * @author Ngọc Viên
  */
-public class HelpCallFrame extends javax.swing.JFrame {
+public class OnlineHelpCallFrame extends javax.swing.JFrame {
 
     /**
      * Creates new form HelpCallFrame
      */
-    public HelpCallFrame(QuestionModel question) {
+    public OnlineHelpCallFrame(QuestionModel question) {
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         initComponents();
         evenHandler();
         setResizable(false);
@@ -85,7 +86,7 @@ public class HelpCallFrame extends javax.swing.JFrame {
     private void thangButonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_thangButonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_thangButonActionPerformed
-    //
+//
 //    /**
 //     * @param args the command line arguments
 //     */
@@ -134,20 +135,21 @@ public class HelpCallFrame extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(HelpCallFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(OnlineHelpCallFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(HelpCallFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(OnlineHelpCallFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(HelpCallFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(OnlineHelpCallFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(HelpCallFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(OnlineHelpCallFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new HelpCallFrame(question).setVisible(true);
+                new OnlineHelpCallFrame(question).setVisible(true);
             }
         });
     }
@@ -224,12 +226,12 @@ public class HelpCallFrame extends javax.swing.JFrame {
 
         jackButon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                GameFrame.disableCall();
+//                GameFrame.disableCall();
                 PlayAudioURL.playClickAudio();
                 PlayAudioURL.stopAudio(jackMouseEnteredClip);
                 dispose();
 
-                CallWithSO.display(question,"Jack",4000,
+                OnlineCallWithSO.display(question,"Jack",4000,
                         getClass().getResource("/audio/thien ly oi.wav"),
                         getClass().getResource("/background/khung chat voi Jack.png"));
             }
@@ -237,11 +239,11 @@ public class HelpCallFrame extends javax.swing.JFrame {
 
         thangButon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                GameFrame.disableCall();
+//                GameFrame.disableCall();
                 PlayAudioURL.playClickAudio();
                 PlayAudioURL.stopAudio(thangMouseEntered);
                 dispose();
-                CallWithSO.display(question,"Thắng",9000,
+                OnlineCallWithSO.display(question,"Thắng",9000,
                         getClass().getResource("/audio/cho toi di theo.wav"),
                         getClass().getResource("/background/khung chat voi Thang.png"));
 
@@ -249,11 +251,11 @@ public class HelpCallFrame extends javax.swing.JFrame {
         });
         sonTungButon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                GameFrame.disableCall();
+//                GameFrame.disableCall();
                 PlayAudioURL.playClickAudio();
                 PlayAudioURL.stopAudio(sonTungMouseEntered);
                 dispose();
-                CallWithSO.display(question,"Sơn Tùng",5500,
+                OnlineCallWithSO.display(question,"Sơn Tùng",5500,
                         getClass().getResource("/audio/dung lam trai tim anh dau.wav"),
                         getClass().getResource("/background/khung chat voi Son Tung.png"));
 

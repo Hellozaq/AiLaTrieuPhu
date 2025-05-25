@@ -12,6 +12,7 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.SocketException;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.SwingUtilities;
@@ -85,12 +86,11 @@ public class GameClient {
                         processServerMessage(serverMessage);
                     }
                 }
-            } catch (SocketException e){
+            } catch (SocketException e) {
                 if (running) { // Chỉ log lỗi nếu client vẫn đang chạy (không phải do chủ động ngắt kết nối)
                     logger.log(Level.WARNING, "Mất kết nối tới server (SocketException): " + e.getMessage());
                 }
-            }
-            catch (IOException | ClassNotFoundException e) {
+            } catch (IOException | ClassNotFoundException e) {
                 if (running) { // Chỉ log lỗi nếu client vẫn đang chạy
                     logger.log(Level.SEVERE, "Lỗi khi đọc tin nhắn từ server hoặc mất kết nối.", e);
                 }
@@ -140,21 +140,21 @@ public class GameClient {
                     if (message.getPayload() instanceof Object[]) {
                         Object[] data = (Object[]) message.getPayload();
                         // (int questionId, int myChoice, boolean myResult, int opponentChoice, boolean opponentResult, int correctAnswerIndex)
-                        onlineGameFrame.showAnswerResult((int)data[0], (int)data[1], (boolean)data[2], (int)data[3], (boolean)data[4], (int)data[5]);
+                        onlineGameFrame.showAnswerResult((int) data[0], (int) data[1], (boolean) data[2], (int) data[3], (boolean) data[4], (int) data[5]);
                     }
                     break;
                 case S2C_UPDATE_GAME_SCORE:
                     if (message.getPayload() instanceof Object[]) {
                         Object[] data = (Object[]) message.getPayload();
                         // (int myOnlineScore, int opponentOnlineScore)
-                        onlineGameFrame.updateScores((int)data[0], (int)data[1]);
+                        onlineGameFrame.updateScores((int) data[0], (int) data[1]);
                     }
                     break;
                 case S2C_GAME_OVER:
                     if (message.getPayload() instanceof Object[]) {
                         Object[] data = (Object[]) message.getPayload();
                         // (String winnerUsername, int prize, boolean iAmWinner)
-                        onlineGameFrame.showGameOver((String)data[0], (int)data[1], (boolean)data[2]);
+                        onlineGameFrame.showGameOver((String) data[0], (int) data[1], (boolean) data[2]);
                     }
                     break;
                 case S2C_ERROR: // Lỗi có thể xảy ra trong game
@@ -162,8 +162,60 @@ public class GameClient {
                         onlineGameFrame.showErrorMessage((String) message.getPayload());
                     }
                     break;
-                // Thêm các case khác dành riêng cho OnlineGameFrame ở đây
-                // Ví dụ: S2C_OPPONENT_ACTION_IN_GAME (nếu cần thông báo hành động của đối thủ trong game)
+
+                case S2C_HELP_RESULT_5050:
+                    if (message.getPayload() instanceof Object[]) {
+                        Object[] data = (Object[]) message.getPayload();
+                        // questionId, optionToRemove1Index, optionToRemove2Index
+                        onlineGameFrame.display5050Result((int) data[0], (int) data[1], (int) data[2]);
+                    }
+                    break;
+                case S2C_HELP_RESULT_CALL:
+                    // Payload có thể là: new Object[]{questionId}
+                    if (message.getPayload() instanceof Object[]) {
+                        Object[] data = (Object[]) message.getPayload();
+                        if (data.length > 0 && data[0] instanceof Integer) {
+                            int questionIdFromServer = (Integer) data[0];
+                            onlineGameFrame.displayCallResult(questionIdFromServer);
+                        } else {
+                            logger.warning("Payload S2C_HELP_RESULT_CALL không hợp lệ hoặc thiếu questionId.");
+                            // Có thể vẫn cho client hiển thị HelpCallFrame dựa trên currentQuestion nếu muốn
+                            // onlineGameFrame.displayCallResult(onlineGameFrame.getCurrentQuestion().getId());
+                            // Hoặc báo lỗi
+                            onlineGameFrame.showErrorMessage("Lỗi nhận kết quả trợ giúp gọi điện.");
+                        }
+                    } else { // Hoặc nếu server chỉ gửi questionId trực tiếp (không phải Object[])
+                        if (message.getPayload() instanceof Integer) {
+                            int questionIdFromServer = (Integer) message.getPayload();
+                            onlineGameFrame.displayCallResult(questionIdFromServer);
+                        } else {
+                            logger.warning("Payload S2C_HELP_RESULT_CALL không phải là Integer (questionId).");
+                            onlineGameFrame.showErrorMessage("Lỗi nhận kết quả trợ giúp gọi điện (dữ liệu không đúng).");
+                        }
+                    }
+                    break;
+                case S2C_HELP_RESULT_AUDIENCE:
+                    if (message.getPayload() instanceof Object[]) {
+                        Object[] data = (Object[]) message.getPayload();
+                        if (data.length >= 3) { // questionId, Map pollResults, int mostVotedOptionIndex
+                            onlineGameFrame.displayAudienceResult((int) data[0], (Map<Integer, Double>) data[1], (int) data[2]);
+                        } else {
+                            logger.warning("Payload S2C_HELP_RESULT_AUDIENCE không đủ phần tử.");
+                        }
+                    }
+                    break;
+                case S2C_OPPONENT_USED_HELP:
+                    if (message.getPayload() instanceof Object[]) {
+                        Object[] data = (Object[]) message.getPayload();
+                        // opponentUsername, String helpTypeDescription
+                        onlineGameFrame.notifyOpponentUsedHelp((String) data[0], (String) data[1]);
+                    }
+                    break;
+                case S2C_HELP_UNAVAILABLE:
+                    if (message.getPayload() instanceof String) {
+                        onlineGameFrame.handleHelpUnavailable((String) message.getPayload());
+                    }
+                    break;
 
                 default:
                     // Nếu OnlineGameFrame đang active nhưng nhận được tin nhắn không dành cho nó,
@@ -282,9 +334,11 @@ public class GameClient {
             running = false;
         }
     }
+
     /**
      * Gán OnlineGameFrame cho client để client có thể cập nhật UI của game.
      * Khi vào game, tham chiếu đến lobbyFrame sẽ được xóa.
+     *
      * @param onlineGameFrame The OnlineGameFrame instance.
      */
     public void setOnlineGameFrame(OnlineGameFrame onlineGameFrame) {
@@ -292,8 +346,6 @@ public class GameClient {
         this.lobbyFrame = null; // Không còn tương tác với Lobby UI khi đã vào game
         logger.info("OnlineGameFrame đã được thiết lập cho GameClient.");
     }
-
-
 
 
     public PlayerModel getPlayer() {

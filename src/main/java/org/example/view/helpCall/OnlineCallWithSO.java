@@ -22,12 +22,12 @@ import java.util.logging.Logger;
 /**
  * @author Ngọc Viên
  */
-public class CallWithSO extends JFrame {
+public class OnlineCallWithSO extends JFrame {
 
     /**
      * Creates new form CallWithJack
      */
-    public CallWithSO(QuestionModel question,String name,int thoiGianNoiMay,URL audioPath,URL imagePath) {
+    public OnlineCallWithSO(QuestionModel question,String name,int thoiGianNoiMay,URL audioPath,URL imagePath) {
         initComponents();
         this.question = question;
         this.name = name;
@@ -96,7 +96,7 @@ public class CallWithSO extends JFrame {
 //        /* Create and display the form */
 //        EventQueue.invokeLater(new Runnable() {
 //            public void run() {
-//                new CallWithSO(question,name,thoiGianNoiMay,audioPath).setVisible(true);
+//                new OnlineCallWithSO(question,name,thoiGianNoiMay,audioPath).setVisible(true);
 //            }
 //        });
 //    }
@@ -127,7 +127,7 @@ public class CallWithSO extends JFrame {
         /* Create and display the form */
         EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CallWithSO(question,name,thoiGianNoiMay,audioPath,imagePath).setVisible(true);
+                new OnlineCallWithSO(question,name,thoiGianNoiMay,audioPath,imagePath).setVisible(true);
             }
         });
     }
@@ -137,7 +137,7 @@ public class CallWithSO extends JFrame {
         addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosing(java.awt.event.WindowEvent evt) {
-                GameFrame.setEableButon();
+//                GameFrame.setEableButon();
                 dispose();
             }
         });
@@ -220,7 +220,7 @@ public class CallWithSO extends JFrame {
                                 @Override
                                 public void actionPerformed(ActionEvent e) {
 
-                                    GameFrame.setEableButon();
+//                                    GameFrame.setEableButon();
                                     PlayAudioURL.stopAudio(audio);
                                     dispose();
                                 }

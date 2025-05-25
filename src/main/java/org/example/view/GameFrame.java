@@ -881,4 +881,3 @@ public class GameFrame extends javax.swing.JFrame {
     private static javax.swing.JLabel x3;
     // End of variables declaration//GEN-END:variables
 }
-

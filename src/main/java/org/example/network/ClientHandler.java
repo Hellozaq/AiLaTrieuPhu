@@ -99,6 +99,29 @@ public class ClientHandler implements Runnable {
                         if(currentRoom.getHandler2() != null) currentRoom.getHandler2().sendMessage(chatRelayMsg);
                     }
                     break;
+                case C2S_USE_HELP_CALL:
+                    if (message.getPayload() instanceof Object[]) {
+                        Object[] data = (Object[]) message.getPayload();
+                        // String roomIdFromClient = (String) data[0]; // Có thể không cần dùng
+                        int questionIdFromClient = (Integer) data[1];
+                        server.processPlayerHelpRequest(currentRoom, this, MessageType.C2S_USE_HELP_CALL, questionIdFromClient);
+                    }
+                    break;
+                case C2S_USE_HELP_5050:
+                    if (message.getPayload() instanceof Object[]) {
+                        Object[] data = (Object[]) message.getPayload();
+                        // String roomIdFromClient = (String) data[0]; // Không nhất thiết phải dùng roomId từ client nếu đã có currentRoom
+                        int questionIdFromClient = (Integer) data[1];
+                        server.processPlayerHelpRequest(currentRoom, this, MessageType.C2S_USE_HELP_5050, questionIdFromClient);
+                    }
+                    break;
+                case C2S_USE_HELP_AUDIENCE:
+                    if (message.getPayload() instanceof Object[]) {
+                        Object[] data = (Object[]) message.getPayload();
+                        int questionIdFromClient = (Integer) data[1];
+                        server.processPlayerHelpRequest(currentRoom, this, MessageType.C2S_USE_HELP_AUDIENCE, questionIdFromClient);
+                    }
+                    break;
                 // Các tin nhắn khác không liên quan đến game có thể bị bỏ qua hoặc log lại
                 default:
                     logger.warning("Client " + player.getUsername() + " gửi tin nhắn " + message.getType() + " không hợp lệ khi đang trong game tại phòng " + currentRoom.getRoomId());
@@ -274,5 +297,9 @@ public class ClientHandler implements Runnable {
 
     public Room getCurrentRoom() {
         return currentRoom;
+    }
+
+    public void setCurrentRoom(Room room) {
+        this.currentRoom = room;
     }
 }

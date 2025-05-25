@@ -158,6 +158,7 @@ public class ModeSelectionFrame extends javax.swing.JFrame {
 //    }
 
     private void loadPlayerData() {
+        makeButtonTransparent(setAvatarButon);
         if (player != null) {
             usernameLabel.setText(player.getUsername());
 
@@ -284,6 +285,11 @@ public class ModeSelectionFrame extends javax.swing.JFrame {
                 new ModeSelectionFrame(player).setVisible(true);
             }
         });
+    }
+
+    static void makeButtonTransparent(JButton button) {
+        button.setContentAreaFilled(false);
+        button.setOpaque(false);
     }
 
     private PlayerModel player;

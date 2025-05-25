@@ -29,6 +29,14 @@ public class Room {
     private int player2OnlineScore;
     private transient ScheduledFuture<?> questionTimerFuture; // Để hủy timer nếu cần
 
+    private boolean player1Used5050 = false;
+    private boolean player1UsedCall = false;
+    private boolean player1UsedAudience = false;
+
+    private boolean player2Used5050 = false;
+    private boolean player2UsedCall = false;
+    private boolean player2UsedAudience = false;
+
 
     public Room(PlayerModel player1, ClientHandler handler1, int betAmount) {
         this.roomId = UUID.randomUUID().toString().substring(0, 6); // ID phòng ngẫu nhiên ngắn
@@ -39,6 +47,7 @@ public class Room {
         this.player1Ready = false;
         this.gameQuestions = new ArrayList<>();
         resetGameStats();
+        resetHelpUsage();
     }
     public void resetGameStats() {
         this.currentQuestionIndexInGame = -1;
@@ -51,6 +60,15 @@ public class Room {
             questionTimerFuture.cancel(true);
         }
         questionTimerFuture = null;
+        resetHelpUsage();
+    }
+    public void resetHelpUsage() {
+        this.player1Used5050 = false;
+        this.player1UsedCall = false;
+        this.player1UsedAudience = false;
+        this.player2Used5050 = false;
+        this.player2UsedCall = false;
+        this.player2UsedAudience = false;
     }
 
     // Getters cho các thuộc tính game
@@ -171,6 +189,21 @@ public class Room {
         return null;
     }
 
+    public boolean isPlayer1Used5050() { return player1Used5050; }
+    public boolean isPlayer1UsedCall() { return player1UsedCall; }
+    public boolean isPlayer1UsedAudience() { return player1UsedAudience; }
+    public boolean isPlayer2Used5050() { return player2Used5050; }
+    public boolean isPlayer2UsedCall() { return player2UsedCall; }
+    public boolean isPlayer2UsedAudience() { return player2UsedAudience; }
+
+    public void setPlayer1Used5050(boolean player1Used5050) { this.player1Used5050 = player1Used5050; }
+    public void setPlayer1UsedCall(boolean player1UsedCall) { this.player1UsedCall = player1UsedCall; }
+    public void setPlayer1UsedAudience(boolean player1UsedAudience) { this.player1UsedAudience = player1UsedAudience; }
+    public void setPlayer2Used5050(boolean player2Used5050) { this.player2Used5050 = player2Used5050; }
+    public void setPlayer2UsedCall(boolean player2UsedCall) { this.player2UsedCall = player2UsedCall; }
+    public void setPlayer2UsedAudience(boolean player2UsedAudience) { this.player2UsedAudience = player2UsedAudience; }
+
+
     public RoomInfo getRoomInfo() {
         return new RoomInfo(
                 roomId,
@@ -180,6 +213,26 @@ public class Room {
                 status,
                 betAmount
         );
+    }
+
+
+    // Phương thức tiện ích để kiểm tra và đặt cờ sử dụng trợ giúp
+    public synchronized boolean tryUseHelp(ClientHandler handler, MessageType helpType) {
+        boolean canUse = false;
+        if (handler == handler1) { // Player 1
+            switch (helpType) {
+                case C2S_USE_HELP_5050: if (!player1Used5050) { player1Used5050 = true; canUse = true; } break;
+                case C2S_USE_HELP_CALL: if (!player1UsedCall) { player1UsedCall = true; canUse = true; } break;
+                case C2S_USE_HELP_AUDIENCE: if (!player1UsedAudience) { player1UsedAudience = true; canUse = true; } break;
+            }
+        } else if (handler == handler2) { // Player 2
+            switch (helpType) {
+                case C2S_USE_HELP_5050: if (!player2Used5050) { player2Used5050 = true; canUse = true; } break;
+                case C2S_USE_HELP_CALL: if (!player2UsedCall) { player2UsedCall = true; canUse = true; } break;
+                case C2S_USE_HELP_AUDIENCE: if (!player2UsedAudience) { player2UsedAudience = true; canUse = true; } break;
+            }
+        }
+        return canUse;
     }
     private static final  Logger logger = Logger.getLogger(Room.class.getName()); // Thêm logger
 
