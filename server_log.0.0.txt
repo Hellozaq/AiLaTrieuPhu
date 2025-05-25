@@ -4126,3 +4126,49 @@ May 25, 2025 10:21:17 PM org.example.network.Server endGameForRoom
 INFO: Game hòa cho phòng 7c9b8c. Tiền cược có thể được hoàn (tùy logic).
 May 25, 2025 10:21:18 PM org.example.network.Server endGameForRoom
 INFO: Phòng 7c9b8c đã kết thúc và bị xóa.
+May 25, 2025 10:33:11 PM org.example.network.Server <init>
+INFO: QuestionController initialized with 15 questions.
+May 25, 2025 10:33:12 PM org.example.network.Server <init>
+INFO: PlayerService initialized successfully.
+May 25, 2025 10:33:12 PM org.example.network.Server startServer
+INFO: Server Ai Là Triệu Phú Online đã khởi động trên cổng 12345
+May 25, 2025 10:33:25 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 25, 2025 10:33:31 PM org.example.network.Server createRoom
+INFO: Phòng e70ece được tạo bởi ngocvien với mức cược 1000
+May 25, 2025 10:33:44 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 25, 2025 10:33:47 PM org.example.network.Server joinRoom
+INFO: key đã tham gia phòng e70ece
+May 25, 2025 10:36:04 PM org.example.network.Server leaveRoom
+INFO: key rời phòng e70ece
+May 25, 2025 10:39:49 PM org.example.network.Server <init>
+INFO: QuestionController initialized with 15 questions.
+May 25, 2025 10:39:49 PM org.example.network.Server <init>
+INFO: PlayerService initialized successfully.
+May 25, 2025 10:39:49 PM org.example.network.Server startServer
+INFO: Server Ai Là Triệu Phú Online đã khởi động trên cổng 12345
+May 25, 2025 10:39:57 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 25, 2025 10:40:00 PM org.example.network.Server createRoom
+INFO: Phòng d4109e được tạo bởi ngocvien với mức cược 1000
+May 25, 2025 10:40:04 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 25, 2025 10:40:06 PM org.example.network.Server joinRoom
+INFO: key đã tham gia phòng d4109e
+May 25, 2025 10:40:10 PM org.example.network.Server leaveRoom
+INFO: key rời phòng d4109e
+May 25, 2025 10:40:44 PM org.example.network.Server leaveRoom
+INFO: key rời phòng d4109e
+May 25, 2025 10:40:49 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 25, 2025 10:40:53 PM org.example.network.Server joinRoom
+INFO: key đã tham gia phòng d4109e
+May 25, 2025 10:41:02 PM org.example.network.Server leaveRoom
+INFO: key rời phòng d4109e
+May 25, 2025 10:41:16 PM org.example.network.Server leaveRoom
+INFO: ngocvien rời phòng d4109e
+May 25, 2025 10:41:16 PM org.example.network.Server leaveRoom
+INFO: Phòng d4109e trống và đã bị xóa.
+May 25, 2025 10:41:16 PM org.example.network.Server leaveRoom
+INFO: Phòng d4109e trống và đã bị xóa.

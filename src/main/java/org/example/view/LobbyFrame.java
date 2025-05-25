@@ -347,7 +347,7 @@ public class LobbyFrame extends JFrame {
             PlayAudioURL.playClickAudio();
             if (currentJoinedRoomInfo != null) {
                 logger.info("Yêu cầu rời phòng: " + currentJoinedRoomInfo.getRoomId());
-                gameClient.sendMessage(new Message(MessageType.C2S_LEAVE_ROOM, null));
+                gameClient.sendMessage(new Message(MessageType.C2S_LEAVE_ROOM, currentJoinedRoomInfo.getRoomId()));
             }
         });
 

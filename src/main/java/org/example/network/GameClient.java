@@ -253,7 +253,10 @@ public class GameClient {
                     }
                     break;
                 case S2C_ROOM_LEFT:
-                    lobbyFrame.handleRoomLeft();
+                    logger.info("Client " + player.getUsername() + " đã nhận xác nhận rời phòng.");
+                    if (lobbyFrame != null) {
+                        lobbyFrame.handleRoomLeft(); // Phương thức này sẽ reset UI của lobby
+                    }
                     break;
                 case S2C_OPPONENT_JOINED_ROOM: // Gửi PlayerModel của đối thủ
                     if (message.getPayload() instanceof PlayerModel) {

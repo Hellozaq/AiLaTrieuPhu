@@ -216,6 +216,20 @@ public class Server {
             }
 
             room.removePlayer(handler); // Truyền ClientHandler
+            handler.sendMessage(new Message(MessageType.S2C_ROOM_LEFT, roomId)); // Gửi xác nhận cho người vừa rời
+
+            ClientHandler opponentHandler = room.getOpponentHandler(handler); // Lấy đối thủ
+            if (room.isEmpty()) {
+                activeRooms.remove(roomId);
+                logger.info("Phòng " + roomId + " trống và đã bị xóa.");
+            } else { // Vẫn còn người
+                room.setStatus("WAITING");
+                if (opponentHandler != null) { // Thông báo cho người còn lại
+                    opponentHandler.sendMessage(new Message(MessageType.S2C_OPPONENT_LEFT_ROOM, handler.getPlayer().getUsername()));
+                    opponentHandler.sendMessage(new Message(MessageType.S2C_ROOM_JOINED, room.getRoomInfo())); // Gửi RoomInfo cập nhật
+                }
+            }
+            broadcastRoomList();
             if (room.isEmpty()) {
                 activeRooms.remove(roomId);
                 logger.info("Phòng " + roomId + " trống và đã bị xóa.");
