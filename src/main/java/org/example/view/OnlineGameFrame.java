@@ -63,15 +63,17 @@ public class OnlineGameFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jOptionPane1 = new javax.swing.JOptionPane();
-        chatPane = new javax.swing.JScrollPane();
-        chatArea = new javax.swing.JTextArea();
         versusIcon = new javax.swing.JLabel();
         setAvatarButon = new javax.swing.JButton();
         avatarLabel = new javax.swing.JLabel();
         usernameLabel = new javax.swing.JLabel();
         unameAndAvtLabel = new javax.swing.JLabel();
         stopButon = new javax.swing.JButton();
+        chatPane = new javax.swing.JScrollPane();
+        chatArea = new javax.swing.JTextArea();
         gameStatusLabel = new javax.swing.JLabel();
+        sendChatInGameButton = new javax.swing.JButton();
+        chatInputFieldInGame = new javax.swing.JTextField();
         chatLabel = new javax.swing.JLabel();
         stopLabel = new javax.swing.JLabel();
         x3 = new javax.swing.JLabel();
@@ -109,12 +111,6 @@ public class OnlineGameFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        chatArea.setColumns(20);
-        chatArea.setRows(5);
-        chatPane.setViewportView(chatArea);
-
-        getContentPane().add(chatPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 170, 280));
-
         versusIcon.setFont(new java.awt.Font("Ink Free", 1, 18)); // NOI18N
         versusIcon.setForeground(new java.awt.Color(255, 255, 255));
         versusIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/elements/vs.png"))); // NOI18N
@@ -140,11 +136,28 @@ public class OnlineGameFrame extends javax.swing.JFrame {
         });
         getContentPane().add(stopButon, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 210, 67, 25));
 
+        chatPane.setPreferredSize(new java.awt.Dimension(186, 78));
+
+        chatArea.setBackground(new java.awt.Color(81, 125, 175));
+        chatArea.setColumns(20);
+        chatArea.setForeground(new java.awt.Color(255, 255, 255));
+        chatArea.setRows(5);
+        chatPane.setViewportView(chatArea);
+
+        getContentPane().add(chatPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 206, 172, 264));
+
         gameStatusLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         gameStatusLabel.setForeground(new java.awt.Color(255, 255, 255));
         getContentPane().add(gameStatusLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 250, -1, -1));
 
-        chatLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/khungchat.png"))); // NOI18N
+        sendChatInGameButton.setBackground(new java.awt.Color(0, 102, 153));
+        sendChatInGameButton.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
+        sendChatInGameButton.setForeground(new java.awt.Color(255, 255, 255));
+        sendChatInGameButton.setText("Gởi");
+        getContentPane().add(sendChatInGameButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(147, 470, 55, 25));
+        getContentPane().add(chatInputFieldInGame, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 469, 119, 25));
+
+        chatLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/elements/khungchat.png"))); // NOI18N
         getContentPane().add(chatLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, -1, -1));
 
         stopLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/stopButon.png"))); // NOI18N
@@ -758,6 +771,28 @@ public class OnlineGameFrame extends javax.swing.JFrame {
                 }
             });
         }
+
+        // --- CHAT IN GAME ---
+        ActionListener sendChatActionInGame = e -> {
+            String messageText = chatInputFieldInGame.getText().trim();
+            if (!messageText.isEmpty() && gameClient.isConnected()) {
+                PlayAudioURL.playClickAudio(); // Âm thanh khi gửi tin nhắn
+                // Gửi tin nhắn chat lên server, sử dụng lại MessageType.C2S_LOBBY_CHAT
+                // hoặc bạn có thể tạo MessageType.C2S_GAME_CHAT nếu muốn phân biệt
+                gameClient.sendMessage(new Message(MessageType.C2S_LOBBY_CHAT, messageText));
+                chatInputFieldInGame.setText(""); // Xóa nội dung đã nhập
+                logger.info("Gửi tin nhắn trong game: " + messageText);
+            } else if (!gameClient.isConnected()) {
+                showErrorMessage("Mất kết nối, không thể gửi tin nhắn.");
+            }
+        };
+
+        if (sendChatInGameButton != null) {
+            sendChatInGameButton.addActionListener(sendChatActionInGame);
+        }
+        if (chatInputFieldInGame != null) {
+            chatInputFieldInGame.addActionListener(sendChatActionInGame); // Cho phép gửi bằng Enter
+        }
     }
 
     public void updateOpponentInfo(String name, String avatarPath, int score) {
@@ -1112,6 +1147,22 @@ public class OnlineGameFrame extends javax.swing.JFrame {
         });
     }
 
+    /**
+     * Hiển thị một tin nhắn chat nhận được lên chatArea.
+     * @param message Tin nhắn đầy đủ (ví dụ: "Username: Nội dung tin nhắn")
+     */
+    public void appendChatMessageToArea(String message) {
+        SwingUtilities.invokeLater(() -> {
+            if (chatArea != null) {
+                chatArea.append(message + "\n");
+                chatArea.setCaretPosition(chatArea.getDocument().getLength()); // Tự động cuộn xuống
+                logger.fine("Tin nhắn game được hiển thị: " + message);
+            } else {
+                logger.warning("chatArea is null, không thể hiển thị tin nhắn: " + message);
+            }
+        });
+    }
+
     private static final Logger logger = Logger.getLogger(OnlineGameFrame.class.getName());
 
 
@@ -1142,6 +1193,7 @@ public class OnlineGameFrame extends javax.swing.JFrame {
     private javax.swing.JLabel backgroundLabel;
     private static javax.swing.JButton cButon;
     private javax.swing.JTextArea chatArea;
+    private javax.swing.JTextField chatInputFieldInGame;
     private javax.swing.JLabel chatLabel;
     private javax.swing.JScrollPane chatPane;
     private static javax.swing.JButton dButon;
@@ -1168,6 +1220,7 @@ public class OnlineGameFrame extends javax.swing.JFrame {
     private javax.swing.JMenuItem quitItem;
     private javax.swing.JLabel scoreLabel;
     private javax.swing.JLabel scoreLabel1;
+    private javax.swing.JButton sendChatInGameButton;
     private javax.swing.JButton setAvatarButon;
     private javax.swing.JButton stopButon;
     private javax.swing.JLabel stopLabel;

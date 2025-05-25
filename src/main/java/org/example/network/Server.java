@@ -165,9 +165,9 @@ public class Server {
 
     public synchronized void broadcastMessageToAll(Message message, ClientHandler excludeClient) {
         for (ClientHandler client : connectedClients) {
-            if (client != excludeClient) { // Không gửi lại cho người gửi
+
                 client.sendMessage(message);
-            }
+
         }
     }
 

@@ -217,6 +217,12 @@ public class GameClient {
                     }
                     break;
 
+                case S2C_LOBBY_CHAT: // Xử lý tin nhắn chat khi đang trong game
+                    if (message.getPayload() instanceof String) {
+                        onlineGameFrame.appendChatMessageToArea((String) message.getPayload());
+                    }
+                    break;
+
                 default:
                     // Nếu OnlineGameFrame đang active nhưng nhận được tin nhắn không dành cho nó,
                     // có thể là tin nhắn toàn cục hoặc lỗi logic.

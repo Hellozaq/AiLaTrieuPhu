@@ -90,15 +90,7 @@ public class ClientHandler implements Runnable {
                     // ClientHandler này có thể sẽ bị đóng sau đó nếu server quyết định vậy
                     // Hoặc client tự quay về lobby sau khi nhận S2C_GAME_OVER
                     break;
-                case C2S_LOBBY_CHAT: // Cho phép chat cả khi đang chơi game
-                    if (message.getPayload() instanceof String) {
-                        String chatMsg = (String) message.getPayload();
-                        logger.info("[CHAT GAME " + currentRoom.getRoomId() + "] " + player.getUsername() + ": " + chatMsg);
-                        Message chatRelayMsg = new Message(MessageType.S2C_LOBBY_CHAT, "[Game] " + player.getUsername() + ": " + chatMsg);
-                        if(currentRoom.getHandler1() != null) currentRoom.getHandler1().sendMessage(chatRelayMsg);
-                        if(currentRoom.getHandler2() != null) currentRoom.getHandler2().sendMessage(chatRelayMsg);
-                    }
-                    break;
+
                 case C2S_USE_HELP_CALL:
                     if (message.getPayload() instanceof Object[]) {
                         Object[] data = (Object[]) message.getPayload();
@@ -120,6 +112,18 @@ public class ClientHandler implements Runnable {
                         Object[] data = (Object[]) message.getPayload();
                         int questionIdFromClient = (Integer) data[1];
                         server.processPlayerHelpRequest(currentRoom, this, MessageType.C2S_USE_HELP_AUDIENCE, questionIdFromClient);
+                    }
+                    break;
+
+                case C2S_LOBBY_CHAT: // Cho phép chat cả khi đang chơi game
+                    if (message.getPayload() instanceof String) {
+                        String chatMsg = (String) message.getPayload();
+                        logger.info("[CHAT GAME " + currentRoom.getRoomId() + "] " + player.getUsername() + ": " + chatMsg);
+                        // Server thêm tiền tố [Game] để client biết đây là chat trong game
+                        Message chatRelayMsg = new Message(MessageType.S2C_LOBBY_CHAT, player.getUsername() + ": " + chatMsg);
+                        // Gửi cho cả hai người chơi trong phòng
+                        if(currentRoom.getHandler1() != null) currentRoom.getHandler1().sendMessage(chatRelayMsg);
+                        if(currentRoom.getHandler2() != null) currentRoom.getHandler2().sendMessage(chatRelayMsg);
                     }
                     break;
                 // Các tin nhắn khác không liên quan đến game có thể bị bỏ qua hoặc log lại
@@ -149,7 +153,7 @@ public class ClientHandler implements Runnable {
                     if (message.getPayload() instanceof String) {
                         String chatMsg = (String) message.getPayload();
                         logger.info("[CHAT PHÒNG " + currentRoom.getRoomId() + "] " + player.getUsername() + ": " + chatMsg);
-                        Message chatRelayMsg = new Message(MessageType.S2C_LOBBY_CHAT, player.getUsername() + ": " + chatMsg);
+                        Message chatRelayMsg = new Message(MessageType.S2C_LOBBY_CHAT, "[Phòng] "+player.getUsername() + ": " + chatMsg);
                         if(currentRoom.getHandler1()!=null) currentRoom.getHandler1().sendMessage(chatRelayMsg);
                         if(currentRoom.getHandler2()!=null) currentRoom.getHandler2().sendMessage(chatRelayMsg);
                     }
