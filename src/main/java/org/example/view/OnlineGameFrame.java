@@ -17,6 +17,8 @@ import org.example.view.helpCall.OnlineHelpCallFrame;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.Map;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -26,6 +28,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import static org.example.network.Server.timerScheduler;
 
 /**
  * @author Ngọc Viên
@@ -423,9 +427,9 @@ public class OnlineGameFrame extends javax.swing.JFrame {
 
     private void eventHandler() throws Exception {
 
-        disableCallCalled=false;
-        disableKhanGiaCalled=false;
-        disable5050Called=false;
+        disableCallCalled = false;
+        disableKhanGiaCalled = false;
+        disable5050Called = false;
         setEableButon();
 
 
@@ -446,7 +450,7 @@ public class OnlineGameFrame extends javax.swing.JFrame {
             @Override
             public void mouseEntered(java.awt.event.MouseEvent evt) {
 //                PlayAudio.playAudio("src/main/java/org/example/file/audio/butonTouch.wav", -4);
-                PlayAudioURL.playAudio(getClass().getResource("/audio/butonTouch.wav"),-4);
+                PlayAudioURL.playAudio(getClass().getResource("/audio/butonTouch.wav"), -4);
             }
         });
         helpYKienKhanGIaButon.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -456,7 +460,7 @@ public class OnlineGameFrame extends javax.swing.JFrame {
                     PlayAudioURL.wrongSound();
                 else
 //                    PlayAudio.playAudio("src/main/java/org/example/file/audio/butonTouch.wav", -4);
-                    PlayAudioURL.playAudio(getClass().getResource("/audio/butonTouch.wav"),-4);
+                    PlayAudioURL.playAudio(getClass().getResource("/audio/butonTouch.wav"), -4);
             }
         });
         helpCallButon.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -466,7 +470,7 @@ public class OnlineGameFrame extends javax.swing.JFrame {
                     PlayAudioURL.wrongSound();
                 else
 //                    PlayAudio.playAudio("src/main/java/org/example/file/audio/butonTouch.wav", -4);
-                    PlayAudioURL.playAudio(getClass().getResource("/audio/butonTouch.wav"),-4);
+                    PlayAudioURL.playAudio(getClass().getResource("/audio/butonTouch.wav"), -4);
             }
         });
         help5050Buton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -475,31 +479,31 @@ public class OnlineGameFrame extends javax.swing.JFrame {
                 if (disable5050Called)
                     PlayAudioURL.wrongSound();
                 else
-                    PlayAudioURL.playAudio(getClass().getResource("/audio/butonTouch.wav"),-4);
+                    PlayAudioURL.playAudio(getClass().getResource("/audio/butonTouch.wav"), -4);
             }
         });
         aButon.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                PlayAudioURL.playAudio(getClass().getResource("/audio/butonTouch2.wav"),-5);
+                PlayAudioURL.playAudio(getClass().getResource("/audio/butonTouch2.wav"), -5);
             }
         });
         bButon.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                PlayAudioURL.playAudio(getClass().getResource("/audio/butonTouch2.wav"),-5);
+                PlayAudioURL.playAudio(getClass().getResource("/audio/butonTouch2.wav"), -5);
             }
         });
         cButon.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                PlayAudioURL.playAudio(getClass().getResource("/audio/butonTouch2.wav"),-5);
+                PlayAudioURL.playAudio(getClass().getResource("/audio/butonTouch2.wav"), -5);
             }
         });
         dButon.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                PlayAudioURL.playAudio(getClass().getResource("/audio/butonTouch2.wav"),-5);
+                PlayAudioURL.playAudio(getClass().getResource("/audio/butonTouch2.wav"), -5);
             }
         });
 
@@ -702,6 +706,7 @@ public class OnlineGameFrame extends javax.swing.JFrame {
                         // Server nên xử lý và client có thể nhận S2C_GAME_OVER hoặc 1 tin nhắn xác nhận rời phòng
                         // Sau đó GameClient sẽ điều hướng về LobbyFrame hoặc ModeSelectionFrame
                         // Tạm thời dispose()
+                        PlayAudioURL.stopAudio(question1to5Audio);
                         gameClient.disconnect(); // Ngắt kết nối khi đóng cửa sổ game
                         dispose();
                         ModeSelectionFrame.display(currentPlayer); // Quay lại màn hình chọn chế độ
@@ -722,7 +727,7 @@ public class OnlineGameFrame extends javax.swing.JFrame {
                         gameClient.sendMessage(new Message(MessageType.C2S_USE_HELP_5050, new Object[]{roomId, currentQuestion.getId()}));
                         if (gameStatusLabel != null) gameStatusLabel.setText("Đang yêu cầu trợ giúp 50/50...");
                         // Không set help5050UsedClient = true ngay, đợi xác nhận từ server
-                         help5050Buton.setEnabled(false); // Vô hiệu hóa tạm thời
+                        help5050Buton.setEnabled(false); // Vô hiệu hóa tạm thời
                     }
                 }
             });
@@ -824,16 +829,14 @@ public class OnlineGameFrame extends javax.swing.JFrame {
     }
 
     private void resetAnswerButtonColors() {
-        // Đặt lại màu nền mặc định cho các nút đáp án
-        // (Copy từ GameFrame nếu bạn có logic đổi màu khi chọn hoặc hiển thị đáp án đúng/sai)
-        // aButon.setBackground(new Color(247, 248, 211)); // Ví dụ
-        // bButon.setBackground(new Color(247, 248, 211));
-        // cButon.setBackground(new Color(247, 248, 211));
-        // dButon.setBackground(new Color(247, 248, 211));
+        SwingUtilities.invokeLater(() -> {
+            Color defaultButtonColor = new Color(247, 248, 211); // Màu nền mặc định của nút câu trả lời
+            if (aButon != null) aButon.setBackground(defaultButtonColor);
+            if (bButon != null) bButon.setBackground(defaultButtonColor);
+            if (cButon != null) cButon.setBackground(defaultButtonColor);
+            if (dButon != null) dButon.setBackground(defaultButtonColor);
+        });
     }
-
-
-
 
 
     public void notifyOpponentAnswered() {
@@ -861,7 +864,6 @@ public class OnlineGameFrame extends javax.swing.JFrame {
 //                PlayAudioURL.playAudio(getClass().getResource("/audio/win_game.wav")); // Ví dụ
             } else {
                 message = "Rất tiếc! Bạn đã thua. " + winnerUsername + " thắng và nhận được " + prize + " xu.";
-//                PlayAudioURL.playAudio(getClass().getResource("/audio/lose_game.wav")); // Ví dụ
             }
             if (gameStatusLabel != null) gameStatusLabel.setText(message);
             questionLabel.setText("TRẬN ĐẤU KẾT THÚC");
@@ -872,6 +874,7 @@ public class OnlineGameFrame extends javax.swing.JFrame {
             // hoặc server có thể gửi S2C_RETURN_TO_LOBBY
         });
     }
+
     public void updateScores(int newMyOnlineScore, int newOpponentOnlineScore) {
         SwingUtilities.invokeLater(() -> {
             this.myOnlineScore = newMyOnlineScore; // Cập nhật biến điểm nội bộ
@@ -889,6 +892,7 @@ public class OnlineGameFrame extends javax.swing.JFrame {
     // Display method
     public void displayQuestion(QuestionModel question, int totalTimeInSeconds) {
         SwingUtilities.invokeLater(() -> {
+            resetAnswerButtonColors();
             this.currentQuestion = question;
             questionCurrentIndex++; // Tăng thứ tự câu hỏi
             if (questionLabel != null) questionLabel.setText("<html>" + question.getQuestion() + "</html>");
@@ -923,20 +927,60 @@ public class OnlineGameFrame extends javax.swing.JFrame {
 
     public void showAnswerResult(int questionId, int myChoice, boolean myResult, int opponentChoice, boolean opponentResult, int correctAnswerIndex) {
         SwingUtilities.invokeLater(() -> {
-            disableButtons();
-            String resultText = "Câu hỏi " + questionId + ": ";
-            resultText += "Bạn chọn " + (myChoice > 0 ? (char) ('A' + myChoice - 1) : "không chọn") + " (" + (myResult ? "Đúng" : "Sai") + "). ";
-            resultText += "Đối thủ chọn " + (opponentChoice > 0 ? (char) ('A' + opponentChoice - 1) : "không chọn") + " (" + (opponentResult ? "Đúng" : "Sai") + "). ";
-            resultText += "Đáp án đúng: " + (char) ('A' + correctAnswerIndex - 1) + ".";
-            if (gameStatusLabel != null) gameStatusLabel.setText(resultText);
+            enableAnswerButtons(false);
+            // 1. Phát âm thanh dựa trên kết quả của người chơi hiện tại (myResult)
+            if (myResult) {
+                PlayAudioURL.playAudio(getClass().getResource("/audio/level-up-2-199574_1.wav"));
+            } else {
+                PlayAudioURL.playAudio(getClass().getResource("/audio/cau1-5sai.wav"));
+            }
+
+            String resultText = "Đáp án đúng: " + (char) ('A' + correctAnswerIndex - 1) + ". ";
+            String myResultText = "Bạn chọn " + (myChoice > 0 ? (char) ('A' + myChoice - 1) : "không chọn") +
+                    " (" + (myResult ? "ĐÚNG" : "SAI") + "). ";
+            // String opponentResultText = "Đối thủ chọn " + (opponentChoice > 0 ? (char) ('A' + opponentChoice - 1) : "không chọn") +
+            //                             " (" + (opponentResult ? "Đúng" : "Sai") + ").";
+
+            if (gameStatusLabel != null) {
+                gameStatusLabel.setText(myResultText + resultText + " Chờ câu hỏi tiếp theo...");
+            }
             logger.info("Kết quả câu hỏi " + questionId + ": " + resultText);
 
             // TODO: Tô màu các nút đáp án để hiển thị đúng/sai
-            // highlightAnswer(myChoice, myResult);
-            // highlightCorrectAnswer(correctAnswerIndex);
+            // Ví dụ:
+            highlightAnswerButton(aButon, 1, myChoice, correctAnswerIndex, myResult);
+            highlightAnswerButton(bButon, 2, myChoice, correctAnswerIndex, myResult);
+            highlightAnswerButton(cButon, 3, myChoice, correctAnswerIndex, myResult);
+            highlightAnswerButton(dButon, 4, myChoice, correctAnswerIndex, myResult);
 
-            // Chờ một chút rồi server sẽ gửi câu hỏi mới hoặc game over
+            timerScheduler.schedule(() -> {
+                synchronized (this) {
+                    PlayAudioURL.playAudio(getClass().getResource("/audio/cau1-4dung.wav"));
+                }
+            }, 2000, TimeUnit.MILLISECONDS);
+
+
         });
+    }
+
+    private void highlightAnswerButton(JButton button, int buttonOptionIndex, int playerChoice, int correctAnswerIndex, boolean playerResult) {
+        System.out.println("da to mau");
+        if (button == null) return;
+        // Reset màu về mặc định trước
+        // button.setBackground(new Color(247, 248, 211)); // Màu mặc định của bạn
+
+        if (buttonOptionIndex == playerChoice) { // Đây là nút người chơi đã chọn
+            if (playerResult) {
+                button.setBackground(Color.GREEN); // Chọn đúng
+            } else {
+                button.setBackground(Color.RED);   // Chọn sai
+            }
+        } else if (buttonOptionIndex == correctAnswerIndex) { // Đây là đáp án đúng (nếu người chơi không chọn nó)
+            button.setBackground(Color.ORANGE); // Hiển thị đáp án đúng
+        } else {
+            // Các nút còn lại không được chọn và không phải đáp án đúng
+            button.setBackground(new Color(220, 220, 220)); // Màu xám nhạt cho các đáp án không liên quan
+        }
     }
 
     private void updateHelpButtonStates() {
@@ -985,9 +1029,11 @@ public class OnlineGameFrame extends javax.swing.JFrame {
 
     // Trong OnlineGameFrame.java
     // Trong OnlineGameFrame.java
+
     /**
      * Xử lý khi server xác nhận cho phép sử dụng trợ giúp Gọi điện thoại.
      * Client sẽ tự mở HelpCallFrame.
+     *
      * @param questionIdFromServer ID của câu hỏi mà trợ giúp được áp dụng.
      */
     public void displayCallResult(int questionIdFromServer) {
@@ -1071,6 +1117,7 @@ public class OnlineGameFrame extends javax.swing.JFrame {
             }
         });
     }
+
     // Trong OnlineGameFrame.java
     public void displayAudienceResult(int questionIdFromServer, Map<Integer, Double> pollResults, int mostVotedOptionIndex) {
         SwingUtilities.invokeLater(() -> {
@@ -1092,10 +1139,18 @@ public class OnlineGameFrame extends javax.swing.JFrame {
 
             String imagePath = "/elements/Ý kiến khán giả (A).png"; // Mặc định hoặc ảnh chung
             switch (mostVotedOptionIndex) { // mostVotedOptionIndex là đáp án được khán giả chọn nhiều nhất
-                case 1: imagePath = "/elements/Ý kiến khán giả (A).png"; break;
-                case 2: imagePath = "/elements/Ý kiến khán giả (B).png"; break;
-                case 3: imagePath = "/elements/Ý kiến khán giả (C).png"; break;
-                case 4: imagePath = "/elements/Ý kiến khán giả (D).png"; break;
+                case 1:
+                    imagePath = "/elements/Ý kiến khán giả (A).png";
+                    break;
+                case 2:
+                    imagePath = "/elements/Ý kiến khán giả (B).png";
+                    break;
+                case 3:
+                    imagePath = "/elements/Ý kiến khán giả (C).png";
+                    break;
+                case 4:
+                    imagePath = "/elements/Ý kiến khán giả (D).png";
+                    break;
                 default: // Nếu server không gửi mostVotedOptionIndex hoặc nó không hợp lệ
                     logger.warning("mostVotedOptionIndex không hợp lệ: " + mostVotedOptionIndex + ". Sử dụng ảnh mặc định.");
                     // Có thể hiển thị text pollResults thay vì ảnh nếu không có mostVotedOptionIndex
@@ -1114,7 +1169,7 @@ public class OnlineGameFrame extends javax.swing.JFrame {
                 // Fallback hiển thị text nếu không có ảnh
                 StringBuilder fallbackText = new StringBuilder("Kết quả hỏi khán giả:\n");
                 for (Map.Entry<Integer, Double> entry : pollResults.entrySet()) {
-                    fallbackText.append("Đáp án ").append((char)('A' + entry.getKey() - 1)).append(": ")
+                    fallbackText.append("Đáp án ").append((char) ('A' + entry.getKey() - 1)).append(": ")
                             .append(String.format("%.0f%%", entry.getValue() * 100)).append("\n");
                 }
                 JOptionPane.showMessageDialog(this, fallbackText.toString().trim(), "Kết Quả Hỏi Khán Giả", JOptionPane.INFORMATION_MESSAGE);
@@ -1126,6 +1181,7 @@ public class OnlineGameFrame extends javax.swing.JFrame {
             updateHelpButtonStates();
         });
     }
+
     public void notifyOpponentUsedHelp(String opponentUsername, String helpTypeDescription) {
         SwingUtilities.invokeLater(() -> {
             String message = "Đối thủ " + opponentUsername + " " + helpTypeDescription + ".";
@@ -1149,6 +1205,7 @@ public class OnlineGameFrame extends javax.swing.JFrame {
 
     /**
      * Hiển thị một tin nhắn chat nhận được lên chatArea.
+     *
      * @param message Tin nhắn đầy đủ (ví dụ: "Username: Nội dung tin nhắn")
      */
     public void appendChatMessageToArea(String message) {

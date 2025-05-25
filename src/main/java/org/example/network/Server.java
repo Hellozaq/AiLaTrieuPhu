@@ -22,7 +22,7 @@ public class Server {
     private final Map<String, Room> activeRooms = new ConcurrentHashMap<>();
     private QuestionController questionController; // Để lấy danh sách câu hỏi
     private PlayerService playerService;           // Để cập nhật tiền người chơi
-    private final ScheduledExecutorService timerScheduler = Executors.newSingleThreadScheduledExecutor(); // Dùng chung cho các timer của phòng
+    public static final ScheduledExecutorService timerScheduler = Executors.newSingleThreadScheduledExecutor(); // Dùng chung cho các timer của phòng
 
 
     private static final Logger logger = Logger.getLogger(Server.class.getName());
@@ -289,7 +289,7 @@ public class Server {
         timerScheduler.schedule(() -> {
             logger.info("Đã trì hoãn, bây giờ gửi câu hỏi đầu tiên cho phòng " + finalRoom.getRoomId());
             sendNextQuestionToRoom(finalRoom);
-        }, 2000, TimeUnit.MILLISECONDS); // Gửi câu hỏi đầu tiên
+        }, 4000, TimeUnit.MILLISECONDS); // Gửi câu hỏi đầu tiên
     }
 
     private synchronized void sendNextQuestionToRoom(Room room) {
@@ -409,37 +409,45 @@ public class Server {
                 room.getPlayer2AnswerIndex(), p2Result,
                 correctAnswer
         });
-//        Message scoreMsg = new Message(MessageType.S2C_UPDATE_GAME_SCORE, new Object[]{
-//                room.getPlayer1OnlineScore(), room.getPlayer2OnlineScore()
-//        });
-//
-//        if (room.getHandler1() != null) {
-//            room.getHandler1().sendMessage(resultMsg);
-//            room.getHandler1().sendMessage(scoreMsg);
-//        }
-//        if (room.getHandler2() != null) {
-//            room.getHandler2().sendMessage(resultMsg);
-//            room.getHandler2().sendMessage(scoreMsg);
-//        }
-
+//        logger.info("SERVER: Chuẩn bị gửi S2C_ANSWER_RESULT cho phòng " + room.getRoomId() + " đến handler1 và handler2.");
         if (room.getHandler1() != null) {
-            room.getHandler1().sendMessage(new Message(MessageType.S2C_UPDATE_GAME_SCORE, new Object[]{
-                    room.getPlayer1OnlineScore(), // myOnlineScore cho P1
-                    room.getPlayer2OnlineScore()  // opponentOnlineScore cho P1
-            }));
+            room.getHandler1().sendMessage(resultMsg);
+        }
+        if (room.getHandler2() != null) {
+            room.getHandler2().sendMessage(resultMsg);
         }
 
-// Gửi cho Client 2 (handler2): Điểm của P2 là "myScore", điểm của P1 là "opponentScore"
-        if (room.getHandler2() != null) {
-            room.getHandler2().sendMessage(new Message(MessageType.S2C_UPDATE_GAME_SCORE, new Object[]{
-                    room.getPlayer2OnlineScore(), // myOnlineScore cho P2
-                    room.getPlayer1OnlineScore()  // opponentOnlineScore cho P2
-            }));
-        }
+
+        final Room finalRoom = room; // Cần biến final để dùng trong lambda
+        final int delayMillisSeconds = 2500;
         logger.info("Đã xử lý và gửi kết quả câu hỏi " + (room.getCurrentQuestionIndexInGame() + 1) + " cho phòng " + room.getRoomId());
 
-        // Chuyển sang câu hỏi tiếp theo hoặc kết thúc game
-        sendNextQuestionToRoom(room);
+        ScheduledFuture<?> nextActionFuture = timerScheduler.schedule(() -> {
+            // Đảm bảo rằng phòng vẫn đang trong trạng thái 'PLAYING' trước khi gửi câu hỏi tiếp theo.
+            // Điều này quan trọng vì trong thời gian delay, một người chơi có thể đã rời trận,
+            // và endGameForRoom có thể đã được gọi, thay đổi trạng thái phòng.
+            synchronized (this) { // Đồng bộ hóa để kiểm tra trạng thái phòng một cách an toàn
+                if ("PLAYING".equals(finalRoom.getStatus())) {
+                    logger.info("Hết thời gian delay, gửi câu hỏi tiếp theo cho phòng " + finalRoom.getRoomId());
+                    if (room.getHandler1() != null) {
+                        room.getHandler1().sendMessage(new Message(MessageType.S2C_UPDATE_GAME_SCORE, new Object[]{
+                                room.getPlayer1OnlineScore(), // myOnlineScore cho P1
+                                room.getPlayer2OnlineScore()  // opponentOnlineScore cho P1
+                        }));
+                    }
+
+                    if (room.getHandler2() != null) {
+                        room.getHandler2().sendMessage(new Message(MessageType.S2C_UPDATE_GAME_SCORE, new Object[]{
+                                room.getPlayer2OnlineScore(), // myOnlineScore cho P2
+                                room.getPlayer1OnlineScore()  // opponentOnlineScore cho P2
+                        }));
+                    }
+                    sendNextQuestionToRoom(finalRoom); // Gọi sendNextQuestionToRoom sau khi delay
+                } else {
+                    logger.info("Phòng " + finalRoom.getRoomId() + " không còn ở trạng thái PLAYING sau khi delay. Trạng thái hiện tại: " + finalRoom.getStatus() + ". Không gửi câu hỏi tiếp.");
+                }
+            }
+        }, delayMillisSeconds, TimeUnit.MILLISECONDS);
     }
 
     public synchronized void endGameForRoom(Room room, String reason, ClientHandler leaver) {
