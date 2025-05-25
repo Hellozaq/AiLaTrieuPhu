@@ -403,20 +403,40 @@ public class Server {
         if (p1Result) room.incrementPlayer1OnlineScore(pointsThisRound);
         if (p2Result) room.incrementPlayer2OnlineScore(pointsThisRound);
 
-        Message resultMsg = new Message(MessageType.S2C_ANSWER_RESULT, new Object[]{
-                question.getId(),
-                room.getPlayer1AnswerIndex(), p1Result,
-                room.getPlayer2AnswerIndex(), p2Result,
-                correctAnswer
-        });
+
 //        logger.info("SERVER: Chuẩn bị gửi S2C_ANSWER_RESULT cho phòng " + room.getRoomId() + " đến handler1 và handler2.");
-        if (room.getHandler1() != null) {
-            room.getHandler1().sendMessage(resultMsg);
-        }
-        if (room.getHandler2() != null) {
-            room.getHandler2().sendMessage(resultMsg);
+        // ... (tính toán p1Result, p2Result) ...
+
+        ClientHandler handlerP1 = room.getHandler1();
+        ClientHandler handlerP2 = room.getHandler2();
+
+        if (handlerP1 != null) {
+            Object[] payloadP1 = new Object[]{
+                    question.getId(),
+                    room.getPlayer1AnswerIndex(), p1Result, // myChoice, myResult cho P1
+                    room.getPlayer2AnswerIndex(), p2Result, // opponentChoice, opponentResult (là P2) cho P1
+                    correctAnswer
+            };
+            handlerP1.sendMessage(new Message(MessageType.S2C_ANSWER_RESULT, payloadP1));
+            // Gửi điểm: [điểm của tôi (P1), điểm của đối thủ (P2)]
+            handlerP1.sendMessage(new Message(MessageType.S2C_UPDATE_GAME_SCORE, new Object[]{
+                    room.getPlayer1OnlineScore(), room.getPlayer2OnlineScore()
+            }));
         }
 
+        if (handlerP2 != null) {
+            Object[] payloadP2 = new Object[]{
+                    question.getId(),
+                    room.getPlayer2AnswerIndex(), p2Result,   // myChoice, myResult cho P2
+                    room.getPlayer1AnswerIndex(), p1Result,   // opponentChoice, opponentResult (là P1) cho P2
+                    correctAnswer
+            };
+            handlerP2.sendMessage(new Message(MessageType.S2C_ANSWER_RESULT, payloadP2));
+            // Gửi điểm: [điểm của tôi (P2), điểm của đối thủ (P1)]
+            handlerP2.sendMessage(new Message(MessageType.S2C_UPDATE_GAME_SCORE, new Object[]{
+                    room.getPlayer2OnlineScore(), room.getPlayer1OnlineScore()
+            }));
+        }
 
         final Room finalRoom = room; // Cần biến final để dùng trong lambda
         final int delayMillisSeconds = 2500;

@@ -157,7 +157,7 @@ public class OnlineHelpCallFrame extends javax.swing.JFrame {
         addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosing(java.awt.event.WindowEvent evt) {
-                GameFrame.setEableButon();
+//                GameFrame.setEableButon();
                 setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
 //                dispose();

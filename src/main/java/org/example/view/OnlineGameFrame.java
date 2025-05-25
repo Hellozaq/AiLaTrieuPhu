@@ -16,7 +16,9 @@ import org.example.view.helpCall.OnlineHelpCallFrame;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 import java.util.Map;
+import java.util.Random;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
@@ -75,7 +77,6 @@ public class OnlineGameFrame extends javax.swing.JFrame {
         stopButon = new javax.swing.JButton();
         chatPane = new javax.swing.JScrollPane();
         chatArea = new javax.swing.JTextArea();
-        gameStatusLabel = new javax.swing.JLabel();
         sendChatInGameButton = new javax.swing.JButton();
         chatInputFieldInGame = new javax.swing.JTextField();
         chatLabel = new javax.swing.JLabel();
@@ -106,6 +107,10 @@ public class OnlineGameFrame extends javax.swing.JFrame {
         questionAndAnswerLable = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         laiVanSam = new javax.swing.JLabel();
+        gameStatusLabel = new javax.swing.JLabel();
+        thinkingBoxLabel = new javax.swing.JLabel();
+        timeRemainingLabel = new javax.swing.JLabel();
+        timerLabel = new javax.swing.JLabel();
         moneyShowLabel = new javax.swing.JLabel();
         backgroundLabel = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -138,7 +143,7 @@ public class OnlineGameFrame extends javax.swing.JFrame {
                 stopButonActionPerformed(evt);
             }
         });
-        getContentPane().add(stopButon, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 210, 67, 25));
+        getContentPane().add(stopButon, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 67, 25));
 
         chatPane.setPreferredSize(new java.awt.Dimension(186, 78));
 
@@ -149,10 +154,6 @@ public class OnlineGameFrame extends javax.swing.JFrame {
         chatPane.setViewportView(chatArea);
 
         getContentPane().add(chatPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 206, 172, 264));
-
-        gameStatusLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        gameStatusLabel.setForeground(new java.awt.Color(255, 255, 255));
-        getContentPane().add(gameStatusLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 250, -1, -1));
 
         sendChatInGameButton.setBackground(new java.awt.Color(0, 102, 153));
         sendChatInGameButton.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
@@ -165,7 +166,7 @@ public class OnlineGameFrame extends javax.swing.JFrame {
         getContentPane().add(chatLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, -1, -1));
 
         stopLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/stopButon.png"))); // NOI18N
-        getContentPane().add(stopLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 200, -1, -1));
+        getContentPane().add(stopLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
         x3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/elements/X.png"))); // NOI18N
         getContentPane().add(x3, new org.netbeans.lib.awtextra.AbsoluteConstraints(912, 74, -1, -1));
@@ -276,7 +277,23 @@ public class OnlineGameFrame extends javax.swing.JFrame {
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(227, 247, -1, -1));
 
         laiVanSam.setIcon(new javax.swing.ImageIcon(getClass().getResource("/elements/laivansam.png"))); // NOI18N
-        getContentPane().add(laiVanSam, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 40, -1, -1));
+        getContentPane().add(laiVanSam, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 40, -1, -1));
+
+        gameStatusLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        gameStatusLabel.setForeground(new java.awt.Color(255, 255, 255));
+        gameStatusLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        getContentPane().add(gameStatusLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 80, 330, 40));
+
+        thinkingBoxLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/elements/thinking_box.png"))); // NOI18N
+        getContentPane().add(thinkingBoxLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 70, -1, -1));
+
+        timeRemainingLabel.setFont(new java.awt.Font("Dubai", 1, 18)); // NOI18N
+        timeRemainingLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        timeRemainingLabel.setText("60");
+        getContentPane().add(timeRemainingLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 202, 30, -1));
+
+        timerLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/elements/timer.png"))); // NOI18N
+        getContentPane().add(timerLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(225, 173, -1, -1));
 
         moneyShowLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/elements/Money.png"))); // NOI18N
         getContentPane().add(moneyShowLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 90, -1, -1));
@@ -577,6 +594,8 @@ public class OnlineGameFrame extends javax.swing.JFrame {
         if (helpCallButon != null) helpCallButon.setVisible(true);
         if (helpYKienKhanGIaButon != null) helpYKienKhanGIaButon.setVisible(true);
 
+        hideMcStatus();
+        setupMcIdleChatter();
 
         // Hiển thị thông tin người chơi hiện tại
         if (avatarLabel != null) {
@@ -614,7 +633,7 @@ public class OnlineGameFrame extends javax.swing.JFrame {
         if (x2 != null) x2.setVisible(false);
         if (x3 != null) x3.setVisible(false);
 
-        if (gameStatusLabel != null) gameStatusLabel.setText("Đang kết nối và chờ game...");
+        if (gameStatusLabel != null) showMcStatus("Chào mừng đến với Ai là trệu phú Online!", 4000);
         help5050UsedClient = false;
         helpCallUsedClient = false;
         helpAudienceUsedClient = false;
@@ -663,6 +682,7 @@ public class OnlineGameFrame extends javax.swing.JFrame {
                     currentSelectedAnswer = selectedAnswerIndex;
                     gameClient.sendMessage(new Message(MessageType.C2S_SUBMIT_ANSWER, new Object[]{currentQuestion.getId(), currentSelectedAnswer}));
                     disableButtons();
+                    stopCountdownTimer();
                     if (gameStatusLabel != null) gameStatusLabel.setText("Đã gửi câu trả lời. Chờ kết quả...");
                     logger.info("Người chơi " + currentPlayer.getUsername() + " đã chọn đáp án " + currentSelectedAnswer + " cho câu hỏi ID " + currentQuestion.getId());
                 }
@@ -855,6 +875,7 @@ public class OnlineGameFrame extends javax.swing.JFrame {
 
     public void showGameOver(String winnerUsername, int prize, boolean iAmWinner) {
         SwingUtilities.invokeLater(() -> {
+            stopCountdownTimer();
             enableAnswerButtons(false);
             String message;
             if (winnerUsername == null || winnerUsername.isEmpty()) { // Hòa hoặc lỗi
@@ -863,7 +884,7 @@ public class OnlineGameFrame extends javax.swing.JFrame {
                 message = "Chúc mừng! Bạn đã thắng và nhận được " + prize + " xu!";
 //                PlayAudioURL.playAudio(getClass().getResource("/audio/win_game.wav")); // Ví dụ
             } else {
-                message = "Rất tiếc! Bạn đã thua. " + winnerUsername + " thắng và nhận được " + prize + " xu.";
+                message = "Rất tiếc! Bạn đã thua. " + winnerUsername + " thắng và bạn bị trừ " + prize + " xu.";
             }
             if (gameStatusLabel != null) gameStatusLabel.setText(message);
             questionLabel.setText("TRẬN ĐẤU KẾT THÚC");
@@ -901,13 +922,20 @@ public class OnlineGameFrame extends javax.swing.JFrame {
             if (cButon != null) cButon.setText("C. " + question.getOptionC());
             if (dButon != null) dButon.setText("D. " + question.getOptionD());
 
+            this.timeLeftInSeconds = totalTimeInSeconds;
+            stopCountdownTimer();
+
             // Cập nhật số thứ tự câu hỏi
             if (questionCurrentIndexLabel != null) {
                 questionCurrentIndexLabel.setText(String.valueOf(questionCurrentIndex));
             }
 
             setEableButon();
-            if (gameStatusLabel != null) gameStatusLabel.setText("Thời gian: " + totalTimeInSeconds + "s");
+            updateTimerDisplay();
+            startCountdownTimer();
+//            if (gameStatusLabel != null) gameStatusLabel.setText("Thời gian: " + totalTimeInSeconds + "s");
+            if (gameStatusLabel != null) gameStatusLabel.setText("");
+
             logger.info("Hiển thị câu hỏi thứ " + questionCurrentIndex);
         });
 
@@ -927,8 +955,8 @@ public class OnlineGameFrame extends javax.swing.JFrame {
 
     public void showAnswerResult(int questionId, int myChoice, boolean myResult, int opponentChoice, boolean opponentResult, int correctAnswerIndex) {
         SwingUtilities.invokeLater(() -> {
+            stopCountdownTimer();
             enableAnswerButtons(false);
-            // 1. Phát âm thanh dựa trên kết quả của người chơi hiện tại (myResult)
             if (myResult) {
                 PlayAudioURL.playAudio(getClass().getResource("/audio/level-up-2-199574_1.wav"));
             } else {
@@ -952,6 +980,14 @@ public class OnlineGameFrame extends javax.swing.JFrame {
             highlightAnswerButton(bButon, 2, myChoice, correctAnswerIndex, myResult);
             highlightAnswerButton(cButon, 3, myChoice, correctAnswerIndex, myResult);
             highlightAnswerButton(dButon, 4, myChoice, correctAnswerIndex, myResult);
+            String resultMessageForMc;
+            if (myResult) {
+                resultMessageForMc = "Chính xác! Tuyệt vời!";
+            } else {
+                resultMessageForMc = "Rất tiếc, chưa đúng rồi. Cố gắng ở câu sau nhé!";
+            }
+            // Hiển thị thông báo của MC về kết quả
+            showMcStatus(resultMessageForMc, 3000);
 
             timerScheduler.schedule(() -> {
                 synchronized (this) {
@@ -964,7 +1000,6 @@ public class OnlineGameFrame extends javax.swing.JFrame {
     }
 
     private void highlightAnswerButton(JButton button, int buttonOptionIndex, int playerChoice, int correctAnswerIndex, boolean playerResult) {
-        System.out.println("da to mau");
         if (button == null) return;
         // Reset màu về mặc định trước
         // button.setBackground(new Color(247, 248, 211)); // Màu mặc định của bạn
@@ -1186,7 +1221,7 @@ public class OnlineGameFrame extends javax.swing.JFrame {
         SwingUtilities.invokeLater(() -> {
             String message = "Đối thủ " + opponentUsername + " " + helpTypeDescription + ".";
             if (gameStatusLabel != null) {
-                gameStatusLabel.setText(message);
+                showMcStatus(message, 4000);
             } else { // Nếu gameStatusLabel không có chỗ, có thể append vào chat
                 // appendChatMessageToArea("Hệ thống: " + message); // Tạo phương thức này nếu cần
             }
@@ -1197,7 +1232,7 @@ public class OnlineGameFrame extends javax.swing.JFrame {
 
     public void handleHelpUnavailable(String reason) {
         SwingUtilities.invokeLater(() -> {
-            if (gameStatusLabel != null) gameStatusLabel.setText("Trợ giúp không khả dụng: " + reason);
+            if (gameStatusLabel != null) showMcStatus("Trợ giúp không khả dụng: " + reason,2000);
             JOptionPane.showMessageDialog(this, "Trợ giúp không khả dụng: " + reason, "Lỗi Trợ Giúp", JOptionPane.WARNING_MESSAGE);
             updateHelpButtonStates(); // Cập nhật lại trạng thái nút (có thể server từ chối nhưng client chưa vô hiệu hóa)
         });
@@ -1220,8 +1255,161 @@ public class OnlineGameFrame extends javax.swing.JFrame {
         });
     }
 
+    /*Time Remaining*/
+    private void updateTimerDisplay() {
+        if (timeRemainingLabel != null) {
+            timeRemainingLabel.setText(timeLeftInSeconds + "");
+
+        } else if (gameStatusLabel != null) {
+            // Chỉ cập nhật gameStatusLabel nếu không có ai khác đang dùng nó cho thông báo quan trọng hơn
+            // Hoặc bạn có thể quyết định gameStatusLabel sẽ ưu tiên hiển thị thời gian
+            gameStatusLabel.setText(timeLeftInSeconds + "");
+        }
+        new Thread(() -> {
+            try {
+                if (timeLeftInSeconds % 2 == 0) {
+                    PlayAudioURL.playAudio(getClass().getResource("/audio/tick1.wav"),-10);
+                } else {
+                    PlayAudioURL.playAudio(getClass().getResource("/audio/tick2.wav"),-10);
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }).start();
+    }
+
+    private void startCountdownTimer() {
+        // Khởi tạo Timer để kích hoạt mỗi giây
+        questionCountdownTimer = new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                timeLeftInSeconds--;
+                updateTimerDisplay();
+                if (timeLeftInSeconds <= 0) {
+                    stopCountdownTimer();
+//                    if (gameStatusLabel != null) gameStatusLabel.setText("Hết giờ!");
+                    enableAnswerButtons(false); // Vô hiệu hóa nút trả lời
+                    // Client không cần gửi gì cả, server sẽ tự xử lý hết giờ
+                    logger.info("Client countdown timer: Hết giờ cho câu hỏi ID " + (currentQuestion != null ? currentQuestion.getId() : "N/A"));
+                }
+
+                if (timeLeftInSeconds <= 10 && timeLeftInSeconds > 0) { // Ví dụ: còn 10 giây
+                    if (thinkingBoxLabel.isVisible() == false || gameStatusLabel.getText().contains("Thời gian còn lại:")) {
+                        showMcStatus("Còn " + timeLeftInSeconds + " giây nữa thôi!", 2000);
+                    }
+                }
+                if (timeLeftInSeconds <= 0) {
+                    stopCountdownTimer();
+                    hideMcStatus(); // Ẩn lời nhắc của MC
+                    if (timeRemainingLabel != null) timeRemainingLabel.setText("0");
+                    else if (gameStatusLabel != null) gameStatusLabel.setText("Hết giờ!"); // Fallback
+                    enableAnswerButtons(false);
+                }
+
+            }
+        });
+        questionCountdownTimer.setInitialDelay(0); // Bắt đầu ngay lập tức nếu muốn, hoặc 1000ms
+        questionCountdownTimer.start();
+        logger.info("Client countdown timer đã bắt đầu cho " + timeLeftInSeconds + " giây.");
+    }
+
+    private void stopCountdownTimer() {
+        if (questionCountdownTimer != null && questionCountdownTimer.isRunning()) {
+            questionCountdownTimer.stop();
+            logger.info("Client countdown timer đã dừng.");
+        }
+    }
+
+    // Trong OnlineGameFrame.java
+
+    private void setupMcIdleChatter() {
+        mcIdleMessages = new ArrayList<>(java.util.List.of(new String[]{
+                "Suy nghĩ đơn giản thôi bạn ơi!",
+                "Còn trẻ mà, mình cứ chọn đi",
+                "Bạn có chắc với lựa chọn này không?",
+                "Một câu hỏi không quá khó, phải không nào?",
+                "Bà nói thiệt hông bà Thơ?",
+                "Tôi tin bạn sẽ làm được!"
+        }));
+
+        // Timer để MC nói ngẫu nhiên sau một khoảng thời gian không có hoạt động gì đặc biệt
+        // Ví dụ: sau mỗi 15-30 giây không có status mới từ game, MC sẽ nói 1 câu
+        if (mcIdleChatterTimer != null && mcIdleChatterTimer.isRunning()) {
+            mcIdleChatterTimer.stop();
+        }
+        mcIdleChatterTimer = new Timer(5000 + random.nextInt(10000), e -> { // Ngẫu nhiên từ 5-10s
+            if (thinkingBoxLabel.isVisible() == false) { // Chỉ nói khi MC đang không hiển thị status game
+                String randomMessage = mcIdleMessages.get(random.nextInt(mcIdleMessages.size()));
+                showMcStatus(randomMessage, 4000); // Hiển thị trong 4 giây
+            }
+        });
+        mcIdleChatterTimer.setRepeats(true); // Cho phép lặp lại
+        // mcIdleChatterTimer.start(); // Sẽ start/stop khi cần
+    }
+
+
+    /**
+     * Hiển thị một thông điệp từ MC trong thinking box trong một khoảng thời gian nhất định.
+     * @param message Nội dung thông điệp.
+     * @param durationMillis Thời gian hiển thị (tính bằng mili giây). Nếu <= 0, hiển thị vô hạn đến khi có showMcStatus mới.
+     */
+    public void showMcStatus(String message, int durationMillis) {
+        SwingUtilities.invokeLater(() -> {
+            if (laiVanSam == null || thinkingBoxLabel == null || gameStatusLabel == null) {
+                logger.warning("Một trong các component của MC (laiVanSam, thinkingBoxLabel, gameStatusLabel) là null.");
+                // Có thể hiển thị message bằng JOptionPane nếu các component chưa sẵn sàng
+                // JOptionPane.showMessageDialog(this, message, "Thông báo từ MC", JOptionPane.PLAIN_MESSAGE);
+                return;
+            }
+            PlayAudioURL.playPopOnAudio();
+            gameStatusLabel.setText( message );
+            thinkingBoxLabel.setVisible(true);
+            gameStatusLabel.setVisible(true);
+            laiVanSam.setVisible(true); // Đảm bảo MC cũng hiện
+
+            // Dừng timer cũ nếu đang chạy (để hiển thị message mới)
+            if (mcStatusTimer != null && mcStatusTimer.isRunning()) {
+                mcStatusTimer.stop();
+            }
+
+            if (durationMillis > 0) {
+                mcStatusTimer = new Timer(durationMillis, e -> hideMcStatus());
+                mcStatusTimer.setRepeats(false); // Chỉ chạy 1 lần
+                mcStatusTimer.start();
+                if (mcIdleChatterTimer != null) mcIdleChatterTimer.restart(); // Reset idle chatter timer
+            } else {
+                if (mcIdleChatterTimer != null) mcIdleChatterTimer.stop(); // Nếu hiển thị vô hạn, dừng idle chatter
+            }
+        });
+    }
+
+    /**
+     * Ẩn thinking box và text của MC.
+     */
+    public void hideMcStatus() {
+        SwingUtilities.invokeLater(() -> {
+            if (thinkingBoxLabel != null) thinkingBoxLabel.setVisible(false);
+            if (gameStatusLabel != null) {
+                gameStatusLabel.setText("");
+                gameStatusLabel.setVisible(false);
+            }
+            // Không ẩn laiVanSam ở đây, chỉ ẩn khung thoại
+            if (mcIdleChatterTimer != null && !mcIdleChatterTimer.isRunning()) {
+                // mcIdleChatterTimer.setInitialDelay(5000 + random.nextInt(10000)); // Chờ 1 chút rồi mới nói tiếp
+                // mcIdleChatterTimer.restart();
+            }
+        });
+    }
+
     private static final Logger logger = Logger.getLogger(OnlineGameFrame.class.getName());
 
+    private javax.swing.Timer mcStatusTimer; // Timer để ẩn thinking box
+    private javax.swing.Timer mcIdleChatterTimer; // Timer để MC nói ngẫu nhiên
+    private ArrayList<String> mcIdleMessages; // Danh sách các câu nói ngẫu nhiên
+    private Random random = new Random();
+
+    private Timer questionCountdownTimer;
+    private int timeLeftInSeconds;
 
     private int currentSelectedAnswer;
     private int myOnlineScore;
@@ -1281,6 +1469,9 @@ public class OnlineGameFrame extends javax.swing.JFrame {
     private javax.swing.JButton setAvatarButon;
     private javax.swing.JButton stopButon;
     private javax.swing.JLabel stopLabel;
+    private javax.swing.JLabel thinkingBoxLabel;
+    private javax.swing.JLabel timeRemainingLabel;
+    private javax.swing.JLabel timerLabel;
     private javax.swing.JLabel unameAndAvtLabel;
     private javax.swing.JLabel unameAndAvtLabel1;
     private javax.swing.JLabel usernameLabel;
