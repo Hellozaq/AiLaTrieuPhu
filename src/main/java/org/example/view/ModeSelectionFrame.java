@@ -269,7 +269,7 @@ public class ModeSelectionFrame extends javax.swing.JFrame {
         });
     }
 
-    public static void display(PlayerModel player) {
+    public static void display(PlayerModel player, GameClient gameClient) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {

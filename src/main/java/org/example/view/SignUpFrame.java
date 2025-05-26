@@ -6,6 +6,7 @@ package org.example.view;
 
 import org.example.model.PlayAudioURL;
 import org.example.model.PlayerModel;
+import org.example.network.GameClient;
 import org.example.service.AuthService;
 import org.example.service.PlayerService;
 
@@ -19,7 +20,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- *
  * @author Ngọc Viên
  */
 public class SignUpFrame extends javax.swing.JFrame {
@@ -27,15 +27,14 @@ public class SignUpFrame extends javax.swing.JFrame {
     /**
      * Creates new form SignUpFrame
      */
-    public SignUpFrame() {
-        playerService = new PlayerService();
-        authService = new AuthService();
+    public SignUpFrame(GameClient gameClient) {
+        this.gameClient = gameClient;
         initComponents();
 //        clipStart = PlayAudio.playStartAudio("src/main/java/org/example/file/audio/" +
 //                "nhạc-bắt-đầu-chương-trình-ALTP-_2008-2020_.wav", -10);
         ImageIcon icon = new ImageIcon(getClass().getResource("/elements/AiLaTrieuPhu.png"));
         setIconImage(icon.getImage());
-        evenHandler();
+        setupListeners();
         setResizable(false);
     }
 
@@ -142,42 +141,41 @@ public class SignUpFrame extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SignUpFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SignUpFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SignUpFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SignUpFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new SignUpFrame().setVisible(true);
-            }
-        });
-    }
-
-    private void evenHandler() {
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(SignUpFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(SignUpFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(SignUpFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(SignUpFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new SignUpFrame().setVisible(true);
+//            }
+//        });
+//    }
+    private void setupListeners() {
 
         setLocationRelativeTo(null);
-        setDocumentFilter(passwordField,15);
+        setDocumentFilter(passwordField, 15);
         getRootPane().setDefaultButton(submitButon);
 //        setLocation(420, 250);
 
@@ -224,42 +222,47 @@ public class SignUpFrame extends javax.swing.JFrame {
         });
         submitButon.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if (passwordField.getText().isEmpty() || usernameField.getText().isEmpty()) {
-                    PlayAudioURL.wrongSound();
-                    JOptionPane.showMessageDialog(null, "Nhập đầy đủ username và password!");
-                }
-                else if(usernameField.getText().contains(" ")){
-                    PlayAudioURL.wrongSound();
-                    JOptionPane.showMessageDialog(null, "Username không được chứa dấu cách!");
-                }
-                else if(passwordField.getText().length()<6){
-                    PlayAudioURL.wrongSound();
-                    JOptionPane.showMessageDialog(null, "Password phải có ít nhất 6 ký tự");
-                }
-                else {
-                    username = usernameField.getText();
-                    password = passwordField.getText();
-                    try {
-                        isSignUp = authService.register(username, password);
-                    } catch (Exception ex) {
-                        throw new RuntimeException(ex);
-                    }
-                    if (isSignUp) {
-                        JOptionPane.showMessageDialog(null, "Đăng ký tài khoảng thành công");
-                        PlayAudioURL.playAudio(getClass().getResource("/audio/level-up-2-199574_1.wav"));
-                        WelcomeFrame.display();
-                        dispose();
-                    }else {
-                        JOptionPane.showMessageDialog(null, "Đăng ký tài khoảng thất bại");
-                    }
+                PlayAudioURL.playClickAudio();
+                username = usernameField.getText().trim();
+                // Lấy mật khẩu từ JPasswordField
+                password = new String(((JTextField) passwordField).getText());
 
+
+                if (username.isEmpty() || password.isEmpty()) {
+                    showDialogMessage("Vui lòng nhập đầy đủ tên đăng nhập và mật khẩu!");
+                    return;
+                }
+                if (username.contains(" ")) {
+                    showDialogMessage("Tên đăng nhập không được chứa dấu cách!");
+                    return;
+                }
+                if (password.length() < 6) {
+                    showDialogMessage("Mật khẩu phải có ít nhất 6 ký tự.");
+                    return;
+                }
+
+                // Gửi yêu cầu đăng ký qua GameClient
+                if (gameClient != null && gameClient.isConnected()) {
+                    gameClient.sendRegisterRequest(username, password);
+                    // Sau khi gửi, SignUpFrame có thể đóng lại và WelcomeFrame sẽ xử lý phản hồi
+                    // (hiển thị thông báo thành công/thất bại)
+//                    JOptionPane.showMessageDialog(SignUpFrame.this, "Đã gửi yêu cầu đăng ký. Vui lòng kiểm tra thông báo ở màn hình đăng nhập.", "Thông Báo", JOptionPane.INFORMATION_MESSAGE);
+//                    dispose(); // Đóng SignUpFrame
+//                    WelcomeFrame.display();
+                } else {
+                    showDialogMessage("Không thể kết nối đến server để đăng ký. Vui lòng thử lại.");
+                    // Có thể thử kết nối lại gameClient ở đây nếu cần
+                    if (gameClient != null && !gameClient.isConnected()) {
+                        gameClient.connectToServerOnly(); // Thử kết nối lại
+                    }
                 }
             }
         });
 
+
         qrCodeItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null,"",
+                JOptionPane.showMessageDialog(null, "",
                         "Vào link để thêm câu hỏi",
                         JOptionPane.INFORMATION_MESSAGE,
 //                        new ImageIcon("src/main/resources/elements/QRcode-ggSheets.png")
@@ -269,6 +272,39 @@ public class SignUpFrame extends javax.swing.JFrame {
         });
 
     }
+
+    private void showDialogMessage(String message) {
+        PlayAudioURL.wrongSound();
+        JOptionPane.showMessageDialog(this, message);
+    }
+
+
+    // Phương thức display để WelcomeFrame có thể gọi
+    public static void display(GameClient client) { // Nhận GameClient
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                        if ("Nimbus".equals(info.getName())) {
+                            javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                            break;
+                        }
+                    }
+                } catch (ClassNotFoundException ex) {
+                    java.util.logging.Logger.getLogger(SignUpFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+                } catch (InstantiationException ex) {
+                    java.util.logging.Logger.getLogger(SignUpFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+                } catch (IllegalAccessException ex) {
+                    java.util.logging.Logger.getLogger(SignUpFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+                } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+                    java.util.logging.Logger.getLogger(SignUpFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+                }
+
+                new SignUpFrame(client).setVisible(true);
+            }
+        });
+    }
+
 
     static void makeButtonTransparent(JButton button) {
         button.setContentAreaFilled(false);
@@ -295,6 +331,7 @@ public class SignUpFrame extends javax.swing.JFrame {
         textField.setDocument(doc);
     }
 
+    private GameClient gameClient;
     private boolean isSignUp;
     private AuthService authService;
     private String username;

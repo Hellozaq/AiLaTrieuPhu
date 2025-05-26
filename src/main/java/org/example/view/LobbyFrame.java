@@ -377,7 +377,7 @@ public class LobbyFrame extends JFrame {
             gameClient.disconnect(); // Ngắt kết nối client
 //            PlayAudioURL.stopAllAudio();
             // Quay lại ModeSelectionFrame hoặc WelcomeFrame tùy logic
-            ModeSelectionFrame.display(currentPlayer); // Ví dụ: quay lại chọn mode
+            ModeSelectionFrame.display(currentPlayer, gameClient); // Ví dụ: quay lại chọn mode
             dispose();
         }
     }
@@ -619,7 +619,7 @@ public class LobbyFrame extends JFrame {
 //                PlayAudioURL.stopAllAudio();
                 // Không truyền currentPlayer nếu không chắc nó còn valid
                 // WelcomeFrame.display(); // Hoặc ModeSelectionFrame nếu muốn giữ phiên đăng nhập
-                ModeSelectionFrame.display(this.currentPlayer); // Cố gắng quay lại với player hiện tại
+                ModeSelectionFrame.display(this.currentPlayer, gameClient); // Cố gắng quay lại với player hiện tại
                 dispose();
             }
         });

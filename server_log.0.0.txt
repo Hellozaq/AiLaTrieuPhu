@@ -4172,3 +4172,65 @@ May 25, 2025 10:41:16 PM org.example.network.Server leaveRoom
 INFO: Phòng d4109e trống và đã bị xóa.
 May 25, 2025 10:41:16 PM org.example.network.Server leaveRoom
 INFO: Phòng d4109e trống và đã bị xóa.
+May 26, 2025 10:00:26 AM org.example.network.Server <init>
+INFO: QuestionController initialized with 15 questions.
+May 26, 2025 10:00:26 AM org.example.network.Server <init>
+INFO: PlayerService initialized successfully.
+May 26, 2025 10:00:26 AM org.example.network.Server startServer
+INFO: Server Ai Là Triệu Phú Online đã khởi động trên cổng 12345
+May 26, 2025 10:00:48 AM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 26, 2025 10:07:05 AM org.example.network.Server <init>
+INFO: QuestionController initialized with 15 questions.
+May 26, 2025 10:07:05 AM org.example.network.Server <init>
+INFO: PlayerService initialized successfully.
+May 26, 2025 10:07:05 AM org.example.network.Server startServer
+INFO: Server Ai Là Triệu Phú Online đã khởi động trên cổng 12345
+May 26, 2025 10:07:17 AM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 26, 2025 10:08:57 AM org.example.network.Server <init>
+INFO: QuestionController initialized with 15 questions.
+May 26, 2025 10:08:57 AM org.example.network.Server <init>
+INFO: PlayerService initialized successfully.
+May 26, 2025 10:08:57 AM org.example.network.Server startServer
+INFO: Server Ai Là Triệu Phú Online đã khởi động trên cổng 12345
+May 26, 2025 10:09:25 AM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 26, 2025 10:15:30 AM org.example.network.Server <init>
+INFO: QuestionController initialized with 15 questions.
+May 26, 2025 10:15:30 AM org.example.network.Server <init>
+INFO: PlayerService initialized successfully.
+May 26, 2025 10:15:30 AM org.example.network.Server startServer
+INFO: Server Ai Là Triệu Phú Online đã khởi động trên cổng 12345
+May 26, 2025 10:17:34 AM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 26, 2025 10:18:39 AM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 26, 2025 10:27:17 AM org.example.network.Server <init>
+INFO: QuestionController initialized with 15 questions.
+May 26, 2025 10:27:17 AM org.example.network.Server <init>
+INFO: PlayerService initialized successfully.
+May 26, 2025 10:27:17 AM org.example.network.Server startServer
+INFO: Server Ai Là Triệu Phú Online đã khởi động trên cổng 12345
+May 26, 2025 10:27:26 AM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 26, 2025 10:27:27 AM org.example.network.Server handleLoginRequest
+INFO: Người chơi key đăng nhập thành công.
+May 26, 2025 10:28:36 AM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 26, 2025 10:28:39 AM org.example.network.Server handleRegisterRequest
+INFO: Đăng ký thất bại cho username: quoc
+May 26, 2025 10:34:28 AM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 26, 2025 10:34:28 AM org.example.network.Server handleLoginRequest
+INFO: Người chơi key đăng nhập thành công.
+May 26, 2025 10:35:06 AM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 26, 2025 10:35:18 AM org.example.network.Server handleRegisterRequest
+INFO: Đăng ký thất bại cho username: quoc
+May 26, 2025 10:35:24 AM org.example.network.Server handleRegisterRequest
+INFO: Người chơi tan đăng ký thành công.
+May 26, 2025 10:35:37 AM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 26, 2025 10:35:37 AM org.example.network.Server handleLoginRequest
+INFO: Người chơi tan đăng nhập thành công.

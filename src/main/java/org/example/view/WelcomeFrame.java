@@ -6,6 +6,7 @@ package org.example.view;
 
 import org.example.model.PlayAudioURL;
 import org.example.model.PlayerModel;
+import org.example.network.GameClient;
 import org.example.service.AuthService;
 import org.example.service.PlayerService;
 
@@ -34,8 +35,9 @@ public class WelcomeFrame extends javax.swing.JFrame {
 //                "nhạc-bắt-đầu-chương-trình-ALTP-_2008-2020_.wav", -10);
         ImageIcon icon = new ImageIcon(getClass().getResource("/elements/AiLaTrieuPhu.png"));
         setIconImage(icon.getImage());
-        clipStart = PlayAudioURL.playStartAudio(getClass().getResource("/audio/nhạc-bắt-đầu-chương-trình-ALTP-_2008-2020_.wav"),-10);
-        evenHandler();
+        clipStart = PlayAudioURL.playStartAudio(getClass().getResource("/audio/nhạc-bắt-đầu-chương-trình-ALTP-_2008-2020_.wav"), -10);
+        this.gameClient = new GameClient("localhost", 12345, this);
+        setupListeners();
         setResizable(false);
     }
 
@@ -213,10 +215,10 @@ public class WelcomeFrame extends javax.swing.JFrame {
     }
 
 
-    private void evenHandler() {
+    private void setupListeners() {
 
         setLocationRelativeTo(null);
-        setDocumentFilter(passwordField,15);
+        setDocumentFilter(passwordField, 15);
         getRootPane().setDefaultButton(playButon);
 //        setLocation(420, 250);
         makeButtonTransparent(rankingButon);
@@ -268,57 +270,39 @@ public class WelcomeFrame extends javax.swing.JFrame {
         signUpButon.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                SignUpFrame.main(null);
+                if (gameClient != null && !gameClient.isConnected()) {
+                    gameClient.connectToServerOnly();
+                }
+                SignUpFrame.display(gameClient);
             }
         });
         playButon.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if (passwordField.getText().isEmpty() || usernameField.getText().isEmpty()) {
-                    PlayAudioURL.wrongSound();
-                    JOptionPane.showMessageDialog(null, "Nhập đầy đủ username và password!");
-                }
-                else if(usernameField.getText().contains(" ")){
-                    PlayAudioURL.wrongSound();
-                    JOptionPane.showMessageDialog(null, "Username không được chứa dấu cách!");
-                }
-                else if(passwordField.getText().length()<6){
-                    PlayAudioURL.wrongSound();
-                    JOptionPane.showMessageDialog(null, "Password phải có ít nhất 6 ký tự");
-                }
-                    else {
-                    username = usernameField.getText();
-                    password = passwordField.getText();
-                    try {
-                        player = authService.login(username, password);
-                    } catch (Exception ex) {
-                        throw new RuntimeException(ex);
-                    }
-                    if (player != null) {
-                        player = playerService.findByUsername(username);
-                        System.out.println("ksjfkdj");
-                        System.out.println(player.getAvatarPath());
-                        if (player.getAvatarPath().isEmpty()) {
-                            System.out.println(1);
-                            SelectAvatarFrame.display(player, 1, null);
-                            PlayAudioURL.stopAudio(clipStart);
-//                        PlayAudio.playAudio("src/main/java/org/example/file/audio/level-up-2-199574_1.wav");
-                            PlayAudioURL.playAudio(getClass().getResource("/audio/level-up-2-199574_1.wav"));
-                        } else {
-                            System.out.println(2);
-                            PlayAudioURL.stopAudio(clipStart);
-//                        PlayAudio.playAudio("src/main/java/org/example/file/audio/level-up-2-199574_1.wav");
-                            PlayAudioURL.playAudio(getClass().getResource("/audio/level-up-2-199574_1.wav"));
-//                            GameFrame.display(player);
-                            ModeSelectionFrame.display(player);
-                        }
-                        dispose();
-                    }
-                    else {
-                        PlayAudioURL.wrongSound();
-                        JOptionPane.showMessageDialog(null, "Username hoặc mật password không chính xác");
-                    }
+                String username = usernameField.getText();
+                String password = new String(passwordField.getText()); // Lấy password đúng cách
 
+                if (username.isEmpty() || password.isEmpty()) {
+                    showDialogMessage("Vui lòng nhập đầy đủ tên đăng nhập và mật khẩu.");
+                    return;
                 }
+                if(username.contains(" ")){
+                    showDialogMessage("Tên đăng nhập không được chứa dấu cách!");
+                    return;
+                }
+                if(password.length()<6){
+                    showDialogMessage("Mật khẩu phải có ít nhất 6 ký tự.");
+                    return;
+                }
+
+                // Gửi yêu cầu đăng nhập qua GameClient
+                if (!gameClient.isConnected()) {
+                    if (!gameClient.connectToServerOnly()) {
+                        // showConnectionError đã được gọi trong connectToServerOnly nếu thất bại
+                        return;
+                    }
+                }
+                gameClient.sendLoginRequest(username, password);
+                // WelcomeFrame sẽ chờ phản hồi từ server thông qua các phương thức handle... do GameClient gọi
             }
         });
         rankingButon.addActionListener(new ActionListener() {
@@ -329,7 +313,7 @@ public class WelcomeFrame extends javax.swing.JFrame {
         });
         qrCodeItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null,"",
+                JOptionPane.showMessageDialog(null, "",
                         "Vào link để thêm câu hỏi",
                         JOptionPane.INFORMATION_MESSAGE,
 //                        new ImageIcon("src/main/resources/elements/QRcode-ggSheets.png")
@@ -364,7 +348,49 @@ public class WelcomeFrame extends javax.swing.JFrame {
         });
         textField.setDocument(doc);
     }
+    public void handleLoginSuccess(PlayerModel loggedInPlayer) {
+        SwingUtilities.invokeLater(() -> {
+            PlayAudioURL.stopAudio(clipStart); // Dừng nhạc nền welcome
+            PlayAudioURL.playAudio(getClass().getResource("/audio/level-up-2-199574_1.wav"));
+            ModeSelectionFrame.display(loggedInPlayer, gameClient); // Truyền PlayerModel và GameClient
+            dispose();
+        });
+    }
 
+    public void showLoginError(String message) {
+        SwingUtilities.invokeLater(() -> {
+            PlayAudioURL.wrongSound();
+            JOptionPane.showMessageDialog(this, message, "Đăng Nhập Thất Bại", JOptionPane.ERROR_MESSAGE);
+        });
+    }
+
+    public void handleRegisterSuccess() {
+        SwingUtilities.invokeLater(() -> {
+            PlayAudioURL.playAudio(getClass().getResource("/audio/level-up-191997.wav")); // Âm thanh thành công
+            JOptionPane.showMessageDialog(this, "Đăng ký tài khoản thành công! Vui lòng đăng nhập.", "Đăng Ký Thành Công", JOptionPane.INFORMATION_MESSAGE);
+        });
+    }
+
+    public void showRegisterError(String message) {
+        SwingUtilities.invokeLater(() -> {
+            PlayAudioURL.wrongSound();
+            JOptionPane.showMessageDialog(this, message, "Đăng Ký Thất Bại", JOptionPane.ERROR_MESSAGE);
+        });
+    }
+
+    public void showConnectionError(String message) {
+        SwingUtilities.invokeLater(() -> {
+            PlayAudioURL.wrongSound();
+            JOptionPane.showMessageDialog(this, message, "Lỗi Kết Nối", JOptionPane.ERROR_MESSAGE);
+        });
+    }
+
+    private void showDialogMessage(String message){ // Tiện ích hiển thị dialog
+        PlayAudioURL.wrongSound();
+        JOptionPane.showMessageDialog(this, message);
+    }
+
+    private GameClient gameClient;
     private String username;
     private String password;
     private PlayerModel player;

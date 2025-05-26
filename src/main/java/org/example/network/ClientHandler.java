@@ -31,54 +31,77 @@ public class ClientHandler implements Runnable {
         }
     }
 
+    // Trong org.example.network.ClientHandler.java
     @Override
     public void run() {
-        try {
-            // Bước đầu tiên: Client gửi thông tin PlayerModel để "đăng nhập" vào server
-            Message connectMessage = (Message) ois.readObject();
-            if (connectMessage.getType() == MessageType.C2S_CONNECT_REQUEST
-                    && connectMessage.getPayload() instanceof PlayerModel) {
-                this.player = (PlayerModel) connectMessage.getPayload();
-                // TODO: Có thể kiểm tra xem player này đã kết nối từ client khác chưa nếu cần
-                server.addConnectedClient(this); // Thêm vào danh sách client đang kết nối của server
-                sendMessage(new Message(MessageType.S2C_CONNECTION_ACKNOWLEDGED, this.player)); // Gửi lại player model
-                                                                                                // (có thể đã được
-                                                                                                // server cập nhật)
-                logger.info(
-                        "Người chơi " + player.getUsername() + " (" + clientSocket.getInetAddress() + ") đã kết nối.");
-                server.broadcastRoomList(); // Cập nhật danh sách phòng cho tất cả client
-            } else {
-                logger.warning("Yêu cầu kết nối không hợp lệ từ " + clientSocket.getInetAddress());
-                sendMessage(new Message(MessageType.S2C_ERROR, "Yêu cầu kết nối không hợp lệ."));
-                closeConnection();
-                return;
-            }
+        String clientIp = String.valueOf(clientSocket.getInetAddress());
+        // player ban đầu sẽ là null cho đến khi đăng nhập/đăng ký thành công
 
-            // Vòng lặp xử lý tin nhắn từ client
+        try {
+            logger.info("ClientHandler cho " + clientIp + " đã khởi động và đang chờ tin nhắn (bao gồm Đăng nhập/Đăng ký).");
+
             Message clientMessage;
+            // Đi thẳng vào vòng lặp xử lý tin nhắn.
+            // handleClientMessage sẽ kiểm tra xem player đã được xác thực chưa.
+            // Vòng lặp sẽ tiếp tục cho đến khi readObject() trả về null (ít khi xảy ra với ObjectInputStream nếu không phải lỗi)
+            // hoặc ném ra một Exception (thường là EOFException khi client đóng kết nối, hoặc SocketException).
             while ((clientMessage = (Message) ois.readObject()) != null) {
-                logger.fine("Nhận tin nhắn từ " + player.getUsername() + ": " + clientMessage.getType() + " - Payload: "
-                        + clientMessage.getPayload());
+                logger.fine("Nhận tin nhắn từ " + (player != null ? player.getUsername() : clientIp) +
+                        ": " + clientMessage.getType() +
+                        " - Payload: " + (clientMessage.getPayload() != null ? clientMessage.getPayload().toString() : "null"));
                 handleClientMessage(clientMessage);
             }
-        } catch (IOException | ClassNotFoundException e) {
-            if (player != null) {
-                logger.log(Level.INFO, "Người chơi " + player.getUsername() + " (" + clientSocket.getInetAddress()
-                        + ") đã ngắt kết nối.", e.getMessage());
-            } else {
-                logger.log(Level.INFO,
-                        "Client (" + clientSocket.getInetAddress() + ") đã ngắt kết nối trước khi xác thực.",
-                        e.getMessage());
-            }
+            // Nếu vòng lặp kết thúc mà không có exception (ví dụ ois.readObject() trả về null),
+            // có thể log thêm ở đây, nhưng thường thì nó sẽ kết thúc bằng exception.
+            logger.info("ClientHandler cho " + (player != null ? player.getUsername() : clientIp) + " đã kết thúc vòng lặp đọc tin nhắn một cách bình thường (readObject() trả về null).");
+
+        } catch (java.io.EOFException e) {
+            logger.log(Level.INFO, "Client " + (player != null ? player.getUsername() : clientIp) +
+                    " đã đóng kết nối (EOFException): " + e.getMessage());
+        } catch (java.net.SocketException e) {
+            // Thường xảy ra khi client đột ngột đóng kết nối (Connection reset, Broken pipe)
+            // hoặc server đóng socket trong khi client đang cố gắng đọc/ghi.
+            logger.log(Level.WARNING, "SocketException cho client " + (player != null ? player.getUsername() : clientIp) +
+                    ": " + e.getMessage()); // Không cần in full stack trace cho các lỗi reset thông thường
+        } catch (IOException e) {
+            logger.log(Level.SEVERE, "IOException trong ClientHandler run() cho " + (player != null ? player.getUsername() : clientIp), e);
+        } catch (ClassNotFoundException e) {
+            logger.log(Level.SEVERE, "ClassNotFoundException trong ClientHandler run() cho " + (player != null ? player.getUsername() : clientIp), e);
+        } catch (Exception e) { // Bắt các ngoại lệ không mong muốn khác
+            logger.log(Level.SEVERE, "Ngoại lệ không mong muốn trong ClientHandler run() cho " + (player != null ? player.getUsername() : clientIp), e);
         } finally {
-            handleDisconnect();
-            closeConnection();
+            logger.info("ClientHandler cho " + (player != null ? player.getUsername() : clientIp) +
+                    " đang thực thi khối finally và gọi handleDisconnect.");
+            handleDisconnect(); // Đảm bảo ngắt kết nối và dọn dẹp tài nguyên
         }
     }
 
     private void handleClientMessage(Message message) {
         if (this.player == null) {
-            logger.warning("Client chưa xác thực gửi tin nhắn: " + message.getType());
+            switch (message.getType()) {
+                case C2S_LOGIN_REQUEST:
+                    if (message.getPayload() instanceof Object[]) {
+                        Object[] loginData = (Object[]) message.getPayload();
+                        String username = (String) loginData[0];
+                        String password = (String) loginData[1];
+                        server.handleLoginRequest(this, username, password);
+                    }
+                    break;
+                case C2S_REGISTER_REQUEST:
+                    if (message.getPayload() instanceof Object[]) {
+                        Object[] registerData = (Object[]) message.getPayload();
+                        String username = (String) registerData[0];
+                        String password = (String) registerData[1];
+                        server.handleRegisterRequest(this, username, password);
+                    }
+                    break;
+                default:
+                    logger.warning("Client chưa xác thực (" + clientSocket.getInetAddress() + ") gửi tin nhắn không hợp lệ: " + message.getType());
+                    sendMessage(new Message(MessageType.S2C_ERROR, "Vui lòng đăng nhập hoặc đăng ký trước."));
+                    // Có thể cân nhắc đóng kết nối nếu client gửi quá nhiều tin nhắn không hợp lệ
+                    // closeConnection();
+                    break;
+            }
             return;
         }
         // Ưu tiên xử lý tin nhắn trong game nếu client đang ở trong phòng và phòng đang
@@ -191,7 +214,7 @@ public class ClientHandler implements Runnable {
                         ClientHandler opponentHandler = currentRoom.getOpponentHandler(this);
                         if (opponentHandler != null) {
                             opponentHandler.sendMessage(new Message(MessageType.S2C_OPPONENT_READY_STATUS,
-                                    new Object[] { this.player.getUsername(), isReady }));
+                                    new Object[]{this.player.getUsername(), isReady}));
                         }
 
                         if ("READY_TO_START".equals(currentRoom.getStatus())) {
@@ -224,7 +247,7 @@ public class ClientHandler implements Runnable {
                             return;
                         }
                         Room createdRoom = server.createRoom(this.player, this, betAmount); // Gán phòng mới cho client
-                                                                                            // handler này
+                        // handler này
                         if (createdRoom != null) {
                             this.currentRoom = createdRoom; // Cập nhật currentRoom
                             sendMessage(new Message(MessageType.S2C_ROOM_JOINED, this.currentRoom.getRoomInfo()));
@@ -274,9 +297,9 @@ public class ClientHandler implements Runnable {
     }
 
     private void handleDisconnect() { // Được gọi khi client ngắt kết nối hoặc có lỗi stream
-        if (player != null) { // Chỉ xử lý nếu client đã được xác thực
+        {
             logger.info(player.getUsername() + " (" + clientSocket.getInetAddress() + ") đang ngắt kết nối...");
-            if (currentRoom != null) {
+            if (currentRoom != null && player != null) {
                 // Nếu đang trong game, xử thua
                 if ("PLAYING".equals(currentRoom.getStatus())) {
                     logger.info(player.getUsername() + " ngắt kết nối khi đang chơi trong phòng "
@@ -288,9 +311,9 @@ public class ClientHandler implements Runnable {
                     ClientHandler opponentHandler = currentRoom.getOpponentHandler(this); // Lấy đối thủ trước khi rời
                     server.leaveRoom(currentRoom.getRoomId(), this); // Gọi server để xử lý rời phòng
                     if (opponentHandler != null && currentRoom != null && !currentRoom.isEmpty()) { // Nếu phòng còn và
-                                                                                                    // có đối thủ
+                        // có đối thủ
                         Room roomAfterLeave = server.getRoomById(currentRoom.getRoomId()); // Lấy trạng thái phòng mới
-                                                                                           // nhất
+                        // nhất
                         if (roomAfterLeave != null) {
                             opponentHandler.sendMessage(
                                     new Message(MessageType.S2C_OPPONENT_LEFT_ROOM, this.player.getUsername()));
@@ -305,11 +328,10 @@ public class ClientHandler implements Runnable {
                 currentRoom = null; // Client này không còn ở trong phòng nào nữa
             }
             server.removeConnectedClient(this);
-            server.broadcastRoomList(); // Cập nhật sảnh cho các client khác
-            logger.info(player.getUsername() + " đã chính thức ngắt kết nối khỏi server.");
-        } else {
-            logger.info("Client (" + clientSocket.getInetAddress() + ") chưa xác thực đã ngắt kết nối.");
-            server.removeConnectedClient(this); // Vẫn xóa khỏi danh sách để tránh rò rỉ
+            if (player != null) {
+                server.broadcastRoomList(); // Cập nhật sảnh cho các client khác
+                logger.info(player.getUsername() + " đã chính thức ngắt kết nối khỏi server.");
+            }
         }
     }
 
@@ -345,6 +367,10 @@ public class ClientHandler implements Runnable {
 
     public PlayerModel getPlayer() {
         return player;
+    }
+
+    public void setPlayer(PlayerModel player) {
+        this.player = player;
     }
 
     public Room getCurrentRoom() {

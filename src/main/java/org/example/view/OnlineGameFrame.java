@@ -4,14 +4,12 @@
  */
 package org.example.view;
 
-import org.example.controllers.QuestionController;
 import org.example.model.PlayAudioURL;
 import org.example.model.PlayerModel;
 import org.example.model.QuestionModel;
 import org.example.network.GameClient;
 import org.example.network.Message;
 import org.example.network.MessageType;
-import org.example.view.helpCall.HelpCallFrame;
 import org.example.view.helpCall.OnlineHelpCallFrame;
 
 import java.awt.event.WindowAdapter;
@@ -19,7 +17,6 @@ import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Random;
-import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -729,11 +726,11 @@ public class OnlineGameFrame extends javax.swing.JFrame {
                         PlayAudioURL.stopAudio(question1to5Audio);
                         gameClient.disconnect(); // Ngắt kết nối khi đóng cửa sổ game
                         dispose();
-                        ModeSelectionFrame.display(currentPlayer); // Quay lại màn hình chọn chế độ
+                        ModeSelectionFrame.display(currentPlayer, gameClient); // Quay lại màn hình chọn chế độ
                     }
                 } else {
                     dispose(); // Nếu không còn kết nối thì đóng luôn
-                    ModeSelectionFrame.display(currentPlayer);
+                    ModeSelectionFrame.display(currentPlayer, gameClient);
                 }
             }
         });

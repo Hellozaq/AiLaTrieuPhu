@@ -9,6 +9,7 @@ import java.util.*;
 
 import org.example.model.QuestionModel;     // Thêm import
 import org.example.controllers.QuestionController; // Thêm import (để lấy câu hỏi)
+import org.example.service.AuthService;
 import org.example.service.PlayerService;
 
 import java.util.concurrent.*;
@@ -22,6 +23,8 @@ public class Server {
     private final Map<String, Room> activeRooms = new ConcurrentHashMap<>();
     private QuestionController questionController; // Để lấy danh sách câu hỏi
     private PlayerService playerService;           // Để cập nhật tiền người chơi
+    private AuthService authService;
+
     public static final ScheduledExecutorService timerScheduler = Executors.newSingleThreadScheduledExecutor(); // Dùng chung cho các timer của phòng
 
 
@@ -33,7 +36,8 @@ public class Server {
 
         try {
             questionController = new QuestionController();
-            playerService = new PlayerService(); // Đảm bảo dòng này được thực thi
+            playerService = new PlayerService();
+            authService = new AuthService();
             logger.info("QuestionController initialized with " + (questionController.getQuestions() != null ? questionController.getQuestions().size() : "null list") + " questions.");
             if (playerService == null) {
                 logger.severe("PLAYER SERVICE IS NULL AFTER INITIALIZATION!");
@@ -130,6 +134,66 @@ public class Server {
             logger.info("Server đã dừng.");
         } catch (IOException e) {
             logger.log(Level.SEVERE, "Lỗi khi dừng server.", e);
+        }
+    }
+
+    // Phương thức mới để xử lý yêu cầu đăng nhập
+    public synchronized void handleLoginRequest(ClientHandler handler, String username, String password) {
+        if (handler == null || username == null || password == null) {
+            logger.warning("Yêu cầu đăng nhập không hợp lệ: thiếu thông tin.");
+            return;
+        }
+        if (handler.getPlayer() != null) { // Client này đã đăng nhập rồi
+            handler.sendMessage(new Message(MessageType.S2C_LOGIN_FAILURE, "Bạn đã đăng nhập rồi."));
+            logger.warning("User " + handler.getPlayer().getUsername() + " cố gắng đăng nhập lại.");
+            return;
+        }
+
+        PlayerModel player = authService.login(username, password);
+        if (player != null) {
+            // Kiểm tra xem player này có đang được sử dụng bởi ClientHandler khác không (đăng nhập đa thiết bị?)
+            for (ClientHandler ch : connectedClients) {
+                if (ch.getPlayer() != null && ch.getPlayer().getId() == player.getId() && ch != handler) {
+                    // Player đã đăng nhập ở client khác. Tùy bạn xử lý:
+                    // 1. Không cho phép -> gửi lỗi.
+                    // 2. Cho phép, có thể ngắt kết nối client cũ. (Phức tạp hơn)
+                    handler.sendMessage(new Message(MessageType.S2C_LOGIN_FAILURE, "Tài khoản này đã được đăng nhập ở nơi khác."));
+                    logger.warning("Tài khoản " + username + " cố gắng đăng nhập khi đã có phiên khác hoạt động.");
+                    return;
+                }
+            }
+
+            handler.setPlayer(player); // Gán PlayerModel cho ClientHandler
+            addConnectedClient(handler); // Thêm vào danh sách client "active" (đã xác thực)
+            handler.sendMessage(new Message(MessageType.S2C_LOGIN_SUCCESS, player));
+            logger.info("Người chơi " + username + " đăng nhập thành công.");
+            broadcastRoomList(); // Cập nhật danh sách phòng cho client vừa đăng nhập
+        } else {
+            handler.sendMessage(new Message(MessageType.S2C_LOGIN_FAILURE, "Tên đăng nhập hoặc mật khẩu không chính xác."));
+            logger.info("Đăng nhập thất bại cho username: " + username);
+        }
+    }
+
+    // Phương thức mới để xử lý yêu cầu đăng ký
+    public synchronized void handleRegisterRequest(ClientHandler handler, String username, String password) {
+        if (handler == null || username == null || password == null) {
+            logger.warning("Yêu cầu đăng ký không hợp lệ: thiếu thông tin.");
+            return;
+        }
+        if (handler.getPlayer() != null) { // Client này đã đăng nhập/xác thực rồi
+            handler.sendMessage(new Message(MessageType.S2C_REGISTER_FAILURE, "Bạn đã đăng nhập, không thể đăng ký."));
+            return;
+        }
+
+        boolean success = authService.register(username, password);
+        if (success) {
+            // Có thể lấy lại PlayerModel vừa tạo để gửi về hoặc chỉ gửi thông báo thành công
+            // PlayerModel newPlayer = authService.login(username, password); // Để lấy PlayerModel đầy đủ
+            handler.sendMessage(new Message(MessageType.S2C_REGISTER_SUCCESS, null)); // Hoặc gửi newPlayer
+            logger.info("Người chơi " + username + " đăng ký thành công.");
+        } else {
+            handler.sendMessage(new Message(MessageType.S2C_REGISTER_FAILURE, "Tên đăng nhập đã tồn tại hoặc có lỗi xảy ra."));
+            logger.info("Đăng ký thất bại cho username: " + username);
         }
     }
 
