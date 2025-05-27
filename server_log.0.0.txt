@@ -4312,3 +4312,7 @@ May 27, 2025 8:30:32 PM org.example.network.Server startServer
 INFO: Client mới kết nối từ: /127.0.0.1
 May 27, 2025 8:30:32 PM org.example.network.Server handleLoginRequest
 INFO: Người chơi key đăng nhập thành công.
+May 27, 2025 8:34:16 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 27, 2025 8:34:16 PM org.example.network.Server handleLoginRequest
+INFO: Người chơi ngocvien đăng nhập thành công.
