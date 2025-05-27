@@ -4316,3 +4316,19 @@ May 27, 2025 8:34:16 PM org.example.network.Server startServer
 INFO: Client mới kết nối từ: /127.0.0.1
 May 27, 2025 8:34:16 PM org.example.network.Server handleLoginRequest
 INFO: Người chơi ngocvien đăng nhập thành công.
+May 27, 2025 8:46:13 PM org.example.network.Server <init>
+INFO: QuestionController initialized with 15 questions.
+May 27, 2025 8:46:13 PM org.example.network.Server <init>
+INFO: PlayerService initialized successfully.
+May 27, 2025 8:46:13 PM org.example.network.Server startServer
+INFO: Server Ai Là Triệu Phú Online đã khởi động trên cổng 12345
+May 27, 2025 8:47:04 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /192.168.1.178
+May 27, 2025 8:47:04 PM org.example.network.Server handleLoginRequest
+INFO: Người chơi key đăng nhập thành công.
+May 27, 2025 8:47:06 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /192.168.1.178
+May 27, 2025 8:47:08 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 27, 2025 8:47:08 PM org.example.network.Server handleLoginRequest
+INFO: Người chơi ngocvien đăng nhập thành công.
