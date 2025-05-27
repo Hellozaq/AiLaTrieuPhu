@@ -17,7 +17,7 @@ public class ClientHandler implements Runnable {
     private PlayerModel player; // Thông tin người chơi của client này
     private Room currentRoom; // Phòng hiện tại mà client đang tham gia
 
-    private static final Logger logger = Logger.getLogger(ClientHandler.class.getName());
+    public static final Logger logger = Logger.getLogger(ClientHandler.class.getName());
 
     public ClientHandler(Socket clientSocket, Server server) {
         this.clientSocket = clientSocket;

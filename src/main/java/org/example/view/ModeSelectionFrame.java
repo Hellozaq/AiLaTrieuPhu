@@ -12,6 +12,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.logging.Logger;
+
+import static org.example.network.ClientHandler.logger;
 
 /**
  *
@@ -22,7 +25,8 @@ public class ModeSelectionFrame extends javax.swing.JFrame {
     /**
      * Creates new form ModeSelectionFrame1
      */
-    public ModeSelectionFrame(PlayerModel player) {
+    public ModeSelectionFrame(PlayerModel player, GameClient gameClient) {
+        this.gameClient = gameClient;
         this.player = player;
 
         setTitle("Ai Là Triệu Phú - Trang Chủ");
@@ -201,36 +205,42 @@ public class ModeSelectionFrame extends javax.swing.JFrame {
             }
         });
 
+        // Nút Chơi Online
         onlineButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 PlayAudioURL.playClickAudio();
+                if (player == null) {
+                    JOptionPane.showMessageDialog(ModeSelectionFrame.this,
+                            "Lỗi: Không có thông tin người chơi để chơi online.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                    WelcomeFrame.display();
+                    dispose();
+                    return;
+                }
                 if (player.getAvatarPath() == null || player.getAvatarPath().isEmpty()) {
                     JOptionPane.showMessageDialog(ModeSelectionFrame.this,
                             "Vui lòng chọn avatar trước khi bắt đầu chơi online!",
                             "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-                    SelectAvatarFrame.display(player, 1, avatarLabel); // Chế độ 1 là chọn lần đầu
+                    SelectAvatarFrame.display(player, 1, avatarLabel);
                     return;
                 }
 
-                // Khởi tạo và kết nối GameClient
-                // Lấy host và port từ một file config hoặc hardcode tạm thời
-                String serverHost = "localhost"; // Hoặc địa chỉ IP của server
-                int serverPort = 12345;       // Phải khớp với PORT của Server
-
-                gameClient = new GameClient(serverHost, serverPort);
-                boolean connected = gameClient.connect(player); // Truyền PlayerModel hiện tại
-
-                if (connected) {
-//                    PlayAudioURL.stopAllAudio(); // Dừng nhạc nền của ModeSelectionFrame
-                    LobbyFrame.display(player, gameClient); // Mở LobbyFrame và truyền player, gameClient
-                    dispose(); // Đóng ModeSelectionFrame
+                if (gameClient != null && gameClient.isConnected()) {
+                    logger.info("Đã kết nối server. Mở LobbyFrame.");
+//                    PlayAudioURL.stopAllAudio(); // Dừng nhạc nền của ModeSelectionFrame nếu có
+                    LobbyFrame.display(player, gameClient);
+                    dispose();
                 } else {
-                    // Xử lý lỗi kết nối, ví dụ hiển thị JOptionPane
+                    // Nếu chưa kết nối, thử kết nối lại (hoặc báo lỗi rõ ràng hơn)
+                    logger.warning("Chưa kết nối tới server. Thử kết nối lại cho " + player.getUsername());
+                    // WelcomeFrame sẽ xử lý việc kết nối ban đầu. Nếu đến đây mà gameClient chưa kết nối
+                    // thì có thể là lỗi logic hoặc người dùng vào thẳng ModeSelectionFrame không qua WelcomeFrame.
+                    // Hiện tại, giả định là WelcomeFrame đã phải đảm bảo gameClient kết nối.
+                    // Nếu không, cần có nút "Kết nối server" hoặc tự động kết nối ở WelcomeFrame.
                     JOptionPane.showMessageDialog(ModeSelectionFrame.this,
-                            "Không thể kết nối đến máy chủ game online.\nVui lòng thử lại sau hoặc kiểm tra kết nối mạng.",
+                            "Chưa kết nối đến máy chủ. Vui lòng quay lại và thử đăng nhập lại.",
                             "Lỗi Kết Nối", JOptionPane.ERROR_MESSAGE);
-                    gameClient = null; // Reset gameClient nếu kết nối thất bại
+                    // Không reset gameClient ở đây vì nó được quản lý bởi WelcomeFrame
                 }
             }
         });
@@ -282,7 +292,11 @@ public class ModeSelectionFrame extends javax.swing.JFrame {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                new ModeSelectionFrame(player).setVisible(true);
+                if(!gameClient.isConnected()){
+                    System.out.println("da ngat ket noi");
+
+                }
+                new ModeSelectionFrame(player, gameClient).setVisible(true);
             }
         });
     }
@@ -294,6 +308,7 @@ public class ModeSelectionFrame extends javax.swing.JFrame {
 
     private PlayerModel player;
     private GameClient gameClient;
+    private static final Logger logger = Logger.getLogger(ModeSelectionFrame.class.getName()); // Thêm logger
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel avatarLabel;

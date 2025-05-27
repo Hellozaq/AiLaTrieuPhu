@@ -374,10 +374,10 @@ public class LobbyFrame extends JFrame {
             if (currentJoinedRoomInfo != null) { // Nếu đang trong phòng thì gửi yêu cầu rời phòng
                 gameClient.sendMessage(new Message(MessageType.C2S_LEAVE_ROOM, null));
             }
-            gameClient.disconnect(); // Ngắt kết nối client
 //            PlayAudioURL.stopAllAudio();
             // Quay lại ModeSelectionFrame hoặc WelcomeFrame tùy logic
-            ModeSelectionFrame.display(currentPlayer, gameClient); // Ví dụ: quay lại chọn mode
+            ModeSelectionFrame.display(this.currentPlayer, gameClient); // Ví dụ: quay lại chọn mode
+//            gameClient.disconnect(); // Ngắt kết nối client
             dispose();
         }
     }
@@ -619,7 +619,8 @@ public class LobbyFrame extends JFrame {
 //                PlayAudioURL.stopAllAudio();
                 // Không truyền currentPlayer nếu không chắc nó còn valid
                 // WelcomeFrame.display(); // Hoặc ModeSelectionFrame nếu muốn giữ phiên đăng nhập
-                ModeSelectionFrame.display(this.currentPlayer, gameClient); // Cố gắng quay lại với player hiện tại
+//                ModeSelectionFrame.display(this.currentPlayer, gameClient); // Cố gắng quay lại với player hiện tại
+                WelcomeFrame.display();
                 dispose();
             }
         });

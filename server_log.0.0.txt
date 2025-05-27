@@ -4234,3 +4234,81 @@ May 26, 2025 10:35:37 AM org.example.network.Server startServer
 INFO: Client mới kết nối từ: /127.0.0.1
 May 26, 2025 10:35:37 AM org.example.network.Server handleLoginRequest
 INFO: Người chơi tan đăng nhập thành công.
+May 27, 2025 5:53:55 PM org.example.network.Server <init>
+INFO: QuestionController initialized with 15 questions.
+May 27, 2025 5:53:55 PM org.example.network.Server <init>
+INFO: PlayerService initialized successfully.
+May 27, 2025 5:53:55 PM org.example.network.Server startServer
+INFO: Server Ai Là Triệu Phú Online đã khởi động trên cổng 12345
+May 27, 2025 5:55:44 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /192.168.1.178
+May 27, 2025 5:55:44 PM org.example.network.Server handleLoginRequest
+INFO: Người chơi key đăng nhập thành công.
+May 27, 2025 5:56:47 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 27, 2025 5:56:47 PM org.example.network.Server handleLoginRequest
+INFO: Người chơi ngocvien đăng nhập thành công.
+May 27, 2025 5:56:48 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /192.168.1.178
+May 27, 2025 5:56:48 PM org.example.network.Server handleLoginRequest
+INFO: Người chơi key đăng nhập thành công.
+May 27, 2025 5:56:49 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /192.168.1.178
+May 27, 2025 5:56:49 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 27, 2025 5:57:15 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 27, 2025 5:57:45 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /192.168.1.178
+May 27, 2025 5:58:24 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 27, 2025 6:00:12 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /192.168.1.178
+May 27, 2025 6:00:15 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 27, 2025 6:00:15 PM org.example.network.Server handleLoginRequest
+INFO: Người chơi ngocvien đăng nhập thành công.
+May 27, 2025 6:00:40 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 27, 2025 6:01:09 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 27, 2025 6:01:09 PM org.example.network.Server handleLoginRequest
+INFO: Người chơi ngocvien đăng nhập thành công.
+May 27, 2025 6:01:12 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 27, 2025 6:12:24 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 27, 2025 6:12:24 PM org.example.network.Server handleLoginRequest
+INFO: Người chơi ngocvien đăng nhập thành công.
+May 27, 2025 6:12:26 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 27, 2025 8:22:05 PM org.example.network.Server <init>
+INFO: QuestionController initialized with 15 questions.
+May 27, 2025 8:22:05 PM org.example.network.Server <init>
+INFO: PlayerService initialized successfully.
+May 27, 2025 8:22:05 PM org.example.network.Server startServer
+INFO: Server Ai Là Triệu Phú Online đã khởi động trên cổng 12345
+May 27, 2025 8:22:18 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 27, 2025 8:22:18 PM org.example.network.Server handleLoginRequest
+INFO: Người chơi key đăng nhập thành công.
+May 27, 2025 8:23:27 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 27, 2025 8:23:27 PM org.example.network.Server handleLoginRequest
+INFO: Người chơi ngocvien đăng nhập thành công.
+May 27, 2025 8:25:17 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 27, 2025 8:25:17 PM org.example.network.Server handleLoginRequest
+INFO: Người chơi key đăng nhập thành công.
+May 27, 2025 8:25:29 PM org.example.network.Server createRoom
+INFO: Phòng b39f3e được tạo bởi key với mức cược 1000
+May 27, 2025 8:25:35 PM org.example.network.Server leaveRoom
+INFO: key rời phòng b39f3e
+May 27, 2025 8:25:35 PM org.example.network.Server leaveRoom
+INFO: Phòng b39f3e trống và đã bị xóa.
+May 27, 2025 8:25:35 PM org.example.network.Server leaveRoom
+INFO: Phòng b39f3e trống và đã bị xóa.
+May 27, 2025 8:30:32 PM org.example.network.Server startServer
+INFO: Client mới kết nối từ: /127.0.0.1
+May 27, 2025 8:30:32 PM org.example.network.Server handleLoginRequest
+INFO: Người chơi key đăng nhập thành công.
