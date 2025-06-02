@@ -724,7 +724,7 @@ public class OnlineGameFrame extends javax.swing.JFrame {
                         // Sau đó GameClient sẽ điều hướng về LobbyFrame hoặc ModeSelectionFrame
                         // Tạm thời dispose()
                         PlayAudioURL.stopAudio(question1to5Audio);
-                        gameClient.disconnect(); // Ngắt kết nối khi đóng cửa sổ game
+//                        gameClient.disconnect();
                         dispose();
                         ModeSelectionFrame.display(currentPlayer, gameClient); // Quay lại màn hình chọn chế độ
                     }

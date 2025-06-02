@@ -30,8 +30,6 @@ public class QuestionService {
         List<QuestionModel> finalQuestions = new ArrayList<>();
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             for (int level = 1; level <= 3; level++) {
-                // Đảm bảo "difficultyLevel" là tên thuộc tính chính xác trong QuestionModel.java
-                // được ánh xạ tới cột 'difficulty_level' trong database.
                 List<QuestionModel> questionsForLevel = session.createQuery(
                                 "FROM QuestionModel WHERE difficultyLevel = :level",
                                 QuestionModel.class)
@@ -40,8 +38,6 @@ public class QuestionService {
 
                 if (questionsForLevel.isEmpty()) {
                     logger.warning("Không tìm thấy câu hỏi nào cho mức độ khó: " + level);
-                    // Bạn có thể quyết định tiếp tục hoặc dừng lại nếu một mức độ không có câu hỏi
-                    // continue;
                 }
 
                 Collections.shuffle(questionsForLevel); // Xáo trộn danh sách câu hỏi của mức độ này
