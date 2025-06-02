@@ -48,6 +48,7 @@ public class QuestionService {
                     finalQuestions.add(questionsForLevel.get(i));
                 }
                 logger.info("Đã lấy " + questionsToTake + " câu hỏi cho mức độ " + level + ". Tổng số hiện tại: " + finalQuestions.size());
+
             }
         } catch (Exception e) {
             logger.log(Level.SEVERE, "Lỗi khi lấy câu hỏi từ database", e);

@@ -351,7 +351,6 @@ public class Server {
 
         // Lấy danh sách câu hỏi cho ván đấu (ví dụ 5 câu)
         List<QuestionModel> allQuestions = questionController.getQuestions(); // Lấy tất cả câu hỏi
-        Collections.shuffle(allQuestions); // Xáo trộn
         List<QuestionModel> gameQuestionsForRoom = new ArrayList<>(allQuestions.subList(0, Math.min(15, allQuestions.size()))); // Chọn 5 câu đầu
         room.setGameQuestions(gameQuestionsForRoom);
 

@@ -16,7 +16,7 @@ import java.util.List;
 public class GoogleSheetConf {
     private static Sheets getSheets() {
         try {
-            final String jsonKeyPath = "src/main/java/org/example/conf/google-json-conf.json";
+            final String jsonKeyPath = "src/main/java/org/example/conf/ailatrieuphu-443912-7a73862ea7b9.json";
             GoogleCredentials credentials = GoogleCredentials.fromStream(new FileInputStream(jsonKeyPath))
                     .createScoped(SheetsScopes.SPREADSHEETS_READONLY);
 
@@ -99,4 +99,3 @@ public class GoogleSheetConf {
         }
     }
 }
-// choi thu di ad =))

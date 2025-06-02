@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "ailatrieuphu-443912",
+  "private_key_id": "7a73862ea7b94234e6ea51817d345c7b13786ddd",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDKBt5GkZNKaXGP\nAXbE/ugXbQYyGx1r1CEhZgSaS6w0Z8FrO2ALF/fZWsrDnhC4dqk2VObss+hV7Rmg\nuXT/zohWxju2iGNtJT8+UXwfp83e7FNb7+kJMzknM1wpPdzbwKty3kqOJEUiX44B\n9tSw1+XdtFtLJ8JQQQvTqpvPxylTLgH3P2mlmUuz+wt+55rvvyK+nXqy3LHv1qhS\n332euIraPxkXHRCd2bDzJjReUwMzRHhj9o5FR5AbXgQwMh5HkZsPjmLZ37AN0946\nsPsUm8NzWfmZOTWTqxfUwqrEQ/dsEqL5n5jb1T52hj/FTTBc7fILaoMRlpOOM2EN\nrXBL02ehAgMBAAECggEAAS3aFUJbQDduVL3W8h5kv2JBA4DaApuZ1+aPB1GCv0mN\nvPD7RgVNSoT3ov2krlbu9OS49k+0fu/j0ubSMn4DmLIOfim8ntH1VQlHtq2Vi4QI\nloRHcWjNoBdyJcF5LQUqWwDGIZ8/kgxJuWQ16JRSAKHBWKZyQWKnzYP05dkNOjGL\nZLZ9EmMJnXGWdXzuTTXZ9BX/8ad9GjkXt3oAIvQ1qO0TJHRMYFPgTiEDQbcmchgd\njX3A6+Wd5PxsJAVxr/0STawI1TnEnQTVxTk5YdspLntxkxFWKS3m8Mp6Xl9ZK38B\n0G/saZSgs11kbdlirrT/c4BsF5ijMd3u4pApeL3wAQKBgQDnLcF1VrXMzqBSa0e5\n7kHNiXfArTu0q/nkQyWhSya+n4gjbCkA0aaLo1OerkQTYBo1h9fQFc1nlvbPZG3H\nAO6DY/ZVvu7Q8r26YcAkX1vi0jhvRhVoRnE8IdV0IWljpTE/0U4VFNFrZOuelDFn\n8rrdwT7k9GCHTGB/ikBuPg8fAQKBgQDft9XGNg1TEg9+dsB62I+g4NlometxPmCn\nkhcmT/3PfCWuCQbqO8z90h6f6KzHgSMiqbgRE1d+ySCDI7h9IqhAVV18Xc0sNzsX\nbTCvKq3y8FtlLAvjtkLQMSP81+qclOaIrK1OkRxmUMnzr7oL80gORDtIbwtaj1/u\nO3JWyDjooQKBgQCSqwHhGwkuji1C/RM9kD6pUzzpvj5yCuX4/uzh3xcOu5IYvydo\ngJqEXzPPKcrA7CjUq4GtYBe4UBv4SkQnjJzGOWZw0jkb0dWzaQ8JRIK8bhkl57Xv\nOTngJ6sQCZ6efJC5Z2Z9k36l/xpJusV5qJML2+22PqD7VeanJCRqjO71AQKBgDv2\nrEfqaPvhFWISNlk2/phibCOLTf4WeBWyJJ5SRnd8kSTqqn3R9Yn67dZyqQz4YhCC\naSG6i3MiOaKsymBQD8TenKYfBkVZsG8BB1GMIP/CyNx/R9iLG7Ft2nWE8g9yIbB0\niCdM4c3Sza6RZU6asK+SPkmV6fcmAtJ6AJWeKRLBAoGAPJm8vAi2cqVyJdIuRX76\nN7O0SGBbNICSxEeKApde9gjCJcmZ54IP3ew18QCcxzHQUUETz+XNUIdGpikLlROX\ny8RgSCjF6l7qI65BFlcz8BIRzF21z5ZZdr7dkfEIYW2ZePr6w+DUoZPrYag2W45W\n9H04BnTptpDYtQSc6zX4aZw=\n-----END PRIVATE KEY-----\n",
+  "client_email": "ai-la-trieu-phu-online@ailatrieuphu-443912.iam.gserviceaccount.com",
+  "client_id": "105314587751624194259",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/ai-la-trieu-phu-online%40ailatrieuphu-443912.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
