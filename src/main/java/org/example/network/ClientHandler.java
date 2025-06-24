@@ -52,7 +52,6 @@ public class ClientHandler implements Runnable {
                 handleClientMessage(clientMessage);
             }
             // Nếu vòng lặp kết thúc mà không có exception (ví dụ ois.readObject() trả về null),
-            // có thể log thêm ở đây, nhưng thường thì nó sẽ kết thúc bằng exception.
             logger.info("ClientHandler cho " + (player != null ? player.getUsername() : clientIp) + " đã kết thúc vòng lặp đọc tin nhắn một cách bình thường (readObject() trả về null).");
 
         } catch (java.io.EOFException e) {
@@ -104,8 +103,7 @@ public class ClientHandler implements Runnable {
             }
             return;
         }
-        // Ưu tiên xử lý tin nhắn trong game nếu client đang ở trong phòng và phòng đang
-        // chơi
+        // Ưu tiên xử lý tin nhắn trong game nếu client đang ở trong phòng và phòng đang chơi
         if (currentRoom != null && "PLAYING".equals(currentRoom.getStatus())) {
             switch (message.getType()) {
                 case C2S_SUBMIT_ANSWER:

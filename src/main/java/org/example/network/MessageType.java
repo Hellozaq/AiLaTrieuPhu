@@ -31,9 +31,9 @@ public enum MessageType {
     S2C_REGISTER_SUCCESS,   // Payload: PlayerModel (hoặc chỉ là thông báo thành công)
     S2C_REGISTER_FAILURE,   // Payload: String errorMessage
     S2C_HELP_RESULT_5050,   // Payload: new Object[]{questionId, optionIndexToRemove1, optionIndexToRemove2} (1-4)
-    S2C_HELP_RESULT_CALL,   // Payload: new Object[]{questionId, suggestedOptionIndex, confidence} (ví dụ: "Chuyên gia gợi ý: C (70%)")
-    S2C_HELP_RESULT_AUDIENCE,// Payload: new Object[]{questionId, Map<Integer, Double> pollResults} (ví dụ: {1:0.6, 2:0.1, 3:0.2, 4:0.1})
-    S2C_OPPONENT_USED_HELP, // Payload: new Object[]{opponentUsername, String helpTypeDescription} (ví dụ: "đã dùng 50/50")
+    S2C_HELP_RESULT_CALL,   // Payload: new Object[]{questionId, suggestedOptionIndex, confidence}
+    S2C_HELP_RESULT_AUDIENCE,// Payload: new Object[]{questionId, Map<Integer, Double> pollResults}
+    S2C_OPPONENT_USED_HELP, // Payload: new Object[]{opponentUsername, String helpTypeDescription}
     S2C_HELP_UNAVAILABLE,
 
 

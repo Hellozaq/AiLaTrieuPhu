@@ -1,14 +1,14 @@
 package org.example.network;
 
-import org.example.model.PlayerModel; // Import PlayerModel
+import org.example.model.PlayerModel;
 
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.*;
 
-import org.example.model.QuestionModel;     // Thêm import
-import org.example.controllers.QuestionController; // Thêm import (để lấy câu hỏi)
+import org.example.model.QuestionModel;
+import org.example.controllers.QuestionController;
 import org.example.service.AuthService;
 import org.example.service.PlayerService;
 
@@ -16,16 +16,16 @@ import java.util.concurrent.*;
 import java.util.logging.*;
 
 public class Server {
-    private static final int PORT = 12345; // Cổng server
+    private static final int PORT = 12345;
     private ServerSocket serverSocket;
-    private ExecutorService clientExecutorService; // Dùng thread pool để quản lý client
+    private ExecutorService clientExecutorService;
     private final List<ClientHandler> connectedClients = Collections.synchronizedList(new ArrayList<>());
     private final Map<String, Room> activeRooms = new ConcurrentHashMap<>();
-    private QuestionController questionController; // Để lấy danh sách câu hỏi
-    private PlayerService playerService;           // Để cập nhật tiền người chơi
+    private QuestionController questionController;
+    private PlayerService playerService;
     private AuthService authService;
 
-    public static final ScheduledExecutorService timerScheduler = Executors.newSingleThreadScheduledExecutor(); // Dùng chung cho các timer của phòng
+    public static final ScheduledExecutorService timerScheduler = Executors.newSingleThreadScheduledExecutor();
 
 
     private static final Logger logger = Logger.getLogger(Server.class.getName());
@@ -46,7 +46,6 @@ public class Server {
             }
         } catch (Exception e) {
             logger.log(Level.SEVERE, "Failed to initialize QuestionController or PlayerService", e);
-            // Critical error, consider stopping server or handling appropriately
         }
 
     }
@@ -241,7 +240,6 @@ public class Server {
 
 
     public synchronized Room createRoom(PlayerModel player, ClientHandler handler, int betAmount) {
-        // TODO: Trừ tiền cược ban đầu ở đây hoặc khi game bắt đầu
         Room newRoom = new Room(player, handler, betAmount);
         activeRooms.put(newRoom.getRoomId(), newRoom);
         logger.info("Phòng " + newRoom.getRoomId() + " được tạo bởi " + player.getUsername() + " với mức cược " + betAmount);
@@ -258,7 +256,6 @@ public class Server {
             }
             if (room.addPlayer2(player, handler)) {
                 logger.info(player.getUsername() + " đã tham gia phòng " + roomId);
-                // TODO: Trừ tiền cược ban đầu ở đây hoặc khi game bắt đầu
                 return room;
             }
         }
@@ -347,7 +344,7 @@ public class Server {
 
 
         room.setStatus("PLAYING");
-        room.resetGameStats(); // Đặt lại điểm số và trạng thái game của phòng
+        room.resetGameStats();
 
         // Lấy danh sách câu hỏi cho ván đấu (ví dụ 5 câu)
         List<QuestionModel> allQuestions = questionController.getQuestions(); // Lấy tất cả câu hỏi

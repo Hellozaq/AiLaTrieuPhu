@@ -971,8 +971,7 @@ public class OnlineGameFrame extends javax.swing.JFrame {
             }
             logger.info("Kết quả câu hỏi " + questionId + ": " + resultText);
 
-            // TODO: Tô màu các nút đáp án để hiển thị đúng/sai
-            // Ví dụ:
+
             highlightAnswerButton(aButon, 1, myChoice, correctAnswerIndex, myResult);
             highlightAnswerButton(bButon, 2, myChoice, correctAnswerIndex, myResult);
             highlightAnswerButton(cButon, 3, myChoice, correctAnswerIndex, myResult);
