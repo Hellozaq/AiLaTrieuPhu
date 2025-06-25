@@ -14,7 +14,7 @@ public class PlayerService {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
-            session.save(player);
+            session.persist(player);
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) transaction.rollback();
@@ -50,7 +50,7 @@ public class PlayerService {
                 .uniqueResult();
             if (existing != null && existing.getScore() < score) {
                 existing.setScore(score);
-                session.update(existing);
+                session.merge(existing);
             }
             transaction.commit();
         } catch (Exception e) {
@@ -69,7 +69,7 @@ public class PlayerService {
                 .uniqueResult();
             if (existing != null) {
                 existing.setAvatarPath(player.getAvatarPath());
-                session.update(existing);
+                session.merge(existing);
             }
             transaction.commit();
         } catch (Exception e) {
@@ -111,7 +111,7 @@ public class PlayerService {
                 existing.setRankScore(player.getRankScore());
                 existing.setPasswordHash(player.getPasswordHash());
                 // Thêm các trường khác nếu cần
-                session.update(existing);
+                session.merge(existing);
             }
             transaction.commit();
         } catch (Exception e) {

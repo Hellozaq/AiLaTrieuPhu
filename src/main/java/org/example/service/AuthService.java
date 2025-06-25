@@ -21,7 +21,7 @@ public class AuthService {
             player.setPasswordHash(encryptedPassword);
 
             Transaction tx = session.beginTransaction();
-            session.save(player);
+            session.persist(player);
             tx.commit();
             return true;
         }

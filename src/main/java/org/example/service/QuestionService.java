@@ -18,7 +18,7 @@ public class QuestionService {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
-            session.save(question);
+            session.persist(question);
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) transaction.rollback();
